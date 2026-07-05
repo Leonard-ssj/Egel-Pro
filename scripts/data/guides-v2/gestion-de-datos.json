@@ -15,17 +15,76 @@
     "published": true
   },
   "concepts": [
-    { "concept": "SQL vs NoSQL", "definition_md": "SQL: bases relacionales con esquema fijo, consultas declarativas y transacciones ACID (PostgreSQL, MySQL). NoSQL: esquemas flexibles, escala horizontal y modelos variados (documental, clave-valor, columnar, grafo).", "importance": "alta" },
-    { "concept": "ACID", "definition_md": "Atomicidad, Consistencia, Aislamiento y Durabilidad. Garantias clasicas de transacciones en bases relacionales: o se completa todo o nada, sin estados invalidos visibles.", "importance": "alta" },
-    { "concept": "BASE", "definition_md": "Basically Available, Soft state, Eventually consistent. Modelo relajado de muchas NoSQL: prioriza disponibilidad y particion sobre consistencia inmediata.", "importance": "alta" },
-    { "concept": "Teorema CAP", "definition_md": "En un sistema distribuido solo puedes garantizar dos de tres: Consistency, Availability, Partition tolerance. Como la particion es inevitable, en la practica se elige entre CP o AP.", "importance": "alta" },
-    { "concept": "JOIN", "definition_md": "Operacion SQL que combina filas de dos tablas segun una condicion. INNER (solo coincidencias), LEFT/RIGHT (preserva un lado), FULL (preserva ambos), CROSS (producto cartesiano).", "importance": "alta" },
-    { "concept": "Indices (B-tree y hash)", "definition_md": "Estructura auxiliar que acelera busquedas. B-tree: ordenado, soporta rangos y orden. Hash: lookup O(1) pero sin rangos. Costo: ocupan espacio y ralentizan escrituras.", "importance": "alta" },
-    { "concept": "Niveles de aislamiento", "definition_md": "Definen que efectos ven las transacciones concurrentes: READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ, SERIALIZABLE. A mayor aislamiento, mayor consistencia y menor concurrencia.", "importance": "alta" },
-    { "concept": "Vista materializada", "definition_md": "Resultado de una consulta almacenado fisicamente y refrescado periodicamente. Acelera reportes pesados a costa de datos ligeramente desactualizados.", "importance": "media" },
-    { "concept": "OLTP vs OLAP", "definition_md": "OLTP: transacciones operacionales, muchas escrituras pequenas (e-commerce). OLAP: analitica, pocas consultas grandes sobre datos historicos (BI, dashboards).", "importance": "alta" },
-    { "concept": "ETL / ELT", "definition_md": "Procesos para mover datos a un warehouse. ETL: Extract-Transform-Load (transformar antes de cargar). ELT: cargar crudo y transformar dentro del warehouse, comun en arquitecturas modernas (BigQuery, Snowflake).", "importance": "media" },
-    { "concept": "Data warehouse", "definition_md": "Repositorio analitico optimizado para OLAP: modelo dimensional (estrella, copo de nieve), datos historicos integrados desde multiples fuentes.", "importance": "media" }
+    {
+      "concept": "SQL vs NoSQL",
+      "definition_md": "SQL: bases relacionales con esquema fijo, consultas declarativas y transacciones ACID (PostgreSQL, MySQL). NoSQL: esquemas flexibles, escala horizontal y modelos variados (documental, clave-valor, columnar, grafo).",
+      "importance": "alta"
+    },
+    {
+      "concept": "ACID",
+      "definition_md": "Atomicidad, Consistencia, Aislamiento y Durabilidad. Garantias clasicas de transacciones en bases relacionales: o se completa todo o nada, sin estados invalidos visibles.",
+      "importance": "alta"
+    },
+    {
+      "concept": "BASE",
+      "definition_md": "Basically Available, Soft state, Eventually consistent. Modelo relajado de muchas NoSQL: prioriza disponibilidad y particion sobre consistencia inmediata.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Teorema CAP",
+      "definition_md": "En un sistema distribuido solo puedes garantizar dos de tres: Consistency, Availability, Partition tolerance. Como la particion es inevitable, en la practica se elige entre CP o AP.",
+      "importance": "alta"
+    },
+    {
+      "concept": "JOIN",
+      "definition_md": "Operacion SQL que combina filas de dos tablas segun una condicion. INNER (solo coincidencias), LEFT/RIGHT (preserva un lado), FULL (preserva ambos), CROSS (producto cartesiano).",
+      "importance": "alta"
+    },
+    {
+      "concept": "Indices (B-tree y hash)",
+      "definition_md": "Estructura auxiliar que acelera busquedas. B-tree: ordenado, soporta rangos y orden. Hash: lookup O(1) pero sin rangos. Costo: ocupan espacio y ralentizan escrituras.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Niveles de aislamiento",
+      "definition_md": "Definen que efectos ven las transacciones concurrentes: READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ, SERIALIZABLE. A mayor aislamiento, mayor consistencia y menor concurrencia.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Vista materializada",
+      "definition_md": "Resultado de una consulta almacenado fisicamente y refrescado periodicamente. Acelera reportes pesados a costa de datos ligeramente desactualizados.",
+      "importance": "media"
+    },
+    {
+      "concept": "OLTP vs OLAP",
+      "definition_md": "OLTP: transacciones operacionales, muchas escrituras pequenas (e-commerce). OLAP: analitica, pocas consultas grandes sobre datos historicos (BI, dashboards).",
+      "importance": "alta"
+    },
+    {
+      "concept": "ETL / ELT",
+      "definition_md": "Procesos para mover datos a un warehouse. ETL: Extract-Transform-Load (transformar antes de cargar). ELT: cargar crudo y transformar dentro del warehouse, comun en arquitecturas modernas (BigQuery, Snowflake).",
+      "importance": "media"
+    },
+    {
+      "concept": "Data warehouse",
+      "definition_md": "Repositorio analitico optimizado para OLAP: modelo dimensional (estrella, copo de nieve), datos historicos integrados desde multiples fuentes.",
+      "importance": "media"
+    },
+    {
+      "concept": "Tipos de bases NoSQL",
+      "definition_md": "Documental (MongoDB): documentos JSON/BSON con esquema flexible. Clave-valor (Redis): acceso directo por llave, latencia minima. Columnar (Cassandra): optimizada para escritura masiva y consultas analiticas por columna. Grafos (Neo4j): nodos y relaciones, ideal para recorrer conexiones de profundidad variable sin JOINs costosos.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Normalizacion (1FN, 2FN, 3FN)",
+      "definition_md": "1FN: elimina grupos repetidos, valores atomicos por celda. 2FN: elimina dependencias parciales de una clave compuesta. 3FN: elimina dependencias transitivas (un atributo no clave no depende de otro atributo no clave). Reduce redundancia e inconsistencias.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Fragmentacion horizontal y vertical",
+      "definition_md": "Horizontal: divide una tabla en particiones por FILAS (ej. por rango de fecha), cada fragmento conserva todas las columnas. Vertical: divide por COLUMNAS relacionadas en fragmentos distintos, unidos por la misma llave. Ambas mejoran rendimiento en tablas grandes o bases de datos distribuidas.",
+      "importance": "alta"
+    }
   ],
   "sections": [
     {
@@ -34,7 +93,12 @@
       "title": null,
       "body_md": "Esta subarea aporta **9 reactivos** en Area 3. Cubre los fundamentos del almacenamiento moderno: cuando usar **SQL** y cuando **NoSQL**, las garantias **ACID** y **BASE**, el **Teorema CAP** en sistemas distribuidos, los tipos de **JOIN**, los **indices**, los **niveles de aislamiento** transaccional y la separacion entre cargas **OLTP** y **OLAP**.\n\nLos errores tipicos del EGEL: (1) creer que NoSQL siempre es mejor que SQL para escalar — depende del patron de acceso; (2) elegir las tres letras del CAP (no se puede); (3) confundir **LEFT JOIN** con **INNER JOIN**; (4) pensar que SERIALIZABLE es el aislamiento por defecto (suele ser READ COMMITTED en PostgreSQL).\n\nTip de oro: si te preguntan por banca o inventario con consistencia estricta, la respuesta es **SQL + ACID** (CP en CAP). Si es feed social, telemetria o catalogo de productos con tolerancia a inconsistencia momentanea, **NoSQL + BASE** (AP en CAP). OLTP = operacion del dia, OLAP = analitica historica."
     },
-    { "type": "concept", "order": 2, "title": "Conceptos clave", "metadata": null },
+    {
+      "type": "concept",
+      "order": 2,
+      "title": "Conceptos clave",
+      "metadata": null
+    },
     {
       "type": "example",
       "order": 3,
@@ -52,14 +116,56 @@
       "order": 5,
       "title": "SQL vs Documental vs Clave-Valor vs Grafo",
       "metadata": {
-        "headers": ["Aspecto", "SQL (Relacional)", "Documental", "Clave-Valor", "Grafo"],
+        "headers": [
+          "Aspecto",
+          "SQL (Relacional)",
+          "Documental",
+          "Clave-Valor",
+          "Grafo"
+        ],
         "rows": [
-          ["Modelo", "Tablas, filas, columnas", "Documentos JSON/BSON", "Pares clave -> valor", "Nodos y aristas"],
-          ["Esquema", "Fijo, fuerte", "Flexible por documento", "Sin esquema", "Tipado por etiquetas"],
-          ["Consistencia", "ACID por defecto", "Configurable, suele BASE", "BASE, eventualmente consistente", "ACID o BASE"],
-          ["Mejor para", "Transacciones, reportes", "Catalogos, CMS, perfiles", "Cache, sesiones, leaderboards", "Redes sociales, fraude, rutas"],
-          ["Consultas", "SQL declarativo", "Lenguaje propio (Mongo: find)", "GET / SET por clave", "Cypher, Gremlin"],
-          ["Ejemplos", "PostgreSQL, MySQL", "MongoDB, CouchDB", "Redis, DynamoDB", "Neo4j, Amazon Neptune"]
+          [
+            "Modelo",
+            "Tablas, filas, columnas",
+            "Documentos JSON/BSON",
+            "Pares clave -> valor",
+            "Nodos y aristas"
+          ],
+          [
+            "Esquema",
+            "Fijo, fuerte",
+            "Flexible por documento",
+            "Sin esquema",
+            "Tipado por etiquetas"
+          ],
+          [
+            "Consistencia",
+            "ACID por defecto",
+            "Configurable, suele BASE",
+            "BASE, eventualmente consistente",
+            "ACID o BASE"
+          ],
+          [
+            "Mejor para",
+            "Transacciones, reportes",
+            "Catalogos, CMS, perfiles",
+            "Cache, sesiones, leaderboards",
+            "Redes sociales, fraude, rutas"
+          ],
+          [
+            "Consultas",
+            "SQL declarativo",
+            "Lenguaje propio (Mongo: find)",
+            "GET / SET por clave",
+            "Cypher, Gremlin"
+          ],
+          [
+            "Ejemplos",
+            "PostgreSQL, MySQL",
+            "MongoDB, CouchDB",
+            "Redis, DynamoDB",
+            "Neo4j, Amazon Neptune"
+          ]
         ]
       }
     },
@@ -69,47 +175,175 @@
       "title": "Herramientas de almacenamiento y analitica",
       "metadata": {
         "tools": [
-          { "name": "PostgreSQL", "url": "https://www.postgresql.org/", "description": "RDBMS open-source con soporte avanzado de JSON, full-text search, particionamiento y replicacion." },
-          { "name": "MySQL", "url": "https://www.mysql.com/", "description": "RDBMS muy popular en LAMP. InnoDB ofrece ACID y replicacion." },
-          { "name": "MongoDB", "url": "https://www.mongodb.com/", "description": "Base documental BSON con sharding nativo, agregaciones pipeline y replica sets." },
-          { "name": "Redis", "url": "https://redis.io/", "description": "Almacen clave-valor en memoria. Usado como cache, broker y para sesiones." },
-          { "name": "Cassandra", "url": "https://cassandra.apache.org/", "description": "Base columnar distribuida AP, optimizada para escrituras masivas en multiples datacenters." },
-          { "name": "Google BigQuery", "url": "https://cloud.google.com/bigquery", "description": "Data warehouse serverless para OLAP a escala de petabytes con SQL estandar." },
-          { "name": "Snowflake", "url": "https://www.snowflake.com/", "description": "Data warehouse cloud con separacion compute/storage y soporte ELT moderno." }
+          {
+            "name": "PostgreSQL",
+            "url": "https://www.postgresql.org/",
+            "description": "RDBMS open-source con soporte avanzado de JSON, full-text search, particionamiento y replicacion."
+          },
+          {
+            "name": "MySQL",
+            "url": "https://www.mysql.com/",
+            "description": "RDBMS muy popular en LAMP. InnoDB ofrece ACID y replicacion."
+          },
+          {
+            "name": "MongoDB",
+            "url": "https://www.mongodb.com/",
+            "description": "Base documental BSON con sharding nativo, agregaciones pipeline y replica sets."
+          },
+          {
+            "name": "Redis",
+            "url": "https://redis.io/",
+            "description": "Almacen clave-valor en memoria. Usado como cache, broker y para sesiones."
+          },
+          {
+            "name": "Neo4j",
+            "url": "https://neo4j.com/",
+            "description": "Base de datos de grafos: nodos y relaciones nativas, ideal para recomendaciones y redes sociales."
+          },
+          {
+            "name": "Cassandra",
+            "url": "https://cassandra.apache.org/",
+            "description": "Base columnar distribuida AP, optimizada para escrituras masivas en multiples datacenters."
+          },
+          {
+            "name": "Google BigQuery",
+            "url": "https://cloud.google.com/bigquery",
+            "description": "Data warehouse serverless para OLAP a escala de petabytes con SQL estandar."
+          },
+          {
+            "name": "Snowflake",
+            "url": "https://www.snowflake.com/",
+            "description": "Data warehouse cloud con separacion compute/storage y soporte ELT moderno."
+          }
         ]
       }
+    },
+    {
+      "type": "comparison_table",
+      "title": "Que tipo de NoSQL (o fragmentacion) usar segun el caso",
+      "metadata": {
+        "headers": [
+          "Necesito...",
+          "Tipo de NoSQL / tecnica",
+          "Ejemplo de motor"
+        ],
+        "rows": [
+          [
+            "Perfiles con campos variables por usuario, esquema flexible",
+            "Documental",
+            "MongoDB"
+          ],
+          [
+            "Acceso ultra rapido por una sola llave (carrito, sesion, cache)",
+            "Clave-valor",
+            "Redis"
+          ],
+          [
+            "Recorrer relaciones de varios niveles (amigos de amigos)",
+            "Grafos",
+            "Neo4j"
+          ],
+          [
+            "Escritura masiva distribuida, consultas analiticas por columna",
+            "Columnar",
+            "Cassandra"
+          ],
+          [
+            "Tabla enorme, consultas casi siempre filtran por rango de fecha",
+            "Fragmentacion horizontal (por filas)",
+            "Particiones por rango"
+          ],
+          [
+            "Pocas columnas se consultan mucho, el resto pesa pero se usa poco",
+            "Fragmentacion vertical (por columnas)",
+            "Tabla separada con misma llave"
+          ]
+        ]
+      },
+      "body_md": "El EGEL suele describir un caso de negocio (red social, carrito de compras, sensor IoT, hospital) y pedir identificar el tipo de NoSQL o la tecnica de particionamiento correcta, no memorizar nombres de productos. Pistas clave: 'esquema flexible / campos variables' -> documental. 'Solo necesito una llave, sin relaciones' -> clave-valor. 'Conexiones/relaciones entre entidades' -> grafos. 'Se divide por FILAS segun un rango' -> fragmentacion horizontal. 'Se divide por COLUMNAS relacionadas' -> fragmentacion vertical. No confundir fragmentacion (dividir UNA tabla) con normalizacion (eliminar redundancia entre atributos).",
+      "order": 7
     },
     {
       "type": "glossary",
-      "order": 7,
+      "order": 8,
       "title": "Glosario",
       "metadata": {
         "terms": [
-          { "term": "ACID", "def": "Atomicidad, Consistencia, Aislamiento, Durabilidad. Garantias transaccionales clasicas." },
-          { "term": "BASE", "def": "Basically Available, Soft state, Eventually consistent. Garantias relajadas de muchas NoSQL." },
-          { "term": "CAP", "def": "Consistency, Availability, Partition tolerance. Solo 2 de las 3 en un sistema distribuido." },
-          { "term": "JOIN", "def": "Operacion SQL que combina filas de dos tablas segun una condicion de igualdad." },
-          { "term": "INDEX", "def": "Estructura auxiliar (B-tree o hash) que acelera busquedas y ordena lecturas." },
-          { "term": "VIEW", "def": "Consulta nombrada que se comporta como tabla virtual. Materializada si se almacena fisicamente." },
-          { "term": "OLAP", "def": "Online Analytical Processing. Cargas analiticas con queries grandes sobre datos historicos." },
-          { "term": "OLTP", "def": "Online Transaction Processing. Cargas operacionales con muchas transacciones cortas." },
-          { "term": "ETL", "def": "Extract-Transform-Load. Mover datos hacia un warehouse transformandolos antes de cargar." },
-          { "term": "Sharding", "def": "Particionar horizontalmente los datos entre multiples servidores para escalar lecturas y escrituras." }
+          {
+            "term": "ACID",
+            "def": "Atomicidad, Consistencia, Aislamiento, Durabilidad. Garantias transaccionales clasicas."
+          },
+          {
+            "term": "BASE",
+            "def": "Basically Available, Soft state, Eventually consistent. Garantias relajadas de muchas NoSQL."
+          },
+          {
+            "term": "CAP",
+            "def": "Consistency, Availability, Partition tolerance. Solo 2 de las 3 en un sistema distribuido."
+          },
+          {
+            "term": "JOIN",
+            "def": "Operacion SQL que combina filas de dos tablas segun una condicion de igualdad."
+          },
+          {
+            "term": "INDEX",
+            "def": "Estructura auxiliar (B-tree o hash) que acelera busquedas y ordena lecturas."
+          },
+          {
+            "term": "VIEW",
+            "def": "Consulta nombrada que se comporta como tabla virtual. Materializada si se almacena fisicamente."
+          },
+          {
+            "term": "OLAP",
+            "def": "Online Analytical Processing. Cargas analiticas con queries grandes sobre datos historicos."
+          },
+          {
+            "term": "OLTP",
+            "def": "Online Transaction Processing. Cargas operacionales con muchas transacciones cortas."
+          },
+          {
+            "term": "ETL",
+            "def": "Extract-Transform-Load. Mover datos hacia un warehouse transformandolos antes de cargar."
+          },
+          {
+            "term": "Sharding",
+            "def": "Particionar horizontalmente los datos entre multiples servidores para escalar lecturas y escrituras."
+          }
         ]
       }
     },
-    { "type": "quick_quiz", "order": 8, "title": "Quick Quiz", "metadata": null },
+    {
+      "type": "quick_quiz",
+      "order": 9,
+      "title": "Quick Quiz",
+      "metadata": null
+    },
     {
       "type": "references",
-      "order": 9,
+      "order": 10,
       "title": "Referencias",
       "metadata": {
         "refs": [
-          { "title": "Martin Kleppmann — Designing Data-Intensive Applications", "url": "https://dataintensive.net/" },
-          { "title": "PostgreSQL Documentation", "url": "https://www.postgresql.org/docs/" },
-          { "title": "MongoDB Manual", "url": "https://www.mongodb.com/docs/manual/" },
-          { "title": "Eric Brewer — CAP Twelve Years Later", "url": "https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/" },
-          { "title": "Ralph Kimball — The Data Warehouse Toolkit", "url": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/books/" }
+          {
+            "title": "Martin Kleppmann — Designing Data-Intensive Applications",
+            "url": "https://dataintensive.net/"
+          },
+          {
+            "title": "PostgreSQL Documentation",
+            "url": "https://www.postgresql.org/docs/"
+          },
+          {
+            "title": "MongoDB Manual",
+            "url": "https://www.mongodb.com/docs/manual/"
+          },
+          {
+            "title": "Eric Brewer — CAP Twelve Years Later",
+            "url": "https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/"
+          },
+          {
+            "title": "Ralph Kimball — The Data Warehouse Toolkit",
+            "url": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/books/"
+          }
         ]
       }
     }

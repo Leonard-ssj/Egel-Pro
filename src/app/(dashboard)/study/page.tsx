@@ -96,6 +96,13 @@ export default async function StudyV2Hub() {
           <BookOpen className="h-3.5 w-3.5" /> Flashcards UML
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
+        <Link
+          href="/study/flashcards-area3"
+          className="ml-2 inline-flex items-center gap-1.5 rounded-full border border-area3/40 bg-area3/10 px-3 py-1 text-xs font-medium text-area3 backdrop-blur-md transition-colors hover:bg-area3/20"
+        >
+          <BookOpen className="h-3.5 w-3.5" /> Flashcards Area 3
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
       </header>
 
       {/* Resumen global */}

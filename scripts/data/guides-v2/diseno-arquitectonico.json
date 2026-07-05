@@ -89,6 +89,21 @@
       "concept": "MVC",
       "definition_md": "Patron que separa **Modelo** (datos/logica), **Vista** (presentacion) y **Controlador** (recibe la entrada y coordina), favoreciendo desacoplamiento y testabilidad.",
       "importance": "media"
+    },
+    {
+      "concept": "Diagrama de despliegue (deployment diagram)",
+      "definition_md": "Diagrama UML estructural que modela nodos de hardware/infraestructura (servidores, contenedores) y la distribucion fisica de los artefactos de software sobre ellos. Distinto del diagrama de componentes (que modela dependencias entre modulos de software, no hardware).",
+      "importance": "alta"
+    },
+    {
+      "concept": "TOGAF",
+      "definition_md": "Marco de arquitectura EMPRESARIAL (no de software puntual) que define metodologia y capas de negocio, datos, aplicaciones y tecnologia para alinear TI con la estrategia de toda la organizacion.",
+      "importance": "media"
+    },
+    {
+      "concept": "C4 Model",
+      "definition_md": "Notacion para documentar arquitectura en 4 niveles de zoom progresivo: Context (sistema y actores externos), Containers (aplicaciones/servicios), Components (modulos internos) y Code (clases). Complementa, no reemplaza, a UML.",
+      "importance": "media"
     }
   ],
   "sections": [

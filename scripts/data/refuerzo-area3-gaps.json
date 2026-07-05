@@ -1,0 +1,786 @@
+[
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 1,
+    "subarea_name": "Lenguajes de desarrollo de software",
+    "question_text": "CASO:\nUn laboratorio de investigacion climatica mantiene desde hace 20 anios un modelo de simulacion numerica que resuelve ecuaciones diferenciales sobre mallas de millones de puntos. El codigo corre en un cluster HPC y el equipo solo puede invertir en optimizar el nucleo de calculo, no en reescribir todo el sistema. Un pasante propone migrar todo a Python por legibilidad, pero el lider del proyecto se opone porque el rendimiento numerico crudo es la prioridad y ya existen decadas de bibliotecas cientificas probadas en el lenguaje original.\n\n¿Cual lenguaje es mas probable que sea el original del modelo, dado el contexto historico y de rendimiento numerico?",
+    "option_a": "Fortran, porque fue disenado para computo cientifico intensivo y tiene decadas de bibliotecas numericas altamente optimizadas para HPC",
+    "option_b": "JavaScript, porque su motor V8 compila JIT y alcanza rendimiento nativo en calculos matriciales",
+    "option_c": "PHP, porque su tipado dinamico facilita cambios rapidos en las formulas del modelo",
+    "correct_answer": "a",
+    "explanation": "Fortran (FORmula TRANslation) fue creado especificamente para calculo cientifico/numerico y sigue siendo dominante en HPC por su rendimiento y bibliotecas maduras (LAPACK, BLAS). (b) V8 es rapido para JS de proposito general pero no compite en computo numerico masivo con codigo Fortran optimizado en cluster. (c) PHP es un lenguaje web de proposito general, sin tradicion ni bibliotecas de computo cientifico intensivo.",
+    "difficulty": "medium",
+    "tags": [
+      "fortran",
+      "computo-cientifico",
+      "seleccion-lenguaje"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 1,
+    "subarea_name": "Lenguajes de desarrollo de software",
+    "question_text": "CASO:\nUn sistema experto para diagnostico medico debe inferir enfermedades a partir de una base de hechos (sintomas del paciente) y reglas logicas (si tiene fiebre y tos y dificultad respiratoria, entonces...). El equipo no quiere programar el flujo de control paso a paso, sino declarar hechos y reglas y dejar que el motor de inferencia encuentre las conclusiones mediante unificacion y backtracking. El arquitecto descarta Java y Python por requerir simular manualmente el motor de reglas.\n\n¿Que lenguaje esta disenado nativamente para este enfoque?",
+    "option_a": "C, porque su cercania al hardware permite implementar motores de inferencia mas rapidos que cualquier otro lenguaje",
+    "option_b": "Prolog, porque es un lenguaje logico donde el programador declara hechos y reglas y el motor resuelve por unificacion y backtracking",
+    "option_c": "HTML, porque permite estructurar los hechos como un arbol de etiquetas facil de recorrer",
+    "correct_answer": "b",
+    "explanation": "Prolog es el lenguaje declarativo/logico por excelencia: el programa es una base de hechos y reglas, y la ejecucion es resolucion logica (unificacion + backtracking), exactamente lo que pide el caso. (a) C es imperativo y de bajo nivel; implementar un motor de inferencia en C es posible pero obliga a programar manualmente todo el backtracking, lo que el caso quiere evitar. (c) HTML no es un lenguaje de programacion, es de marcado; no tiene motor de inferencia.",
+    "difficulty": "medium",
+    "tags": [
+      "prolog",
+      "programacion-logica",
+      "sistemas-expertos"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 1,
+    "subarea_name": "Lenguajes de desarrollo de software",
+    "question_text": "CASO:\nUn fabricante de electrodomesticos desarrolla el firmware de un microcontrolador de 8 bits con 2KB de RAM que controla el panel de una lavadora. El firmware debe manipular registros de hardware directamente, tener control total sobre el uso de memoria y compilar a codigo maquina extremadamente compacto. El equipo evalua usar Python para prototipar rapido, pero el ingeniero de firmware senala que el microcontrolador no tiene recursos para un interprete y se necesita control de bajo nivel real.\n\n¿Cual lenguaje es el mas adecuado para el firmware final?",
+    "option_a": "Java, porque la JVM esta optimizada para correr en cualquier dispositivo incluyendo microcontroladores de 8 bits",
+    "option_b": "Python, porque MicroPython permite correr el mismo codigo de prototipado directamente en produccion sin cambios",
+    "option_c": "C, porque compila directo a codigo maquina compacto, permite manipular registros y punteros, y no requiere runtime ni interprete pesado",
+    "correct_answer": "c",
+    "explanation": "C es el estandar en sistemas embebidos de recursos limitados: compila a binario compacto, permite acceso directo a registros/memoria y no necesita runtime. (b) MicroPython existe pero requiere bastante mas RAM/flash que 2KB y no da el control de bajo nivel que pide el caso. (a) La JVM requiere memoria y un runtime que un microcontrolador de 2KB de RAM no puede sostener; 'write once run anywhere' no aplica a hardware tan restringido.",
+    "difficulty": "medium",
+    "tags": [
+      "c",
+      "sistemas-embebidos",
+      "microcontroladores"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 1,
+    "subarea_name": "Lenguajes de desarrollo de software",
+    "question_text": "CASO:\nUn equipo de ciencia de datos en una aseguradora necesita analizar 3 millones de polizas para construir modelos estadisticos de riesgo: regresiones, pruebas de hipotesis y visualizaciones exploratorias avanzadas. El equipo esta formado por actuarios sin formacion formal en ingenieria de software, que ya conocen sintaxis estadistica basica de otras herramientas. Necesitan un lenguaje con soporte nativo de primer nivel para vectores estadisticos, data frames y paquetes de analisis (como ggplot2 y dplyr) sin tener que programar esas estructuras desde cero.\n\n¿Cual lenguaje conviene mas para este equipo y objetivo?",
+    "option_a": "R, porque fue disenado especificamente para estadistica y analisis de datos, con data frames y visualizacion nativos y un ecosistema de paquetes estadisticos maduro",
+    "option_b": "C++, porque su velocidad de ejecucion es indispensable para procesar 3 millones de registros",
+    "option_c": "Assembly, porque el control total del hardware garantiza el mejor rendimiento en cualculos estadisticos",
+    "correct_answer": "a",
+    "explanation": "R nacio para estadistica: data frames, vectores y paquetes (ggplot2, dplyr, caret) son de primera clase, ideal para un equipo de actuarios sin bagaje de ingenieria de software. (b) C++ es rapido pero obliga a implementar desde cero estructuras estadisticas que R ya trae, y el equipo no tiene el perfil para eso. (c) Assembly requeriria anios de desarrollo para lo que R hace en pocas lineas; totalmente desproporcionado para el caso.",
+    "difficulty": "easy",
+    "tags": [
+      "r",
+      "analisis-de-datos",
+      "seleccion-lenguaje"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 1,
+    "subarea_name": "Lenguajes de desarrollo de software",
+    "question_text": "CASO:\nUn desarrollador junior encuentra en un repositorio legacy un modulo escrito en Assembly que se comunica directamente con drivers de un dispositivo de captura de video. Su lider le explica que ese modulo fue escrito asi porque el equipo original necesitaba control absoluto de ciclos de reloj y acceso a instrucciones especificas del procesador, algo que ni C podia garantizar en ese contexto. El junior pregunta como se relaciona Assembly con C.\n\n¿Cual es la explicacion tecnicamente correcta?",
+    "option_a": "Assembly es un subconjunto de C que se activa con directivas de compilador para acelerar bucles",
+    "option_b": "C se considera un lenguaje de 'alto nivel cercano al hardware': se compila a Assembly (y este a codigo maquina), pero Assembly ofrece control mas fino de instrucciones y registros del procesador que C no expone directamente",
+    "option_c": "No existe relacion: Assembly y C son familias de lenguajes independientes que nunca interoperan en un mismo binario",
+    "correct_answer": "b",
+    "explanation": "El compilador de C traduce el codigo a Assembly y luego a codigo maquina; Assembly es un paso intermedio que expone directamente instrucciones y registros del CPU, dando un control que C (por diseno, mas portable) no expone. (a) Assembly no es un subconjunto de C, es un lenguaje distinto de mas bajo nivel. (c) Es falso: C soporta bloques de 'inline assembly' precisamente para casos como el descrito.",
+    "difficulty": "medium",
+    "tags": [
+      "ensamblador",
+      "c",
+      "bajo-nivel"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 1,
+    "subarea_name": "Lenguajes de desarrollo de software",
+    "question_text": "CASO:\nUna startup necesita lanzar en 6 semanas el backend de un marketplace con autenticacion, pagos y un blog con contenido gestionado por editores no tecnicos. El equipo es pequeno (3 desarrolladores) y prioriza velocidad de desarrollo sobre rendimiento extremo, ademas de necesitar un ecosistema maduro de CMS y plantillas de servidor listas para usar. Evaluan PHP con WordPress/Laravel contra escribir todo desde cero en C++.\n\n¿Cual decision se alinea mejor con las restricciones del caso?",
+    "option_a": "Ensamblador, porque minimiza el tamano del binario final y reduce costos de hosting",
+    "option_b": "C++ puro, porque ofrece el mejor rendimiento posible y eso siempre debe priorizarse en un backend nuevo",
+    "option_c": "PHP con Laravel (o WordPress para el blog), porque el ecosistema maduro de CMS y frameworks acelera el desarrollo con un equipo pequeno y un plazo corto",
+    "correct_answer": "c",
+    "explanation": "El caso prioriza velocidad de entrega con equipo chico y necesidad de CMS: PHP (Laravel/WordPress) tiene el ecosistema mas maduro para exactamente ese escenario. (b) C++ maximiza rendimiento pero multiplica el tiempo de desarrollo y no aporta valor cuando la restriccion real es el plazo de 6 semanas. (a) Ensamblador es inviable para un marketplace completo en 6 semanas con 3 personas; el ahorro de hosting no compensa el costo de desarrollo.",
+    "difficulty": "easy",
+    "tags": [
+      "php",
+      "seleccion-lenguaje",
+      "frameworks-web"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 2,
+    "subarea_name": "Paradigmas de programacion",
+    "question_text": "CASO:\nUn desarrollador debe convertir la expresion aritmetica infija (3 + 4) * (5 - 2) a notacion polaca inversa (postfija) para implementar un evaluador de expresiones con una pila, tal como se usa en calculadoras cientificas y compiladores. Escribe el resultado en un pizarron para revisarlo con su equipo antes de programar el algoritmo de evaluacion basado en pila.\n\n¿Cual de las siguientes es la conversion correcta a notacion polaca inversa?",
+    "option_a": "3 4 + 5 2 - *",
+    "option_b": "+ 3 4 * - 5 2",
+    "option_c": "3 + 4 5 - 2 *",
+    "correct_answer": "a",
+    "explanation": "En postfija, cada operador se coloca despues de sus dos operandos, respetando la jerarquia de los parentesis: (3+4) se convierte en '3 4 +', (5-2) en '5 2 -', y el producto de ambos subresultados se escribe al final como '*'. (b) es notacion prefija (polaca, no inversa), no postfija. (c) mezcla el operador '+' en medio de forma incorrecta y no respeta el orden postfijo real de la expresion.",
+    "difficulty": "medium",
+    "tags": [
+      "notacion-polaca-inversa",
+      "pilas",
+      "estructuras-de-datos"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 2,
+    "subarea_name": "Paradigmas de programacion",
+    "question_text": "CASO:\nUn evaluador de expresiones postfijas procesa la cadena '6 2 3 + - 4 *' usando una pila (stack), leyendo de izquierda a derecha: cuando encuentra un numero lo apila, y cuando encuentra un operador desapila los dos ultimos valores, opera y vuelve a apilar el resultado. El equipo de QA quiere verificar manualmente el resultado antes de aceptar el modulo.\n\n¿Cual es el resultado final que debe arrojar el evaluador?",
+    "option_a": "-8",
+    "option_b": "4",
+    "option_c": "24",
+    "correct_answer": "b",
+    "explanation": "Paso a paso con la pila: apilar 6, 2, 3 -> pila=[6,2,3]. Operador '+': desapila 3 y 2, calcula 2+3=5, apila -> pila=[6,5]. Operador '-': desapila 5 y 6, calcula 6-5=1, apila -> pila=[1]. Operador '*': falta un numero, se apila 4 -> pila=[1,4]; '*' desapila 4 y 1, calcula 1*4=4. Resultado final: 4. (a) y (c) surgen de invertir el orden de los operandos al desapilar (por ejemplo restar 5-6 en vez de 6-5), un error comun en la implementacion de pilas para RPN.",
+    "difficulty": "hard",
+    "tags": [
+      "notacion-polaca-inversa",
+      "pilas",
+      "trazado-de-algoritmo"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 2,
+    "subarea_name": "Paradigmas de programacion",
+    "question_text": "CASO:\nUn desarrollador escribe una funcion recursiva para calcular el factorial, pero olvida definir correctamente la condicion de paro:\n\n```\nfunction factorial(n) {\n  return n * factorial(n - 1);\n}\n```\n\nAl ejecutarla con factorial(5), la aplicacion se cae en produccion con un error de memoria agotada tras miles de llamadas anidadas. El equipo de soporte reporta el incidente como critico porque tumbo el servicio.\n\n¿Cual es el diagnostico correcto y la correccion necesaria?",
+    "option_a": "El problema es que la funcion no es asincrona; convertirla en async/await evita el consumo de memoria",
+    "option_b": "El error es que JavaScript no soporta recursividad; se debe reescribir con un ciclo for obligatoriamente",
+    "option_c": "Falta el caso base (por ejemplo, if (n <= 1) return 1;); sin el, la recursion nunca termina y cada llamada anidada consume un marco de pila hasta un stack overflow",
+    "correct_answer": "c",
+    "explanation": "Toda funcion recursiva necesita un caso base que detenga la recursion; sin el, las llamadas se acumulan en la pila de llamadas hasta agotar la memoria disponible (stack overflow), que es exactamente el sintoma descrito. (b) es falso: la mayoria de lenguajes modernos, incluido JavaScript, soportan recursividad perfectamente si tiene caso base. (a) async/await gestiona el orden de ejecucion asincrona, no soluciona la ausencia de un caso base en la recursion.",
+    "difficulty": "medium",
+    "tags": [
+      "recursividad",
+      "caso-base",
+      "stack-overflow"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 2,
+    "subarea_name": "Paradigmas de programacion",
+    "question_text": "CASO:\nUn sistema de atencion a clientes de un banco debe procesar solicitudes en el orden exacto en que llegaron, garantizando que la primera solicitud registrada sea siempre la primera en ser atendida por el siguiente agente disponible, sin importar cuantas solicitudes nuevas entren mientras tanto. El arquitecto debe elegir la estructura de datos correcta para la cola de espera del sistema.\n\n¿Cual estructura satisface el requisito?",
+    "option_a": "Una cola (queue) FIFO, porque garantiza que el primer elemento en entrar sea el primero en salir, respetando el orden de llegada",
+    "option_b": "Una pila (stack) LIFO, porque el ultimo elemento en entrar se procesa primero y eso agiliza la atencion mas reciente",
+    "option_c": "Un arbol binario de busqueda, porque permite encontrar la solicitud mas antigua en tiempo logaritmico",
+    "correct_answer": "a",
+    "explanation": "El requisito 'primero en llegar, primero en ser atendido' es la definicion exacta de una cola FIFO (First In, First Out). (b) una pila LIFO haria lo opuesto: atenderia primero al cliente mas reciente, violando el requisito de orden de llegada. (c) un arbol binario de busqueda esta pensado para busqueda/orden por clave, no para preservar estrictamente el orden de llegada de insercion.",
+    "difficulty": "easy",
+    "tags": [
+      "colas",
+      "fifo",
+      "estructuras-de-datos"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 2,
+    "subarea_name": "Paradigmas de programacion",
+    "question_text": "CASO:\nEl editor de texto de una aplicacion de escritorio implementa la funcion 'deshacer' (Ctrl+Z), donde cada accion del usuario se registra y, al presionar deshacer, siempre se revierte la accion mas reciente antes que cualquier accion anterior. Si el usuario deshace varias veces seguidas, las acciones se revierten en orden inverso exacto al que fueron realizadas. El desarrollador debe elegir la estructura de datos que modela naturalmente este comportamiento.\n\n¿Cual es la eleccion correcta?",
+    "option_a": "Una cola (queue) FIFO, porque procesa las acciones en el mismo orden en que se registraron",
+    "option_b": "Una pila (stack) LIFO, porque la ultima accion registrada es siempre la primera en deshacerse, en orden inverso exacto",
+    "option_c": "Una tabla hash, porque permite acceso directo a cualquier accion sin importar el orden",
+    "correct_answer": "b",
+    "explanation": "El patron 'ultimo en entrar, primero en salir' es exactamente una pila LIFO: cada Ctrl+Z hace pop() de la accion mas reciente. (a) una cola FIFO revertiria primero la accion mas antigua, no la mas reciente, contradiciendo el comportamiento descrito. (c) una tabla hash no preserva orden de insercion de forma nativa ni prioriza 'lo mas reciente'.",
+    "difficulty": "easy",
+    "tags": [
+      "pilas",
+      "lifo",
+      "estructuras-de-datos"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 2,
+    "subarea_name": "Paradigmas de programacion",
+    "question_text": "CASO:\nUn sistema de archivos de un sistema operativo organiza carpetas y subcarpetas donde cada carpeta puede contener multiples subcarpetas, pero cada subcarpeta tiene exactamente una carpeta padre, sin ciclos posibles. Un desarrollador necesita implementar la funcion 'calcular tamano total de una carpeta' que debe sumar recursivamente el tamano de todos los archivos en la carpeta y en todas sus subcarpetas anidadas, sin importar la profundidad del anidamiento.\n\n¿Cual estructura de datos y estrategia describen mejor este escenario?",
+    "option_a": "Una pila LIFO donde se apilan todas las carpetas de una sola vez antes de sumar tamanos",
+    "option_b": "Una lista enlazada simple, recorrida con un ciclo while que avanza un nodo a la vez",
+    "option_c": "Un arbol (no necesariamente binario), recorrido recursivamente en profundidad (DFS), donde cada nodo es una carpeta y sus hijos son las subcarpetas",
+    "correct_answer": "c",
+    "explanation": "La relacion 'un padre, multiples hijos, sin ciclos' es la definicion de un arbol; recorrer todas las subcarpetas anidadas para sumar tamanos es un recorrido recursivo natural (DFS) donde cada llamada recursiva procesa un subarbol. (b) una lista enlazada modela una secuencia lineal, no una jerarquia de padre-multiples-hijos. (a) una pila puede usarse para implementar DFS de forma iterativa, pero por si sola no es la estructura que modela la jerarquia; el arbol es la respuesta conceptual correcta.",
+    "difficulty": "medium",
+    "tags": [
+      "arboles",
+      "recursividad",
+      "estructuras-de-datos"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 2,
+    "subarea_name": "Paradigmas de programacion",
+    "question_text": "CASO:\nUna red social debe implementar la funcion 'sugerencia de amigos en comun', donde cada usuario es un nodo y cada amistad es una conexion bidireccional entre dos usuarios, y un mismo usuario puede tener decenas de conexiones sin ninguna jerarquia de padre-hijo. El equipo necesita encontrar el camino mas corto de conexiones entre dos usuarios (por ejemplo, '¿a cuantos amigos de distancia estan Ana y Luis?').\n\n¿Cual estructura de datos y algoritmo son mas apropiados?",
+    "option_a": "Un grafo no dirigido, recorrido con BFS (busqueda en amplitud) para encontrar el camino mas corto en numero de conexiones",
+    "option_b": "Un arbol binario de busqueda, porque garantiza encontrar cualquier usuario en tiempo logaritmico",
+    "option_c": "Una pila LIFO, recorriendo las conexiones mas recientes primero hasta encontrar coincidencias",
+    "correct_answer": "a",
+    "explanation": "Conexiones bidireccionales sin jerarquia fija son un grafo no dirigido; BFS explora nivel por nivel y es el algoritmo estandar para encontrar el camino mas corto en numero de saltos entre dos nodos. (b) un arbol binario de busqueda asume una relacion jerarquica ordenada que no existe entre amistades mutuas. (c) una pila no explora por niveles, por lo que no garantiza encontrar el camino mas corto (privilegia profundidad reciente, no cercania real).",
+    "difficulty": "hard",
+    "tags": [
+      "grafos",
+      "bfs",
+      "estructuras-de-datos"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 2,
+    "subarea_name": "Paradigmas de programacion",
+    "question_text": "CASO:\nUn catalogo de productos de un e-commerce contiene 500,000 items ordenados por SKU de forma ascendente. El sistema necesita verificar rapidamente si un SKU especifico existe en el catalogo antes de procesar un pedido, y el equipo de rendimiento detecta que la busqueda actual revisa el arreglo elemento por elemento desde el inicio, generando cuellos de botella en horas pico. Los datos ya estan ordenados y no cambian durante el dia.\n\n¿Cual estrategia de busqueda reduce drasticamente el tiempo respecto a la actual?",
+    "option_a": "Busqueda lineal optimizada, revisando el arreglo de atras hacia adelante en lugar de adelante hacia atras",
+    "option_b": "Busqueda binaria, porque al estar el arreglo ordenado permite descartar la mitad de los elementos en cada comparacion, logrando complejidad logaritmica en vez de lineal",
+    "option_c": "Ordenamiento burbuja aplicado antes de cada busqueda, para garantizar que el arreglo este siempre actualizado",
+    "correct_answer": "b",
+    "explanation": "Con datos ya ordenados, la busqueda binaria es la mejora natural: compara contra el elemento central y descarta la mitad del espacio de busqueda en cada paso (O(log n)) en vez de revisar todo el arreglo (O(n)). (a) invertir el sentido de una busqueda lineal no cambia su complejidad, sigue siendo O(n) en el peor caso. (c) el ordenamiento burbuja es O(n^2) y ademas es innecesario porque el arreglo ya esta ordenado; ejecutarlo antes de cada busqueda empeoraria el rendimiento, no lo mejoraria.",
+    "difficulty": "medium",
+    "tags": [
+      "busqueda-binaria",
+      "algoritmos",
+      "complejidad"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 3,
+    "subarea_name": "Entornos de desarrollo",
+    "question_text": "CASO:\nUn equipo de bioestadistica en una universidad necesita escribir scripts de analisis estadistico en R, ejecutar pruebas de hipotesis y generar graficas exploratorias de forma interactiva, ademas de organizar el codigo en proyectos con control de versiones integrado y una consola de variables visible en todo momento. Evaluan usar Visual Studio Code generico contra un entorno especializado en R.\n\n¿Cual entorno de desarrollo es el mas adecuado para este equipo?",
+    "option_a": "Xcode, porque incluye herramientas de profiling avanzadas utiles para cualquier lenguaje cientifico",
+    "option_b": "Eclipse, porque su arquitectura de plugins es la mas popular para todo tipo de analisis estadistico",
+    "option_c": "RStudio, porque esta disenado especificamente para R con panel de variables, graficas integradas, gestion de proyectos y soporte nativo de R Markdown",
+    "correct_answer": "c",
+    "explanation": "RStudio es el IDE especializado para R: integra consola, visualizador de variables/graficas, gestion de proyectos y R Markdown, cubriendo exactamente las necesidades del caso. (b) Eclipse es generico (principalmente Java) y no ofrece las herramientas especificas de analisis estadistico en R que RStudio trae de fabrica. (a) Xcode es el IDE de Apple para desarrollo en Swift/Objective-C para su ecosistema, no tiene relacion con R.",
+    "difficulty": "easy",
+    "tags": [
+      "rstudio",
+      "seleccion-ide",
+      "r"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 3,
+    "subarea_name": "Entornos de desarrollo",
+    "question_text": "CASO:\nUn estudiante de ingenieria construye un proyecto casero con una placa Arduino Uno para controlar sensores de temperatura y un motor mediante codigo en un dialecto simplificado de C/C++. El estudiante necesita compilar el sketch, cargarlo directamente al microcontrolador via USB y tener acceso a un monitor serial para depurar las lecturas del sensor en tiempo real, sin configurar manualmente un toolchain de compilacion cruzada.\n\n¿Cual entorno de desarrollo es el mas adecuado para este flujo?",
+    "option_a": "Arduino IDE, porque integra el compilador para microcontroladores AVR, la carga via USB y el monitor serial en una sola herramienta simplificada",
+    "option_b": "IntelliJ IDEA, porque su soporte de Java es el estandar de facto para cualquier proyecto de hardware",
+    "option_c": "Aptana, porque su enfoque en desarrollo web permite depurar sensores mediante WebSockets",
+    "correct_answer": "a",
+    "explanation": "Arduino IDE fue creado exactamente para este flujo: escribir sketches en el dialecto Arduino (basado en C/C++), compilar para el microcontrolador AVR, cargar via USB y abrir el monitor serial, todo integrado y sin configurar un toolchain manual. (b) IntelliJ IDEA es un IDE para Java/Kotlin de proposito general, sin soporte nativo para programar microcontroladores AVR. (c) Aptana es un IDE orientado a desarrollo web (HTML/JS/Ruby on Rails), no tiene relacion con programacion de hardware embebido.",
+    "difficulty": "easy",
+    "tags": [
+      "arduino-ide",
+      "sistemas-embebidos",
+      "seleccion-ide"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 3,
+    "subarea_name": "Entornos de desarrollo",
+    "question_text": "CASO:\nUn equipo de ingenieria electrica necesita disenar filtros digitales, simular senales en el dominio de la frecuencia y prototipar algoritmos de procesamiento de senales usando matrices y operaciones vectoriales complejas, ademas de generar graficas tecnicas para un reporte de control de calidad. El equipo ya tiene licencias corporativas de una suite matematica ampliamente usada en ingenieria con su propio entorno integrado de scripts (.m).\n\n¿Cual entorno describe mejor esta herramienta?",
+    "option_a": "BlueJ, porque su enfoque didactico en objetos Java es el estandar de la industria para procesamiento de senales",
+    "option_b": "MATLAB, porque su entorno integrado esta disenado para calculo matricial, procesamiento de senales y visualizacion tecnica con su propio lenguaje de scripts",
+    "option_c": "Thonny, porque su interfaz simplificada para principiantes de Python es ideal para simulaciones de ingenieria electrica avanzadas",
+    "correct_answer": "b",
+    "explanation": "MATLAB (MATrix LABoratory) es el entorno estandar en ingenieria para calculo matricial, procesamiento de senales/filtros digitales y visualizacion tecnica, con su propio lenguaje de scripts .m. (a) BlueJ es un IDE educativo para ensenar POO en Java a principiantes, sin herramientas de procesamiento de senales. (c) Thonny es un IDE minimalista para ensenar Python a principiantes, no tiene las capacidades de calculo matricial ni las bibliotecas de ingenieria que requiere el caso.",
+    "difficulty": "medium",
+    "tags": [
+      "matlab",
+      "seleccion-ide",
+      "procesamiento-senales"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 3,
+    "subarea_name": "Entornos de desarrollo",
+    "question_text": "CASO:\nUn profesor de un curso introductorio de programacion para adolescentes busca un entorno de Python minimalista, sin la sobrecarga visual de un IDE profesional con demasiados paneles, que muestre errores de forma simple y permita ejecutar scripts cortos paso a paso con un depurador visual muy basico, priorizando que los estudiantes no se distraigan ni se abrumen.\n\n¿Cual entorno de desarrollo cumple mejor este objetivo pedagogico?",
+    "option_a": "Visual Studio (completo, no Code), porque su enfoque en aplicaciones empresariales .NET es el mas simple para introducir programacion",
+    "option_b": "IntelliJ IDEA Ultimate, porque su gran cantidad de paneles y atajos avanzados prepara mejor a los estudiantes para la industria desde el primer dia",
+    "option_c": "Thonny, porque es un IDE de Python explicitamente disenado para principiantes, con interfaz simplificada y un depurador visual facil de entender",
+    "correct_answer": "c",
+    "explanation": "Thonny fue creado especificamente para ensenar Python a principiantes: interfaz minimalista, mensajes de error simplificados y un depurador visual paso a paso muy accesible. (b) IntelliJ IDEA Ultimate es un IDE profesional con muchas herramientas avanzadas que abrumarian a adolescentes en un curso introductorio. (a) Visual Studio completo esta orientado a desarrollo empresarial .NET/C++, con una curva de aprendizaje y complejidad muy superior a lo que pide el caso.",
+    "difficulty": "easy",
+    "tags": [
+      "thonny",
+      "seleccion-ide",
+      "python"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 3,
+    "subarea_name": "Entornos de desarrollo",
+    "question_text": "CASO:\nUn desarrollador trabaja en una rama 'feature/pagos' que se separo de 'main' hace dos semanas. Mientras tanto, 'main' recibio 15 commits de otros companeros. Antes de abrir su pull request, su lider tecnico le pide 'limpiar el historial para que parezca una linea recta de commits sobre main, sin un commit de merge que mezcle ambas historias', porque el equipo usa un historial lineal para facilitar la revision.\n\n¿Cual comando de Git logra este resultado?",
+    "option_a": "git rebase main, porque reescribe los commits de la rama feature como si se hubieran creado a partir del ultimo commit de main, generando un historial lineal sin commit de merge",
+    "option_b": "git merge main, porque combina ambas ramas y crea automaticamente un historial lineal sin commits adicionales",
+    "option_c": "git cherry-pick main, porque aplica todos los commits de main sobre la rama feature en un solo paso limpio",
+    "correct_answer": "a",
+    "explanation": "git rebase reescribe la base de la rama feature para que parta del commit mas reciente de main, produciendo un historial lineal sin un commit de merge explicito, que es justo lo que pide el lider. (b) git merge hace lo contrario: crea un commit de merge que une explicitamente ambas historias, generando una bifurcacion visible en el historial. (c) git cherry-pick aplica commits individuales especificos, no sirve para traer todo el historial de una rama de forma limpia y no es la herramienta pensada para este escenario.",
+    "difficulty": "medium",
+    "tags": [
+      "git",
+      "rebase",
+      "control-de-versiones"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 3,
+    "subarea_name": "Entornos de desarrollo",
+    "question_text": "CASO:\nEn un repositorio compartido, un desarrollador descubre que un commit especifico (hash a1b2c3d) en la rama 'main' contiene la correccion urgente de un bug de seguridad, pero el resto de los commits de esa rama no deben mezclarse todavia con la rama 'release/v2', que esta congelada para estabilizacion. El equipo de release necesita aplicar unicamente ese commit puntual a 'release/v2' sin traer nada mas.\n\n¿Cual comando de Git es el apropiado?",
+    "option_a": "git rebase main, porque reescribe toda la rama release/v2 sobre main trayendo automaticamente solo el commit de seguridad",
+    "option_b": "git cherry-pick a1b2c3d, porque aplica un commit especifico de otra rama sobre la rama actual sin traer el resto del historial",
+    "option_c": "git branch -d main, porque elimina la rama main dejando unicamente el commit de seguridad disponible para release/v2",
+    "correct_answer": "b",
+    "explanation": "git cherry-pick esta disenado exactamente para esto: tomar un commit puntual de otra rama y aplicarlo sobre la rama actual, sin arrastrar el resto de la historia. (a) git rebase trae todos los commits desde el punto de divergencia, no solo uno, violando el requisito de 'sin traer nada mas'. (c) git branch -d elimina una rama local; no mueve ni aplica commits a otra rama y ademas es una operacion destructiva no relacionada con el objetivo.",
+    "difficulty": "medium",
+    "tags": [
+      "git",
+      "cherry-pick",
+      "control-de-versiones"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 3,
+    "subarea_name": "Entornos de desarrollo",
+    "question_text": "CASO:\nEl equipo de QA de una fintech necesita validar que, al simular 5,000 usuarios concurrentes haciendo login en la API de pagos, el tiempo de respuesta promedio se mantenga bajo 300ms y el servidor no colapse bajo esa carga. El objetivo no es probar la logica de un metodo aislado, sino medir el comportamiento del sistema completo bajo estres de trafico simultaneo.\n\n¿Cual herramienta de pruebas es la mas apropiada para este escenario?",
+    "option_a": "Appium, porque automatiza interacciones de interfaz movil que simulan el comportamiento real de un usuario",
+    "option_b": "JUnit, porque permite ejecutar pruebas unitarias de cada metodo de login de forma aislada con altisima cobertura",
+    "option_c": "JMeter, porque esta disenado para pruebas de carga y estres simulando miles de usuarios concurrentes contra un servidor o API",
+    "correct_answer": "c",
+    "explanation": "JMeter es la herramienta estandar para pruebas de carga/estres: permite simular miles de usuarios concurrentes contra una API y medir tiempos de respuesta bajo presion. (b) JUnit sirve para pruebas unitarias de codigo Java aislado, no para simular carga concurrente de miles de usuarios sobre un servidor. (a) Appium automatiza pruebas funcionales de UI en apps moviles/web, no esta pensado para medir rendimiento bajo carga masiva de un backend.",
+    "difficulty": "medium",
+    "tags": [
+      "jmeter",
+      "pruebas-de-carga",
+      "testing-tools"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 3,
+    "subarea_name": "Entornos de desarrollo",
+    "question_text": "CASO:\nEl equipo de QA de una app bancaria movil necesita automatizar pruebas funcionales que simulen a un usuario real tocando botones, deslizando pantallas e ingresando texto en la app nativa de Android e iOS, para detectar regresiones visuales y funcionales antes de cada release. Las pruebas deben ejecutarse sobre emuladores y dispositivos fisicos reales, no sobre codigo fuente aislado.\n\n¿Cual herramienta es la mas adecuada para este objetivo?",
+    "option_a": "Appium, porque automatiza interacciones de interfaz (tocar, deslizar, escribir) sobre apps moviles nativas en Android e iOS, en emuladores y dispositivos reales",
+    "option_b": "SoapUI, porque su enfoque en probar servicios SOAP permite validar tambien botones e interfaces moviles nativas",
+    "option_c": "JUnit, porque sus anotaciones @Test permiten simular gestos tactiles de forma nativa en cualquier dispositivo movil",
+    "correct_answer": "a",
+    "explanation": "Appium es el framework de automatizacion de pruebas de UI para apps moviles nativas, hibridas y web, tanto en Android como iOS, sobre emuladores y dispositivos reales. (b) SoapUI esta enfocado en probar servicios web SOAP/REST a nivel de API, no interactua con la interfaz grafica de una app movil. (c) JUnit es un framework de pruebas unitarias para Java a nivel de codigo, no tiene capacidad de simular gestos tactiles en una interfaz movil.",
+    "difficulty": "medium",
+    "tags": [
+      "appium",
+      "pruebas-moviles",
+      "testing-tools"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 3,
+    "subarea_name": "Entornos de desarrollo",
+    "question_text": "CASO:\nUn proveedor de logistica expone un servicio web SOAP heredado (con WSDL formal) que sus socios comerciales usan desde hace 10 anios para consultar el estado de envios. El equipo de QA necesita validar que los mensajes XML de solicitud y respuesta cumplan estrictamente el contrato WSDL, probar diferentes operaciones SOAP y generar mensajes de prueba automaticamente a partir del WSDL, sin escribir XML a mano.\n\n¿Cual herramienta es la mas apropiada?",
+    "option_a": "Appium, porque su soporte nativo de XML es ideal para validar contratos WSDL en aplicaciones moviles",
+    "option_b": "SoapUI, porque esta disenado especificamente para probar servicios SOAP a partir de su WSDL, generando y validando mensajes XML automaticamente",
+    "option_c": "Postman en su version mas basica, porque fue creado originalmente para SOAP antes de expandirse a REST",
+    "correct_answer": "b",
+    "explanation": "SoapUI fue creado especificamente para pruebas de servicios SOAP: importa el WSDL, genera las solicitudes XML automaticamente y valida las respuestas contra el contrato. (a) Appium prueba interfaces de apps moviles, no tiene relacion con validar contratos WSDL de servicios SOAP. (c) Postman nacio enfocado en APIs REST/HTTP; su soporte de SOAP es limitado y no fue su proposito original, a diferencia de SoapUI.",
+    "difficulty": "medium",
+    "tags": [
+      "soapui",
+      "soap",
+      "testing-tools"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 4,
+    "subarea_name": "Gestion de datos",
+    "question_text": "CASO:\nUna plataforma de streaming tiene dos tablas: `usuarios(id, nombre)` con los registros (1, 'Ana'), (2, 'Luis'), (3, 'Marco'); y `reproducciones(id, usuario_id, cancion)` con los registros (10, 1, 'Vals'), (11, 1, 'Rock'), (12, 2, 'Jazz'). El equipo de analitica ejecuta la consulta `SELECT u.nombre, r.cancion FROM usuarios u INNER JOIN reproducciones r ON u.id = r.usuario_id;` para un reporte de actividad.\n\n¿Cuantas filas y con que contenido debe devolver esta consulta?",
+    "option_a": "2 filas: (Ana, Vals) y (Luis, Jazz) unicamente, porque INNER JOIN solo toma la primera coincidencia por usuario",
+    "option_b": "4 filas: incluye ademas (Marco, NULL) porque INNER JOIN siempre incluye todas las filas de la tabla izquierda con NULL si no hay match",
+    "option_c": "3 filas: (Ana, Vals), (Ana, Rock), (Luis, Jazz) — Marco no aparece porque no tiene reproducciones y el INNER JOIN excluye usuarios sin coincidencia",
+    "correct_answer": "c",
+    "explanation": "INNER JOIN devuelve solo las filas donde existe coincidencia en ambas tablas: Ana tiene 2 reproducciones (Vals, Rock) y Luis tiene 1 (Jazz), total 3 filas. Marco no tiene ninguna fila en `reproducciones`, por lo que no aparece. (b) describe el comportamiento de un LEFT JOIN, no de un INNER JOIN (que nunca rellena con NULL). (a) es incorrecto: INNER JOIN no limita a 'la primera coincidencia', devuelve todas las combinaciones que coinciden (Ana aparece 2 veces, no 1).",
+    "difficulty": "medium",
+    "tags": [
+      "sql",
+      "inner-join",
+      "interpretacion-de-resultado"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 4,
+    "subarea_name": "Gestion de datos",
+    "question_text": "CASO:\nUn desarrollador junior escribe la siguiente consulta para obtener el total de ventas por vendedor, pero al ejecutarla en PostgreSQL recibe el error 'column \"v.nombre\" must appear in the GROUP BY clause or be used in an aggregate function':\n\n```sql\nSELECT v.nombre, v.telefono, SUM(p.monto) AS total\nFROM ventas p\nJOIN vendedores v ON p.vendedor_id = v.id\nGROUP BY v.nombre;\n```\n\nEl lider tecnico le pide corregir la consulta sin cambiar el objetivo del reporte (nombre, telefono y total por vendedor).\n\n¿Cual correccion resuelve el error manteniendo el resultado esperado?",
+    "option_a": "Agregar v.telefono al GROUP BY (GROUP BY v.nombre, v.telefono), porque toda columna no agregada del SELECT debe estar en el GROUP BY",
+    "option_b": "Eliminar v.telefono del SELECT, porque el motor no puede procesar mas de dos columnas en un SELECT con agregacion",
+    "option_c": "Cambiar SUM por COUNT, porque COUNT no exige que las columnas esten en el GROUP BY",
+    "correct_answer": "a",
+    "explanation": "En SQL estandar (y estricto en PostgreSQL), cada columna del SELECT que no este dentro de una funcion de agregacion debe aparecer en el GROUP BY; agregar v.telefono al GROUP BY resuelve el error manteniendo las tres columnas pedidas. (b) es una perdida de funcionalidad innecesaria; el motor si soporta multiples columnas, el problema es cuales estan agrupadas. (c) cualquier funcion de agregacion (COUNT, SUM, AVG) exige la misma regla de GROUP BY; cambiar la funcion no resuelve el error de columnas no agrupadas.",
+    "difficulty": "hard",
+    "tags": [
+      "sql",
+      "group-by",
+      "errores-de-sintaxis"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 4,
+    "subarea_name": "Gestion de datos",
+    "question_text": "CASO:\nUn analista de datos intenta ejecutar la siguiente consulta para listar clientes con mas de 3 pedidos, pero el motor de base de datos rechaza la ejecucion con un error de sintaxis:\n\n```sql\nSELECT cliente_id, COUNT(*) AS total_pedidos\nFROM pedidos\nWHERE COUNT(*) > 3\nGROUP BY cliente_id;\n```\n\nUn companero le sugiere que el error esta en donde coloco la condicion de filtrado sobre el resultado agregado.\n\n¿Cual es la correccion correcta?",
+    "option_a": "Mover el WHERE COUNT(*) > 3 antes del FROM, porque las condiciones de agregacion deben evaluarse antes de seleccionar la tabla",
+    "option_b": "Reemplazar el WHERE COUNT(*) > 3 por una clausula HAVING COUNT(*) > 3 despues del GROUP BY, porque WHERE filtra filas antes de agrupar y no puede usar funciones de agregacion",
+    "option_c": "Eliminar el GROUP BY y dejar unicamente el WHERE COUNT(*) > 3, porque COUNT ya agrupa implicitamente por cliente_id",
+    "correct_answer": "b",
+    "explanation": "WHERE filtra filas individuales antes de que ocurra la agregacion, por lo que no puede referenciar funciones de agregacion como COUNT(*); HAVING existe exactamente para filtrar sobre los resultados ya agrupados. (a) sintacticamente invalido: una clausula no puede colocarse antes del FROM en SQL estandar. (c) COUNT(*) sin GROUP BY cuenta todas las filas de la tabla completa, no agrupa automaticamente por cliente_id; el GROUP BY es indispensable para el resultado por cliente.",
+    "difficulty": "medium",
+    "tags": [
+      "sql",
+      "having",
+      "errores-de-sintaxis"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 4,
+    "subarea_name": "Gestion de datos",
+    "question_text": "CASO:\nUna red social necesita almacenar el perfil de cada usuario, donde cada perfil puede tener un numero variable de campos personalizados (algunos usuarios agregan 'universidad' y 'empleador', otros agregan campos completamente distintos como 'instrumento musical'). El equipo no quiere alterar el esquema de la base de datos cada vez que un usuario agrega un campo nuevo, y necesita que cada documento de perfil se pueda leer y escribir como una sola unidad anidada.\n\n¿Cual tipo de base de datos NoSQL es la mas adecuada?",
+    "option_a": "Base de datos clave-valor (como Redis), porque permite guardar cualquier dato sin estructura bajo una sola llave por usuario",
+    "option_b": "Base de datos de grafos (como Neo4j), porque su modelo de nodos y relaciones es el mas eficiente para campos de perfil variables",
+    "option_c": "Base de datos documental (como MongoDB), porque almacena cada perfil como un documento JSON/BSON con esquema flexible, sin necesidad de migraciones para campos nuevos",
+    "correct_answer": "c",
+    "explanation": "Una base documental almacena cada registro como un documento con esquema flexible (JSON/BSON), ideal para perfiles con campos variables sin alterar un esquema rigido. (b) las bases de grafos estan optimizadas para modelar y recorrer relaciones complejas entre entidades (amistades, recomendaciones), no para esquemas flexibles de un solo perfil. (a) clave-valor es eficiente para lecturas/escrituras simples por llave, pero no ofrece consultas ricas sobre los campos internos del perfil como si lo hace un documento indexado.",
+    "difficulty": "medium",
+    "tags": [
+      "nosql",
+      "documental",
+      "mongodb",
+      "seleccion-tecnologia"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 4,
+    "subarea_name": "Gestion de datos",
+    "question_text": "CASO:\nUn sitio de e-commerce con picos de trafico extremo en rebajas necesita cachear el carrito de compras de cada sesion de usuario para lecturas y escrituras en microsegundos, donde el acceso es siempre por un identificador de sesion unico y no se requieren consultas complejas ni relaciones entre carritos. El equipo evalua entre una base de grafos, una documental y una clave-valor en memoria.\n\n¿Cual es la eleccion mas adecuada para este caso?",
+    "option_a": "Base de datos clave-valor en memoria (como Redis), porque ofrece latencias minimas de lectura/escritura accediendo directamente por una llave (el id de sesion), sin necesidad de consultas complejas",
+    "option_b": "Base de datos de grafos (como Neo4j), porque modelar el carrito como nodos conectados acelera el acceso en microsegundos",
+    "option_c": "Base de datos columnar (como Cassandra), porque su enfoque en columnas es siempre mas rapido que cualquier otro modelo para cualquier tipo de acceso",
+    "correct_answer": "a",
+    "explanation": "El caso pide acceso puro por clave con latencia minima y sin relaciones ni consultas complejas: exactamente el fuerte de una base clave-valor en memoria como Redis. (b) un modelo de grafos anade overhead para modelar relaciones que el caso no necesita (no hay relaciones entre carritos que consultar). (c) Cassandra es fuerte en escritura masiva distribuida por columnas para analitica, pero no es la opcion mas simple ni la mas rapida para un acceso puro clave-valor como el descrito.",
+    "difficulty": "medium",
+    "tags": [
+      "nosql",
+      "clave-valor",
+      "redis",
+      "seleccion-tecnologia"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 4,
+    "subarea_name": "Gestion de datos",
+    "question_text": "CASO:\nUn sistema de recomendaciones de una plataforma de streaming necesita responder rapidamente preguntas como '¿que peliculas vieron los amigos de mis amigos que a mi tambien podrian gustarme?', navegando relaciones de amistad y de gustos en comun con varios niveles de profundidad. Modelar esto como JOINs sucesivos en una base relacional resulta cada vez mas lento conforme crecen los niveles de conexion.\n\n¿Cual tipo de base de datos NoSQL resuelve mejor este problema?",
+    "option_a": "Base de datos clave-valor (como Redis), porque el acceso directo por llave es mas rapido que cualquier consulta relacional para recomendaciones",
+    "option_b": "Base de datos de grafos (como Neo4j), porque modela nativamente nodos y relaciones, permitiendo recorrer conexiones de varios niveles con rendimiento constante sin JOINs costosos",
+    "option_c": "Base de datos documental (como MongoDB), porque anidar documentos dentro de documentos resuelve relaciones de cualquier profundidad de forma nativa",
+    "correct_answer": "b",
+    "explanation": "Las bases de grafos estan disenadas exactamente para este patron: recorrer relaciones (amigo de amigo, gustos en comun) con rendimiento que no se degrada al aumentar los niveles de profundidad, a diferencia de JOINs relacionales encadenados. (a) clave-valor no modela relaciones entre entidades, solo accesos directos por llave; no resuelve consultas de conexiones multiples. (c) documental puede anidar datos pero no esta optimizada para recorrer relaciones dinamicas de profundidad variable entre millones de usuarios.",
+    "difficulty": "hard",
+    "tags": [
+      "nosql",
+      "grafos",
+      "neo4j",
+      "seleccion-tecnologia"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 4,
+    "subarea_name": "Gestion de datos",
+    "question_text": "CASO:\nUna empresa de mensajeria tiene una tabla `envios` con 200 millones de registros historicos, y la mayoria de las consultas del dashboard operativo solo necesitan los envios de los ultimos 90 dias, mientras que un reporte anual ocasional consulta datos historicos completos. Las consultas del dashboard se han vuelto lentas porque el motor recorre toda la tabla incluso cuando solo se necesitan los envios recientes. El equipo decide dividir la tabla en particiones separadas segun el rango de fecha de creacion del envio.\n\n¿Cual tecnica de particionamiento estan aplicando?",
+    "option_a": "Normalizacion a tercera forma normal, porque separar por fecha elimina dependencias transitivas entre atributos",
+    "option_b": "Fragmentacion vertical, porque divide la tabla separando columnas relacionadas con fecha del resto de columnas",
+    "option_c": "Fragmentacion horizontal (por rango), porque divide la tabla en particiones que contienen subconjuntos de filas (por fecha), manteniendo todas las columnas en cada fragmento",
+    "correct_answer": "c",
+    "explanation": "Dividir una tabla en particiones que contienen subconjuntos de FILAS (por ejemplo, por rango de fecha) mientras cada particion conserva todas las columnas es la definicion de fragmentacion horizontal. (b) la fragmentacion vertical divide la tabla por COLUMNAS (por ejemplo, separar datos sensibles de datos frecuentes), no es lo que describe el caso. (a) la normalizacion trata sobre eliminar redundancia y dependencias entre atributos dentro del diseno logico, no sobre particionar fisicamente filas por rango de fecha.",
+    "difficulty": "medium",
+    "tags": [
+      "fragmentacion-horizontal",
+      "particionamiento",
+      "bases-de-datos"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 4,
+    "subarea_name": "Gestion de datos",
+    "question_text": "CASO:\nUn hospital mantiene una tabla `pacientes` con 40 columnas, donde 5 columnas (nombre, telefono, direccion) se consultan constantemente desde el modulo de recepcion, mientras que otras 35 columnas (historial clinico detallado, resultados de laboratorio extensos) solo se consultan desde el modulo medico especializado y son mucho mas pesadas. El equipo decide separar esas 35 columnas en una tabla distinta relacionada por el mismo identificador de paciente, para que el modulo de recepcion no cargue datos clinicos pesados que no necesita.\n\n¿Cual tecnica estan aplicando?",
+    "option_a": "Fragmentacion vertical, porque divide la tabla original separando subconjuntos de columnas relacionadas entre distintas tablas o fragmentos, unidos por la misma llave",
+    "option_b": "Fragmentacion horizontal, porque divide la tabla en particiones que contienen subconjuntos de filas segun el tipo de paciente",
+    "option_c": "Desnormalizacion, porque combina varias tablas en una sola para acelerar las consultas del modulo de recepcion",
+    "correct_answer": "a",
+    "explanation": "Separar un conjunto de COLUMNAS de una tabla en otra tabla relacionada (manteniendo la misma llave para reunir los datos cuando se necesite) es exactamente fragmentacion vertical. (b) la fragmentacion horizontal divide por FILAS, no por columnas; aqui todas las filas de pacientes existen en ambos fragmentos, lo que cambia son las columnas. (c) la desnormalizacion busca fusionar tablas para reducir JOINs, lo opuesto a separar columnas en una tabla nueva.",
+    "difficulty": "medium",
+    "tags": [
+      "fragmentacion-vertical",
+      "particionamiento",
+      "bases-de-datos"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 5,
+    "subarea_name": "Plataformas de desarrollo",
+    "question_text": "CASO:\nUna startup con un equipo de 2 desarrolladores debe lanzar una app movil para iOS y Android en 8 semanas, con un presupuesto ajustado que no permite mantener dos equipos nativos separados. La app necesita animaciones fluidas, hot-reload para iterar rapido durante el desarrollo, y un solo codigo base compartido que compile a binarios nativos reales en ambas plataformas (no un WebView empaquetado).\n\n¿Cual tecnologia se ajusta mejor a estas restricciones?",
+    "option_a": "Desarrollar dos apps nativas independientes, una en Swift y otra en Kotlin, porque siempre es la unica opcion viable para animaciones fluidas",
+    "option_b": "Flutter, porque compila a codigo nativo en ambas plataformas desde una sola base de codigo en Dart, con hot-reload y un motor de renderizado propio para animaciones fluidas",
+    "option_c": "Empaquetar el sitio web actual en un WebView simple, porque cualquier framework multiplataforma termina siendo solo un navegador embebido",
+    "correct_answer": "b",
+    "explanation": "Flutter compila a codigo nativo real en iOS y Android desde una unica base Dart, ofrece hot-reload para iterar rapido y tiene su propio motor de renderizado (Skia) que permite animaciones fluidas, cumpliendo las tres restricciones del caso. (a) construir dos apps nativas duplicaria el esfuerzo del equipo de 2 personas en 8 semanas, contradiciendo la restriccion de presupuesto y tiempo. (c) un WebView empaquetado no ofrece el rendimiento ni las animaciones nativas fluidas que pide el caso, y es precisamente lo que frameworks como Flutter o React Native evitan (no son solo un navegador embebido).",
+    "difficulty": "medium",
+    "tags": [
+      "flutter",
+      "desarrollo-movil",
+      "seleccion-tecnologia"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 5,
+    "subarea_name": "Plataformas de desarrollo",
+    "question_text": "CASO:\nUna empresa que ya tiene un gran equipo de desarrolladores C# especializados en el ecosistema .NET necesita construir una app movil multiplataforma reutilizando al maximo el conocimiento existente del equipo en C# y las librerias .NET que ya mantienen para su backend. No quieren invertir en aprender Dart ni JavaScript desde cero para este proyecto.\n\n¿Cual framework movil aprovecha mejor las habilidades ya existentes del equipo?",
+    "option_a": "React Native, porque JavaScript es un superset de C# y reutiliza automaticamente las librerias .NET existentes",
+    "option_b": "Flutter, porque Dart es sintacticamente identico a C# y no requiere ninguna curva de aprendizaje",
+    "option_c": "Xamarin (o su evolucion .NET MAUI), porque permite escribir apps moviles multiplataforma usando C# y el ecosistema .NET que el equipo ya domina",
+    "correct_answer": "c",
+    "explanation": "Xamarin (y su sucesor .NET MAUI) permite construir apps moviles multiplataforma en C#, compartiendo logica y aprovechando el conocimiento de .NET que el equipo ya tiene, sin aprender un lenguaje nuevo. (b) Dart no es sintacticamente identico a C#; aunque comparten similitudes de C-like syntax, el equipo si tendria una curva de aprendizaje real con Flutter. (a) JavaScript no es un superset de C# ni reutiliza automaticamente librerias .NET; son ecosistemas distintos, la afirmacion es falsa.",
+    "difficulty": "medium",
+    "tags": [
+      "xamarin",
+      "desarrollo-movil",
+      "seleccion-tecnologia"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 5,
+    "subarea_name": "Plataformas de desarrollo",
+    "question_text": "CASO:\nUn estudio independiente de videojuegos quiere lanzar un juego 3D con graficos de alta fidelidad, fisica realista y soporte para consolas, PC y moviles desde un mismo proyecto, priorizando el motor grafico mas usado en la industria AAA e indie con el mayor ecosistema de assets y documentacion disponible. El equipo tiene experiencia previa en C# y busca evitar escribir un motor grafico propio desde cero.\n\n¿Cual motor conviene mas para este caso?",
+    "option_a": "Unity, porque es uno de los motores mas usados en la industria (AAA e indie), soporta multiples plataformas desde un mismo proyecto, tiene un enorme ecosistema de assets y usa C# como lenguaje de scripting",
+    "option_b": "Scratch, porque su motor de bloques visuales es el estandar de la industria para juegos 3D de alta fidelidad grafica",
+    "option_c": "Escribir un motor grafico propio en ensamblador, porque siempre ofrece mejor rendimiento que cualquier motor existente para juegos AAA",
+    "correct_answer": "a",
+    "explanation": "Unity es uno de los motores mas usados en la industria, soporta multiplataforma (PC, consolas, moviles) desde un solo proyecto, tiene un ecosistema enorme de assets/documentacion y usa C#, que coincide con la experiencia previa del equipo. (b) Scratch es una herramienta educativa de programacion por bloques para ninos, sin capacidad de graficos 3D de alta fidelidad ni soporte de consolas. (c) escribir un motor propio en ensamblador tomaria anios de desarrollo para un estudio independiente, totalmente desproporcionado frente a usar un motor maduro existente.",
+    "difficulty": "easy",
+    "tags": [
+      "unity",
+      "motores-graficos",
+      "seleccion-tecnologia"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 5,
+    "subarea_name": "Plataformas de desarrollo",
+    "question_text": "CASO:\nUn profesor de secundaria quiere introducir a estudiantes de 12 anios a los conceptos basicos de programacion (secuencias, condicionales, ciclos) a traves de la creacion de animaciones y juegos simples, sin que los estudiantes tengan que escribir sintaxis de codigo textual desde el primer dia, priorizando una interfaz de arrastrar y soltar bloques visuales.\n\n¿Cual herramienta es la mas adecuada para este objetivo pedagogico introductorio?",
+    "option_a": "Unreal Engine, porque su editor Blueprint visual esta pensado exclusivamente para estudiantes de secundaria sin experiencia previa",
+    "option_b": "Scratch, porque permite crear animaciones y juegos simples mediante bloques visuales de arrastrar y soltar, sin requerir sintaxis textual, ideal para introducir conceptos de programacion a jovenes",
+    "option_c": "Godot con GDScript, porque su sintaxis identica a Python es la mas facil de memorizar para ninos de 12 anios desde el primer dia",
+    "correct_answer": "b",
+    "explanation": "Scratch fue disenado especificamente para ensenar conceptos de programacion a ninos y jovenes mediante bloques visuales, sin sintaxis textual, cumpliendo exactamente el objetivo pedagogico descrito. (a) Blueprint de Unreal Engine es un sistema visual pero orientado a desarrollo de videojuegos profesionales complejos, no es una herramienta introductoria pensada para secundaria. (c) GDScript de Godot si requiere escribir sintaxis textual (aunque simple), lo que contradice el requisito explicito de evitar sintaxis de codigo desde el primer dia.",
+    "difficulty": "easy",
+    "tags": [
+      "scratch",
+      "educacion",
+      "seleccion-tecnologia"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 5,
+    "subarea_name": "Plataformas de desarrollo",
+    "question_text": "CASO:\nUna fabrica de manufactura necesita instalar 200 sensores de temperatura y vibracion distribuidos en su planta, cada uno conectado a una placa de bajo costo que lea los sensores via GPIO, procese localmente los datos con Python y los envie por WiFi a un servidor central. El presupuesto por unidad es muy limitado y se necesita un sistema operativo Linux completo corriendo en cada placa para facilitar el desarrollo.\n\n¿Cual plataforma de hardware es la mas adecuada para este caso frente a un microcontrolador tradicional?",
+    "option_a": "Un mainframe IBM, porque su bajo costo por unidad lo hace ideal para desplegar 200 unidades en una planta industrial",
+    "option_b": "Un microcontrolador Arduino sin modificaciones, porque ejecuta Linux completo de forma nativa igual que cualquier computadora de escritorio",
+    "option_c": "Raspberry Pi, porque es una computadora de placa reducida de bajo costo que corre un Linux completo, soporta Python nativamente y tiene GPIO y WiFi integrados",
+    "correct_answer": "c",
+    "explanation": "Raspberry Pi es una computadora de placa reducida (no un microcontrolador) que corre un sistema operativo Linux completo, soporta Python de forma nativa y trae GPIO y conectividad WiFi, cumpliendo todos los requisitos del caso a bajo costo. (b) Arduino usa microcontroladores AVR/ARM sin sistema operativo completo; no corre Linux, por lo que no cumple el requisito explicito de un Linux completo en cada placa. (a) un mainframe IBM es una plataforma de computo empresarial masivo, de costo altisimo y fisicamente inviable para desplegar 200 unidades distribuidas en sensores de planta.",
+    "difficulty": "medium",
+    "tags": [
+      "raspberry-pi",
+      "sistemas-embebidos",
+      "seleccion-tecnologia"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 5,
+    "subarea_name": "Plataformas de desarrollo",
+    "question_text": "CASO:\nUna empresa de e-commerce recibe trafico normal la mayor parte del ano, pero durante el Buen Fin el trafico se multiplica por 20 durante solo 4 dias. El equipo de infraestructura no quiere pagar todo el ano por servidores dimensionados para el pico de 4 dias, y prefiere que la plataforma en la nube agregue y quite servidores automaticamente segun la demanda real en tiempo real.\n\n¿Cual estrategia de escalabilidad describe mejor lo que necesita el equipo?",
+    "option_a": "Escalabilidad horizontal (agregar o quitar mas instancias/servidores segun la demanda), aprovechable en la nube publica con autoescalado",
+    "option_b": "Escalabilidad vertical (aumentar la memoria y CPU de un unico servidor existente) contratada de forma fija todo el ano para el pico maximo",
+    "option_c": "Migrar a un mainframe on-premise dimensionado para el pico de trafico, evitando cualquier dependencia de la nube",
+    "correct_answer": "a",
+    "explanation": "El caso pide agregar/quitar capacidad dinamicamente segun demanda real: eso es escalabilidad horizontal (mas instancias) combinada con autoescalado en la nube, que permite pagar solo por lo que se usa. (b) escalar verticalmente un unico servidor de forma fija todo el ano para el pico maximo es exactamente lo que el equipo quiere evitar (pagar todo el ano por capacidad que solo se usa 4 dias). (c) un mainframe on-premise dimensionado para el pico implica la misma sobre-inversion todo el ano que el equipo busca evitar, ademas de perder la elasticidad que ofrece la nube.",
+    "difficulty": "medium",
+    "tags": [
+      "escalabilidad-horizontal",
+      "nube",
+      "autoescalado"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 5,
+    "subarea_name": "Plataformas de desarrollo",
+    "question_text": "CASO:\nUn banco necesita migrar su sistema de core bancario a la nube, pero por regulacion debe mantener los datos de clientes y transacciones en infraestructura bajo su control exclusivo, sin compartir hardware fisico con otras organizaciones; al mismo tiempo, quiere usar servicios de nube publica para su portal de marketing y landing pages, que no manejan datos sensibles.\n\n¿Cual modelo de nube describe mejor la arquitectura que necesita el banco?",
+    "option_a": "Nube publica unicamente, porque los proveedores publicos garantizan aislamiento total de hardware sin necesidad de infraestructura privada",
+    "option_b": "Nube hibrida, combinando una nube privada (para el core bancario con datos sensibles bajo control exclusivo) con una nube publica (para el portal de marketing sin datos sensibles)",
+    "option_c": "Nube privada unicamente para todo el banco, incluyendo el portal de marketing, porque mezclar modelos de nube nunca es tecnicamente posible",
+    "correct_answer": "b",
+    "explanation": "El caso describe exactamente una nube hibrida: infraestructura privada dedicada para los datos sensibles regulados y nube publica para cargas de trabajo sin sensibilidad, combinando ambos modelos segun la necesidad. (a) la nube publica comparte infraestructura fisica entre clientes (multi-tenant), lo que contradice el requisito regulatorio de hardware exclusivo para el core bancario. (c) es falso que mezclar modelos de nube sea tecnicamente imposible; la nube hibrida es un modelo estandar y ampliamente usado precisamente para casos como este.",
+    "difficulty": "medium",
+    "tags": [
+      "nube-hibrida",
+      "nube-privada",
+      "nube-publica"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 5,
+    "subarea_name": "Plataformas de desarrollo",
+    "question_text": "CASO:\nUn proveedor de inventarios expone un servicio web heredado con un contrato WSDL formal, mensajes XML estrictamente tipados y soporte de transacciones distribuidas complejas exigido por regulaciones del sector financiero de sus clientes. Un nuevo desarrollador propone migrar todo a REST con JSON porque 'siempre es mas simple', pero el arquitecto senala que el contrato formal y las garantias transaccionales del protocolo actual son requisitos del negocio, no una preferencia tecnica.\n\n¿Cual es el analisis correcto sobre REST vs SOAP en este caso?",
+    "option_a": "SOAP y REST son identicos en capacidades transaccionales y de tipado, por lo que la eleccion no afecta el cumplimiento regulatorio",
+    "option_b": "REST siempre es superior a SOAP en cualquier escenario, por lo que la migracion debe hacerse sin excepcion para modernizar el sistema",
+    "option_c": "SOAP es mas apropiado aqui porque ofrece un contrato formal (WSDL), tipado estricto vía XML Schema y estandares maduros para transacciones distribuidas (WS-AtomicTransaction), que son justo los requisitos regulatorios del caso",
+    "correct_answer": "c",
+    "explanation": "SOAP fue disenado con un contrato formal (WSDL), tipado estricto y extensiones estandar (como WS-AtomicTransaction) para transacciones distribuidas complejas, que es exactamente lo que exige el caso regulado. (b) es una generalizacion falsa: REST es mas simple y ligero para muchos casos, pero no ofrece de forma nativa las garantias transaccionales formales que SOAP si tiene. (a) es incorrecto: REST usa JSON sin un contrato de tipado formal equivalente a XML Schema, y no incluye estandares nativos de transacciones distribuidas como SOAP.",
+    "difficulty": "hard",
+    "tags": [
+      "soap",
+      "rest",
+      "seleccion-tecnologia",
+      "apis"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 5,
+    "subarea_name": "Plataformas de desarrollo",
+    "question_text": "CASO:\nUn desarrollador esta disenando la API REST de un sistema de gestion de tareas. Necesita definir el metodo HTTP correcto para la operacion 'actualizar completamente una tarea existente, reemplazando todos sus campos con los valores enviados', diferenciandola de otra operacion que solo modifica un campo especifico sin tocar el resto. Su companero sugiere usar el mismo metodo para ambas operaciones para simplificar el codigo.\n\n¿Cual es el analisis correcto segun las convenciones REST/HTTP?",
+    "option_a": "PUT debe usarse para reemplazar completamente el recurso (todos los campos), mientras que PATCH es el metodo pensado para modificaciones parciales de campos especificos; usar el mismo metodo para ambas operaciones rompe la semantica esperada por los consumidores de la API",
+    "option_b": "GET debe usarse para ambas operaciones, porque su simplicidad permite tanto reemplazar como modificar parcialmente un recurso sin diferencias practicas",
+    "option_c": "DELETE seguido de POST es la unica forma valida de actualizar un recurso segun el estandar REST, sin importar si el cambio es total o parcial",
+    "correct_answer": "a",
+    "explanation": "La convencion REST/HTTP asigna PUT a reemplazo completo de un recurso y PATCH a modificaciones parciales; mantener esta distincion es clave para que los consumidores de la API sepan que esperar de cada operacion. (b) GET esta reservado para lectura, no debe usarse para modificar datos; usarlo para escritura viola una convencion fundamental de HTTP. (c) DELETE + POST recrea el recurso con un nuevo identificador en muchos disenos, perdiendo continuidad de identidad del recurso; no es la practica estandar para actualizar campos existentes.",
+    "difficulty": "medium",
+    "tags": [
+      "rest",
+      "http-methods",
+      "apis"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 3,
+    "area_name": "Desarrollo de Sistemas de Software",
+    "subarea": 5,
+    "subarea_name": "Plataformas de desarrollo",
+    "question_text": "CASO:\nUna empresa de software como servicio (SaaS) permite que aplicaciones de terceros accedan a los datos de calendario de sus usuarios, pero solo despues de que el usuario autorice explicitamente el acceso desde una pantalla de consentimiento, sin que la aplicacion tercera llegue a conocer la contrasena del usuario en ningun momento. El equipo de seguridad exige ademas que el token de acceso otorgado pueda tener permisos limitados (solo lectura de calendario, por ejemplo) y expirar automaticamente.\n\n¿Cual mecanismo de autorizacion cumple estos requisitos?",
+    "option_a": "Una API Key estatica compartida con la aplicacion tercera, porque es equivalente en seguridad a un token OAuth con scopes y expiracion",
+    "option_b": "OAuth 2.0, porque permite que una aplicacion tercera obtenga un token de acceso con permisos limitados (scopes) tras el consentimiento explicito del usuario, sin exponer nunca la contrasena original",
+    "option_c": "Enviar usuario y contrasena en cada peticion HTTP mediante autenticacion basica, porque es el metodo mas simple de implementar para terceros",
+    "correct_answer": "b",
+    "explanation": "OAuth 2.0 fue disenado exactamente para este flujo: autorizacion delegada con consentimiento explicito del usuario, scopes que limitan permisos y tokens con expiracion, sin exponer la contrasena a la aplicacion tercera. (a) una API key estatica no tiene consentimiento granular del usuario ni expiracion ni scopes dinamicos por usuario; es un mecanismo mucho mas simple y menos seguro para este caso. (c) enviar usuario/contrasena en cada peticion expone las credenciales reales a la aplicacion tercera, justo lo que el requisito de seguridad prohibe explicitamente.",
+    "difficulty": "medium",
+    "tags": [
+      "oauth",
+      "apis",
+      "seguridad",
+      "autorizacion"
+    ]
+  }
+]

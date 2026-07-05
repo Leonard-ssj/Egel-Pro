@@ -1,0 +1,287 @@
+[
+  {
+    "section": "disciplinar",
+    "area": 1,
+    "area_name": "Analisis de Sistemas de Software",
+    "subarea": 1,
+    "subarea_name": "Tipos de requerimientos",
+    "question_text": "CASO:\nUn banco desarrolla un modulo de transferencias interbancarias. Durante la revision de requerimientos, el area legal exige que el sistema cumpla con las disposiciones del Banco Central sobre limites de transferencia diaria y retencion de registros por 10 anios, independientemente de lo que el cliente final solicite. El analista debe clasificar correctamente este tipo de requerimiento para documentarlo en la seccion adecuada de la SRS.\n\n¿Cual es la clasificacion correcta?",
+    "option_a": "Requerimiento externo (legal/normativo/de compliance), porque proviene de una entidad regulatoria fuera de la organizacion y es obligatorio sin importar la voluntad del cliente",
+    "option_b": "Requerimiento de usuario, porque describe una necesidad expresada directamente por quien opera el sistema en su dia a dia",
+    "option_c": "Requerimiento de interfaz, porque especifica como el sistema debe comunicarse con otros modulos bancarios",
+    "correct_answer": "a",
+    "explanation": "Los requerimientos externos capturan obligaciones impuestas por leyes, normas o regulaciones de entidades fuera de la organizacion (como un Banco Central); son obligatorios independientemente de lo que pida el cliente. (b) un requerimiento de usuario refleja lo que el operador quiere lograr con el sistema, no una obligacion regulatoria externa. (c) un requerimiento de interfaz especifica puntos de comunicacion tecnica entre sistemas, no restricciones legales de negocio.",
+    "difficulty": "medium",
+    "tags": [
+      "requerimientos-externos",
+      "compliance",
+      "clasificacion-requerimientos"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 1,
+    "area_name": "Analisis de Sistemas de Software",
+    "subarea": 1,
+    "subarea_name": "Tipos de requerimientos",
+    "question_text": "CASO:\nDurante la revision de una SRS para un sistema hospitalario, un auditor de calidad encuentra el siguiente requerimiento: 'El sistema debe responder rapido cuando el medico consulte el historial del paciente'. El auditor lo marca como no aceptable y pide reescribirlo antes de aprobar el documento, senalando que viola una caracteristica fundamental que toda SRS bien escrita debe cumplir.\n\n¿Cual caracteristica esta violando este requerimiento?",
+    "option_a": "Trazabilidad, porque el requerimiento no incluye un identificador unico que permita rastrearlo en la matriz de trazabilidad",
+    "option_b": "No ambiguedad, porque 'rapido' no tiene un criterio medible y objetivo (por ejemplo, tiempo de respuesta menor a 2 segundos); distintos lectores pueden interpretar 'rapido' de forma diferente",
+    "option_c": "Factibilidad, porque consultar el historial del paciente rapidamente es tecnicamente imposible con la tecnologia actual",
+    "correct_answer": "b",
+    "explanation": "'Rapido' es un termino subjetivo sin metrica verificable; la caracteristica de no ambiguedad exige que el requerimiento tenga una unica interpretacion posible, idealmente con un criterio cuantificable. (a) la trazabilidad se refiere a poder rastrear el origen y destino de un requerimiento mediante identificadores, un problema distinto al de la redaccion ambigua. (c) la factibilidad evalua si algo es tecnicamente posible de construir; consultar un historial rapido es perfectamente factible, el problema es la falta de un criterio medible, no la imposibilidad tecnica.",
+    "difficulty": "easy",
+    "tags": [
+      "no-ambiguedad",
+      "calidad-de-requerimientos",
+      "srs"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 1,
+    "area_name": "Analisis de Sistemas de Software",
+    "subarea": 2,
+    "subarea_name": "Tecnicas y herramientas para obtencion, analisis, priorizacion y validacion",
+    "question_text": "CASO:\nUn equipo de analisis debe elicitar requerimientos para un nuevo sistema de manufactura donde los operadores tienen dificultad para verbalizar sus procesos porque los ejecutan de forma casi automatica tras anios de experiencia; muchas decisiones criticas ocurren de forma tacita en el piso de produccion y no se documentan en ningun manual. Entrevistas y encuestas ya se intentaron y arrojaron respuestas vagas o incompletas.\n\n¿Cual tecnica de elicitacion es mas apropiada para capturar este conocimiento tacito?",
+    "option_a": "Una licitacion formal a proveedores externos, porque ellos tienen mas experiencia describiendo procesos de manufactura que los propios operadores",
+    "option_b": "Un cuestionario cerrado de opcion multiple, porque estandariza las respuestas y elimina la ambiguedad de las entrevistas anteriores",
+    "option_c": "Observacion (shadowing) del operador en su entorno real de trabajo, porque permite capturar procesos y decisiones tacitas que el propio operador no logra verbalizar en una entrevista",
+    "correct_answer": "c",
+    "explanation": "La observacion directa (shadowing) es la tecnica indicada quando el conocimiento es tacito y dificil de verbalizar: el analista ve el proceso real ejecutarse y captura decisiones que el operador no menciona explicitamente. (b) un cuestionario cerrado depende de que el operador pueda articular el proceso en opciones predefinidas, justo la limitacion que ya se identifico con entrevistas/encuestas. (a) una licitacion a proveedores externos no tiene relacion con capturar el conocimiento tacito de los operadores actuales de la planta.",
+    "difficulty": "medium",
+    "tags": [
+      "observacion",
+      "elicitacion",
+      "tecnicas-de-requerimientos"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 1,
+    "area_name": "Analisis de Sistemas de Software",
+    "subarea": 3,
+    "subarea_name": "Tecnicas y herramientas de documentacion de requerimientos",
+    "question_text": "CASO:\nUn equipo de auditoria de un proyecto gubernamental necesita verificar que cada requerimiento de negocio aprobado por el cliente este implementado en algun caso de uso, y que cada caso de uso este cubierto por al menos un caso de prueba, para poder responder con evidencia si se le pregunta '¿donde se probo el requerimiento 4.2?'. El equipo debe elegir la herramienta de documentacion adecuada para sostener esa cadena de evidencia de principio a fin.\n\n¿Cual herramienta cumple este objetivo?",
+    "option_a": "Una matriz de trazabilidad, porque relaciona explicitamente cada requerimiento con los artefactos de diseno, casos de uso y pruebas que lo cubren, permitiendo rastrear la cadena completa",
+    "option_b": "Un diagrama de flujo de datos (DFD), porque documenta el movimiento de datos entre procesos, no la relacion entre requerimientos y pruebas",
+    "option_c": "Un diagrama de contexto, porque delimita el sistema frente a entidades externas, sin relacionar requerimientos con pruebas especificas",
+    "correct_answer": "a",
+    "explanation": "La matriz de trazabilidad es el artefacto disenado exactamente para esto: vincular cada requerimiento con los elementos de diseno, implementacion y prueba que lo cubren, permitiendo auditar la cobertura completa. (b) un DFD documenta el flujo de datos entre procesos del sistema, es util para diseno pero no rastrea la cobertura de pruebas por requerimiento. (c) un diagrama de contexto muestra los limites del sistema y sus interacciones externas de alto nivel, no ofrece la trazabilidad requerimiento-prueba que pide el caso.",
+    "difficulty": "medium",
+    "tags": [
+      "matriz-de-trazabilidad",
+      "trazabilidad",
+      "documentacion"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 2,
+    "area_name": "Diseno de Sistemas de Software",
+    "subarea": 1,
+    "subarea_name": "Diseno arquitectonico de software",
+    "question_text": "CASO:\nUna empresa de logistica debe documentar la arquitectura de su nuevo sistema de rastreo de paquetes para presentarla a tres audiencias distintas: el equipo de infraestructura necesita saber en que servidores fisicos y contenedores se ejecutara cada componente, el equipo de desarrollo necesita ver las clases y sus relaciones, y la gerencia necesita una vista general de alto nivel. El arquitecto decide usar un diagrama UML especifico para mostrarle a infraestructura donde se despliega fisicamente cada nodo de software (servidores, contenedores Docker, balanceadores).\n\n¿Cual diagrama UML es el apropiado para esa audiencia especifica?",
+    "option_a": "Diagrama de clases, porque siempre es la unica vista necesaria para comunicar arquitectura a cualquier audiencia, incluida infraestructura",
+    "option_b": "Diagrama de despliegue (deployment diagram), porque modela los nodos de hardware/infraestructura (servidores, contenedores) y como se distribuyen fisicamente los artefactos de software sobre ellos",
+    "option_c": "Diagrama de casos de uso, porque muestra las interacciones de los actores con el sistema, informacion que el equipo de infraestructura necesita para dimensionar servidores",
+    "correct_answer": "b",
+    "explanation": "El diagrama de despliegue es el diagrama UML estructural pensado exactamente para mostrar nodos de hardware/infraestructura y la distribucion fisica de artefactos de software sobre ellos, ideal para la audiencia de infraestructura. (a) el diagrama de clases muestra estructura estatica de codigo orientado a objetos, util para desarrollo, pero no comunica topologia de despliegue fisico. (c) el diagrama de casos de uso documenta funcionalidad desde la perspectiva de actores externos, no informacion de infraestructura fisica ni de contenedores.",
+    "difficulty": "medium",
+    "tags": [
+      "diagrama-de-despliegue",
+      "uml",
+      "arquitectura"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 2,
+    "area_name": "Diseno de Sistemas de Software",
+    "subarea": 1,
+    "subarea_name": "Diseno arquitectonico de software",
+    "question_text": "CASO:\nUna consultora de arquitectura empresarial es contratada por una aseguradora para alinear la estrategia de TI con los objetivos de negocio a largo plazo, definiendo capas de arquitectura de negocio, datos, aplicaciones y tecnologia de forma integral en toda la organizacion, no solo en un sistema puntual. El cliente pide explicitamente un marco de referencia reconocido de arquitectura empresarial, no solo un patron de diseno de software.\n\n¿Cual marco de referencia es el mas adecuado para este alcance?",
+    "option_a": "El patron Singleton, porque garantiza una unica instancia de la estrategia de TI en toda la organizacion",
+    "option_b": "El patron MVC, porque su separacion de responsabilidades en Modelo-Vista-Controlador cubre igualmente las cuatro capas de arquitectura empresarial",
+    "option_c": "TOGAF, porque es un marco de arquitectura empresarial que define metodologia y capas (negocio, datos, aplicaciones, tecnologia) para alinear TI con la estrategia organizacional completa",
+    "correct_answer": "c",
+    "explanation": "TOGAF (The Open Group Architecture Framework) es un marco de arquitectura empresarial disenado exactamente para alinear TI con la estrategia de negocio a traves de capas de negocio, datos, aplicaciones y tecnologia en toda la organizacion. (b) MVC es un patron de diseno de software a nivel de aplicacion individual, no un marco de arquitectura empresarial para toda la organizacion. (a) Singleton es un patron de diseno de objetos (una sola instancia de una clase), sin ninguna relacion con arquitectura empresarial o alineacion estrategica de TI.",
+    "difficulty": "medium",
+    "tags": [
+      "togaf",
+      "arquitectura-empresarial",
+      "marcos-de-referencia"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 2,
+    "area_name": "Diseno de Sistemas de Software",
+    "subarea": 2,
+    "subarea_name": "Diseno de modulos, componentes y de datos",
+    "question_text": "CASO:\nUn revisor de codigo encuentra un modulo `ProcesadorPagos` que, ademas de procesar pagos, modifica directamente variables globales que pertenecen al modulo `Inventario` sin pasar por ninguna interfaz o parametro, simplemente accediendo y alterando esas variables compartidas desde dentro de sus propias funciones. El revisor senala esto como el peor tipo de acoplamiento posible entre modulos.\n\n¿Cual tipo de acoplamiento describe correctamente este caso?",
+    "option_a": "Acoplamiento de contenido, porque un modulo modifica directamente datos internos de otro modulo sin pasar por su interfaz, siendo el tipo de acoplamiento mas fuerte y peligroso",
+    "option_b": "Acoplamiento de datos, porque los modulos solo intercambian parametros simples a traves de sus interfaces publicas",
+    "option_c": "Acoplamiento externo, porque ambos modulos dependen unicamente de un formato de comunicacion externo estandarizado como XML",
+    "correct_answer": "a",
+    "explanation": "El acoplamiento de contenido ocurre cuando un modulo accede o modifica directamente el estado interno de otro modulo sin pasar por su interfaz; es considerado el tipo de acoplamiento mas fuerte y indeseable porque rompe el encapsulamiento. (b) el acoplamiento de datos es el mas debil y deseable: los modulos solo comparten parametros simples a traves de una interfaz bien definida, justo lo opuesto al caso descrito. (c) el acoplamiento externo se refiere a dependencia de un formato o protocolo externo compartido, no a la modificacion directa de variables internas de otro modulo.",
+    "difficulty": "medium",
+    "tags": [
+      "acoplamiento-de-contenido",
+      "acoplamiento",
+      "diseno-de-modulos"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 2,
+    "area_name": "Diseno de Sistemas de Software",
+    "subarea": 2,
+    "subarea_name": "Diseno de modulos, componentes y de datos",
+    "question_text": "CASO:\nUn sistema de reportes financieros necesita generar el mismo reporte en tres formatos distintos (PDF, Excel y CSV), y el equipo quiere que el codigo cliente que solicita el reporte no necesite conocer las clases concretas de cada generador de formato, sino simplemente pedir 'un generador de reportes' y recibir la implementacion correcta segun un parametro de configuracion, permitiendo agregar formatos nuevos en el futuro sin modificar el codigo cliente existente.\n\n¿Cual patron de diseno resuelve mejor este problema?",
+    "option_a": "Singleton, porque garantiza que solo exista una instancia del generador de reportes en toda la aplicacion, sin importar el formato solicitado",
+    "option_b": "Factory Method, porque encapsula la logica de creacion de objetos concretos (los generadores PDF, Excel, CSV) detras de una interfaz comun, permitiendo agregar nuevos formatos sin modificar el codigo cliente",
+    "option_c": "Observer, porque notifica automaticamente a todos los generadores de formato cuando cambian los datos del reporte",
+    "correct_answer": "b",
+    "explanation": "Factory Method es el patron creacional pensado exactamente para este caso: el cliente solicita un objeto a traves de una interfaz comun y la fabrica decide que implementacion concreta instanciar, facilitando agregar nuevos formatos sin tocar el codigo cliente. (a) Singleton resuelve un problema distinto (una unica instancia global), no la seleccion dinamica de una implementacion segun un formato solicitado. (c) Observer resuelve notificacion de cambios de estado a multiples suscriptores, no la creacion desacoplada de objetos segun un tipo solicitado.",
+    "difficulty": "medium",
+    "tags": [
+      "factory-method",
+      "patrones-de-diseno",
+      "gof"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 2,
+    "area_name": "Diseno de Sistemas de Software",
+    "subarea": 3,
+    "subarea_name": "Diseno de interfaces",
+    "question_text": "CASO:\nEl equipo de UX de una app de citas medicas presenta un prototipo donde el boton principal de 'Agendar cita' cambia de posicion en cada pantalla, usa iconos diferentes para la misma accion en distintas secciones, y el color de 'accion primaria' varia sin patron aparente entre modulos. Un evaluador de usabilidad revisa el prototipo contra las heuristicas de Nielsen y senala una violacion especifica relacionada con la falta de estandares visuales dentro de la misma aplicacion.\n\n¿Cual heuristica de Nielsen se esta violando?",
+    "option_a": "Prevencion de errores, porque el sistema no advierte al usuario antes de que cometa una equivocacion al agendar",
+    "option_b": "Visibilidad del estado del sistema, porque el usuario no puede saber si su cita fue agendada correctamente despues de presionar el boton",
+    "option_c": "Consistencia y estandares, porque los elementos y convenciones visuales deben comportarse de manera uniforme a lo largo de toda la aplicacion para que el usuario no tenga que reaprender cada pantalla",
+    "correct_answer": "c",
+    "explanation": "La heuristica de consistencia y estandares exige que elementos similares (como el boton de accion primaria) se comporten y luzcan igual en toda la aplicacion; el caso describe exactamente una violacion de esto al variar posicion, icono y color sin patron. (b) la visibilidad del estado del sistema trata sobre retroalimentacion tras una accion (por ejemplo, confirmar que la cita se agendo), un problema distinto al descrito en el caso. (a) la prevencion de errores se refiere a advertir o impedir acciones erroneas antes de que ocurran, no a la falta de consistencia visual entre pantallas.",
+    "difficulty": "easy",
+    "tags": [
+      "heuristicas-de-nielsen",
+      "consistencia",
+      "ux"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 4,
+    "area_name": "Gestion de Proyectos de Software",
+    "subarea": 2,
+    "subarea_name": "Calidad de software",
+    "question_text": "CASO:\nUna empresa mexicana de desarrollo de software, con menos de 20 empleados y sin la estructura organizacional para certificarse en CMMI (que considera demasiado costoso y complejo para su tamano), busca un modelo de procesos de software adaptado especificamente a las PyMEs de Mexico e Iberoamerica, reconocido por la Secretaria de Economia, para mejorar sus procesos de desarrollo de forma gradual y con menor costo de certificacion.\n\n¿Cual modelo de calidad de procesos es el mas adecuado para este caso?",
+    "option_a": "Moprosoft (Modelo de Procesos para la Industria de Software), porque fue disenado especificamente para PyMEs mexicanas e iberoamericanas como una alternativa mas accesible y gradual que CMMI",
+    "option_b": "CMMI nivel 5, porque es el unico modelo reconocido internacionalmente y no existen alternativas para empresas pequenas",
+    "option_c": "ISO 9001 exclusivamente, porque fue creado especificamente para la industria de software en paises de habla hispana",
+    "correct_answer": "a",
+    "explanation": "Moprosoft fue desarrollado en Mexico especificamente para PyMEs de la industria de software, ofreciendo un modelo de procesos mas accesible y gradual que CMMI, y es la base del programa mexicano de mejora de procesos reconocido por la Secretaria de Economia. (b) CMMI es reconocido internacionalmente pero su costo y complejidad de certificacion son altos, justo la barrera que el caso describe para una empresa pequena. (c) ISO 9001 es un estandar de gestion de calidad generico para cualquier industria, no fue creado especificamente para software ni es exclusivo de paises hispanohablantes.",
+    "difficulty": "medium",
+    "tags": [
+      "moprosoft",
+      "modelos-de-calidad",
+      "pymes"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 4,
+    "area_name": "Gestion de Proyectos de Software",
+    "subarea": 2,
+    "subarea_name": "Calidad de software",
+    "question_text": "CASO:\nEl equipo de calidad de una empresa de software necesita evaluar sistematicamente la calidad de un producto ya terminado usando un estandar internacional que define caracteristicas como adecuacion funcional, eficiencia de desempeno, compatibilidad, usabilidad, confiabilidad, seguridad, mantenibilidad y portabilidad, para reportarlo formalmente a un cliente que exige cumplimiento de normas ISO vigentes (no el estandar ISO/IEC 9126 que fue reemplazado).\n\n¿Cual estandar debe usar el equipo?",
+    "option_a": "ISO/IEC 29119, porque es el estandar especifico para definir las ocho caracteristicas de calidad de un producto de software terminado",
+    "option_b": "ISO/IEC 25000 (SQuaRE), porque es el estandar vigente que sucede y reemplaza a ISO/IEC 9126, definiendo las caracteristicas de calidad de producto de software mencionadas",
+    "option_c": "ISO 12207, porque define las caracteristicas de calidad de producto que el cliente esta solicitando en el reporte",
+    "correct_answer": "b",
+    "explanation": "ISO/IEC 25000 (familia SQuaRE, System and Software Quality Requirements and Evaluation) es el estandar vigente que reemplazo a ISO/IEC 9126 y define las caracteristicas de calidad de producto (adecuacion funcional, eficiencia, compatibilidad, usabilidad, confiabilidad, seguridad, mantenibilidad, portabilidad). (a) ISO/IEC 29119 es el estandar internacional de pruebas de software (procesos, documentacion y tecnicas de testing), no de caracteristicas de calidad de producto. (c) ISO 12207 define los procesos del ciclo de vida del software (que actividades se ejecutan y cuando), no las caracteristicas de calidad de un producto terminado.",
+    "difficulty": "hard",
+    "tags": [
+      "iso-25000",
+      "squares",
+      "calidad-de-producto"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 4,
+    "area_name": "Gestion de Proyectos de Software",
+    "subarea": 2,
+    "subarea_name": "Calidad de software",
+    "question_text": "CASO:\nUn equipo de QA de una empresa de consultoria necesita estandarizar sus procesos de pruebas de software para un cliente internacional que exige documentacion formal de politicas de prueba, estrategias, planes de prueba y disenio de casos de prueba conforme a un estandar internacional especifico de testing, distinto de los estandares de calidad de producto o de procesos de ciclo de vida.\n\n¿Cual estandar deben adoptar?",
+    "option_a": "CMMI nivel 3, porque su unico objetivo es estandarizar la documentacion de casos de prueba de software",
+    "option_b": "ISO/IEC 25000, porque define exclusivamente los procesos y documentacion formal de pruebas de software que el cliente solicita",
+    "option_c": "ISO/IEC/IEEE 29119, porque es el estandar internacional dedicado especificamente a procesos, documentacion y tecnicas de pruebas de software",
+    "correct_answer": "c",
+    "explanation": "ISO/IEC/IEEE 29119 es el estandar internacional enfocado especificamente en procesos de prueba de software: politicas de prueba organizacional, estrategias, planes de prueba y tecnicas de diseno de casos de prueba. (b) ISO/IEC 25000 (SQuaRE) se enfoca en caracteristicas de calidad de producto de software, no en procesos ni documentacion de pruebas. (a) CMMI es un modelo de madurez de procesos organizacionales en general, no un estandar especifico de documentacion de pruebas de software.",
+    "difficulty": "hard",
+    "tags": [
+      "iso-29119",
+      "pruebas-de-software",
+      "estandares"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 4,
+    "area_name": "Gestion de Proyectos de Software",
+    "subarea": 2,
+    "subarea_name": "Calidad de software",
+    "question_text": "CASO:\nUn equipo de metricas de calidad quiere definir indicadores de software que se conecten claramente con objetivos de negocio concretos (por ejemplo, 'reducir el tiempo de respuesta del sistema en 30%'), evitando caer en medir cosas solo porque son faciles de medir sin relacion con una meta real. El gerente de calidad propone usar un enfoque estructurado en tres niveles: primero definir la meta (Goal), luego las preguntas que indican si se cumple (Question), y finalmente las metricas concretas que responden esas preguntas (Metric).\n\n¿Cual enfoque describe correctamente esta metodologia?",
+    "option_a": "GQM (Goal-Question-Metric), porque estructura la definicion de metricas partiendo de una meta de negocio, derivando preguntas relevantes y despues las metricas concretas que las responden",
+    "option_b": "FURPS, porque clasifica requerimientos en funcionalidad, usabilidad, confiabilidad, desempeno y soportabilidad sin relacionarlos con metas de negocio",
+    "option_c": "Six Sigma DMAIC, porque su unico enfoque es medir defectos por millon de oportunidades sin definir metas ni preguntas previas",
+    "correct_answer": "a",
+    "explanation": "GQM (Goal-Question-Metric) es exactamente el enfoque estructurado en tres niveles descrito: se define primero una meta (Goal), se derivan preguntas que indican su cumplimiento (Question) y finalmente se identifican metricas concretas que responden esas preguntas (Metric), evitando metricas sin proposito. (b) FURPS es un modelo de clasificacion de requerimientos de calidad (Functionality, Usability, Reliability, Performance, Supportability), no una metodologia para derivar metricas desde metas de negocio. (c) Six Sigma DMAIC es una metodologia de mejora de procesos centrada en reducir variabilidad y defectos, no el marco especifico de tres niveles Goal-Question-Metric descrito en el caso.",
+    "difficulty": "hard",
+    "tags": [
+      "gqm",
+      "metricas-de-software",
+      "goal-question-metric"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 4,
+    "area_name": "Gestion de Proyectos de Software",
+    "subarea": 2,
+    "subarea_name": "Calidad de software",
+    "question_text": "CASO:\nUn equipo de mejora continua en una fabrica de software recibe 120 reportes de bugs del ultimo trimestre y quiere identificar cuales 'pocas causas vitales' concentran la mayoria de los defectos, para enfocar sus esfuerzos de correccion donde tendran mayor impacto, en lugar de repartir el esfuerzo por igual entre las 30 categorias de bugs registradas.\n\n¿Cual herramienta de calidad es la mas apropiada para este analisis?",
+    "option_a": "Diagrama de Ishikawa (causa-efecto), porque su unico proposito es contar la frecuencia acumulada de defectos por categoria",
+    "option_b": "Diagrama de Pareto, porque ordena las categorias de defectos de mayor a menor frecuencia acumulada, permitiendo identificar el pequeno grupo de causas que concentra la mayoria de los problemas (regla 80/20)",
+    "option_c": "Diagrama de dispersion, porque muestra la correlacion entre dos variables continuas, identificando automaticamente cual causa concentra mas defectos",
+    "correct_answer": "b",
+    "explanation": "El diagrama de Pareto ordena las categorias por frecuencia y muestra la curva acumulada, identificando visualmente el pequeno subconjunto de causas ('pocos vitales') responsable de la mayoria de los defectos, siguiendo el principio 80/20. (a) el diagrama de Ishikawa (espina de pescado) sirve para explorar las causas raiz de un problema especifico mediante categorias (mano de obra, metodo, maquina, etc.), no para priorizar por frecuencia acumulada. (c) el diagrama de dispersion evalua correlacion entre dos variables numericas continuas, no esta pensado para priorizar categorias discretas de defectos por frecuencia.",
+    "difficulty": "medium",
+    "tags": [
+      "pareto",
+      "herramientas-de-calidad",
+      "analisis-de-defectos"
+    ]
+  },
+  {
+    "section": "disciplinar",
+    "area": 4,
+    "area_name": "Gestion de Proyectos de Software",
+    "subarea": 2,
+    "subarea_name": "Calidad de software",
+    "question_text": "CASO:\nUn equipo de soporte tecnico detecta que un modulo de facturacion falla intermitentemente en produccion, y en lugar de corregir el sintoma inmediato (reiniciar el servicio cada vez que falla), el lider de calidad pide construir un diagrama que organice las posibles causas del fallo en categorias como mano de obra, metodo, maquina, medicion y materiales, para encontrar la causa raiz real antes de aplicar una correccion definitiva.\n\n¿Cual herramienta de calidad describe esta actividad?",
+    "option_a": "Histograma, porque agrupa datos numericos en intervalos de frecuencia, siendo la herramienta indicada para encontrar causas raiz cualitativas de un fallo",
+    "option_b": "Diagrama de Pareto, porque su unico proposito es identificar la causa raiz exacta de un problema mediante categorias predefinidas de mano de obra y materiales",
+    "option_c": "Diagrama de Ishikawa (causa-efecto o espina de pescado), porque organiza sistematicamente las posibles causas de un problema especifico en categorias, facilitando encontrar la causa raiz",
+    "correct_answer": "c",
+    "explanation": "El diagrama de Ishikawa (espina de pescado) es la herramienta de calidad disenada exactamente para esto: organizar las causas potenciales de un efecto (el fallo) en categorias estandar (mano de obra, metodo, maquina, medicion, materiales, medio ambiente) para guiar el analisis de causa raiz. (b) el diagrama de Pareto prioriza categorias por frecuencia acumulada, no organiza causas cualitativas de un problema especifico en categorias como el caso describe. (a) un histograma visualiza la distribucion de frecuencia de datos numericos continuos, no esta pensado para el analisis cualitativo de causas raiz de un fallo especifico.",
+    "difficulty": "medium",
+    "tags": [
+      "ishikawa",
+      "causa-efecto",
+      "herramientas-de-calidad"
+    ]
+  }
+]

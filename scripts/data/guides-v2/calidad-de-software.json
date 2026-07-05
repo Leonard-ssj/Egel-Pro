@@ -99,6 +99,41 @@
       "concept": "Pruebas de caja blanca",
       "definition_md": "Tecnica estructural que **examina el codigo interno** y mide cobertura de sentencias, ramas, condiciones y caminos (relacionada con la complejidad ciclomatica de McCabe). Responde a *como* lo hace el sistema. Complementa a la caja negra.",
       "importance": "alta"
+    },
+    {
+      "concept": "Moprosoft",
+      "definition_md": "Modelo de Procesos para la Industria de Software, creado en Mexico especificamente para PyMEs iberoamericanas como alternativa mas accesible y gradual que CMMI, reconocido por la Secretaria de Economia.",
+      "importance": "media"
+    },
+    {
+      "concept": "ISO/IEC 25000 (SQuaRE)",
+      "definition_md": "Familia de estandares que reemplazo a ISO/IEC 9126, paraguas de todo el modelo de calidad. ISO/IEC 25010 (caracteristicas de calidad de producto) es una de las normas dentro de esta familia SQuaRE.",
+      "importance": "alta"
+    },
+    {
+      "concept": "ISO/IEC/IEEE 29119",
+      "definition_md": "Estandar internacional dedicado especificamente a procesos de PRUEBA de software: politicas de prueba organizacional, estrategias, planes de prueba y tecnicas de diseno de casos de prueba.",
+      "importance": "media"
+    },
+    {
+      "concept": "ISO/IEC 12207",
+      "definition_md": "Estandar que define los procesos del CICLO DE VIDA del software (que actividades se ejecutan y cuando: adquisicion, suministro, desarrollo, operacion, mantenimiento), no caracteristicas de calidad de producto.",
+      "importance": "media"
+    },
+    {
+      "concept": "FURPS",
+      "definition_md": "Modelo de clasificacion de requerimientos de calidad: Functionality, Usability, Reliability, Performance, Supportability. Distinto de GQM (que deriva metricas desde metas de negocio).",
+      "importance": "media"
+    },
+    {
+      "concept": "GQM (Goal-Question-Metric)",
+      "definition_md": "Metodologia de tres niveles para definir metricas: primero una meta de negocio (Goal), luego preguntas que indican su cumplimiento (Question), y finalmente metricas concretas que las responden (Metric).",
+      "importance": "media"
+    },
+    {
+      "concept": "Diagrama de Ishikawa y de Pareto",
+      "definition_md": "Ishikawa (causa-efecto/espina de pescado): organiza causas potenciales de un problema en categorias (mano de obra, metodo, maquina, medicion, materiales) para encontrar la causa raiz. Pareto: ordena categorias de defectos por frecuencia acumulada para identificar el 20% de causas responsable del 80% de los problemas.",
+      "importance": "media"
     }
   ],
   "sections": [

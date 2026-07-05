@@ -15,19 +15,116 @@
     "published": true
   },
   "concepts": [
-    { "concept": "IaaS (Infrastructure-as-a-Service)", "definition_md": "El proveedor expone infraestructura virtualizada (VMs, redes, almacenamiento); el cliente administra SO, runtime y app. Ejemplos: AWS EC2, Azure VMs.", "importance": "alta" },
-    { "concept": "PaaS (Platform-as-a-Service)", "definition_md": "El proveedor administra SO, runtime y middleware; el cliente solo despliega codigo. Ejemplos: Heroku, Google App Engine, Vercel.", "importance": "alta" },
-    { "concept": "SaaS (Software-as-a-Service)", "definition_md": "Aplicacion completa lista para usar via navegador. El cliente solo consume, no opera nada. Ejemplos: Gmail, Salesforce, Notion.", "importance": "alta" },
-    { "concept": "FaaS / Serverless", "definition_md": "El cliente sube funciones; el proveedor las ejecuta on-demand, escala a cero y cobra por invocacion y duracion. Ejemplos: AWS Lambda, Cloud Functions.", "importance": "alta" },
-    { "concept": "Imagen vs contenedor (Docker)", "definition_md": "Imagen: plantilla inmutable de solo lectura con el codigo y sus dependencias. Contenedor: instancia en ejecucion de una imagen, con su capa escribible.", "importance": "alta" },
-    { "concept": "Pod (Kubernetes)", "definition_md": "Unidad minima de despliegue en K8s. Agrupa uno o mas contenedores que comparten red y almacenamiento. Suele ser efimero.", "importance": "alta" },
-    { "concept": "Deployment (Kubernetes)", "definition_md": "Recurso declarativo que mantiene N replicas de un Pod, realiza rolling updates y permite rollback automatico.", "importance": "alta" },
-    { "concept": "Service (Kubernetes)", "definition_md": "Abstraccion estable de red que expone un conjunto de Pods bajo una IP y DNS interno fijos (ClusterIP, NodePort, LoadBalancer).", "importance": "alta" },
-    { "concept": "CDN (Content Delivery Network)", "definition_md": "Red global de servidores edge que cachean assets estaticos cerca del usuario para reducir latencia y descargar el origen.", "importance": "media" },
-    { "concept": "API Gateway", "definition_md": "Punto unico de entrada a microservicios: enrutamiento, autenticacion, rate limiting, transformacion y observabilidad. Ejemplo: AWS API Gateway, Kong.", "importance": "media" },
-    { "concept": "Edge computing", "definition_md": "Ejecucion de codigo (no solo cache) cerca del usuario en POPs distribuidos. Ejemplo: Cloudflare Workers, Vercel Edge Functions.", "importance": "media" },
-    { "concept": "PWA (Progressive Web App)", "definition_md": "App web instalable con service workers, manifest y soporte offline. Se comporta como nativa sin pasar por tiendas.", "importance": "media" },
-    { "concept": "BaaS (Backend-as-a-Service)", "definition_md": "Plataformas que dan auth, DB, storage y push como servicio para que el cliente solo construya el front. Ejemplos: Supabase, Firebase.", "importance": "media" }
+    {
+      "concept": "IaaS (Infrastructure-as-a-Service)",
+      "definition_md": "El proveedor expone infraestructura virtualizada (VMs, redes, almacenamiento); el cliente administra SO, runtime y app. Ejemplos: AWS EC2, Azure VMs.",
+      "importance": "alta"
+    },
+    {
+      "concept": "PaaS (Platform-as-a-Service)",
+      "definition_md": "El proveedor administra SO, runtime y middleware; el cliente solo despliega codigo. Ejemplos: Heroku, Google App Engine, Vercel.",
+      "importance": "alta"
+    },
+    {
+      "concept": "SaaS (Software-as-a-Service)",
+      "definition_md": "Aplicacion completa lista para usar via navegador. El cliente solo consume, no opera nada. Ejemplos: Gmail, Salesforce, Notion.",
+      "importance": "alta"
+    },
+    {
+      "concept": "FaaS / Serverless",
+      "definition_md": "El cliente sube funciones; el proveedor las ejecuta on-demand, escala a cero y cobra por invocacion y duracion. Ejemplos: AWS Lambda, Cloud Functions.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Imagen vs contenedor (Docker)",
+      "definition_md": "Imagen: plantilla inmutable de solo lectura con el codigo y sus dependencias. Contenedor: instancia en ejecucion de una imagen, con su capa escribible.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Pod (Kubernetes)",
+      "definition_md": "Unidad minima de despliegue en K8s. Agrupa uno o mas contenedores que comparten red y almacenamiento. Suele ser efimero.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Deployment (Kubernetes)",
+      "definition_md": "Recurso declarativo que mantiene N replicas de un Pod, realiza rolling updates y permite rollback automatico.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Service (Kubernetes)",
+      "definition_md": "Abstraccion estable de red que expone un conjunto de Pods bajo una IP y DNS interno fijos (ClusterIP, NodePort, LoadBalancer).",
+      "importance": "alta"
+    },
+    {
+      "concept": "CDN (Content Delivery Network)",
+      "definition_md": "Red global de servidores edge que cachean assets estaticos cerca del usuario para reducir latencia y descargar el origen.",
+      "importance": "media"
+    },
+    {
+      "concept": "API Gateway",
+      "definition_md": "Punto unico de entrada a microservicios: enrutamiento, autenticacion, rate limiting, transformacion y observabilidad. Ejemplo: AWS API Gateway, Kong.",
+      "importance": "media"
+    },
+    {
+      "concept": "Edge computing",
+      "definition_md": "Ejecucion de codigo (no solo cache) cerca del usuario en POPs distribuidos. Ejemplo: Cloudflare Workers, Vercel Edge Functions.",
+      "importance": "media"
+    },
+    {
+      "concept": "PWA (Progressive Web App)",
+      "definition_md": "App web instalable con service workers, manifest y soporte offline. Se comporta como nativa sin pasar por tiendas.",
+      "importance": "media"
+    },
+    {
+      "concept": "BaaS (Backend-as-a-Service)",
+      "definition_md": "Plataformas que dan auth, DB, storage y push como servicio para que el cliente solo construya el front. Ejemplos: Supabase, Firebase.",
+      "importance": "media"
+    },
+    {
+      "concept": "Nube publica, privada e hibrida",
+      "definition_md": "Publica: infraestructura multi-tenant compartida entre organizaciones (AWS, Azure, GCP). Privada: infraestructura dedicada a una sola organizacion, util cuando hay regulacion estricta. Hibrida: combina ambas segun sensibilidad de la carga de trabajo.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Escalabilidad horizontal vs vertical",
+      "definition_md": "Horizontal: agrega mas instancias/servidores (scale-out), ideal para picos de trafico variables con autoescalado en la nube. Vertical: aumenta CPU/memoria de un mismo servidor (scale-up), tiene un limite fisico y suele requerir downtime.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Frameworks moviles multiplataforma",
+      "definition_md": "Flutter (Dart, motor de renderizado propio Skia), React Native (JavaScript, puente a componentes nativos), Xamarin/.NET MAUI (C#, aprovecha el ecosistema .NET). Todos compilan a apps nativas reales, a diferencia de un WebView empaquetado.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Desarrollo movil nativo",
+      "definition_md": "Kotlin (y Java) para Android con Android Studio; Swift para iOS con Xcode. Ofrecen el mayor rendimiento y acceso total a APIs de la plataforma, a costa de mantener dos bases de codigo.",
+      "importance": "media"
+    },
+    {
+      "concept": "Sistemas embebidos y microcontroladores",
+      "definition_md": "Raspberry Pi: computadora de placa reducida que corre Linux completo, soporta Python. Arduino: microcontrolador AVR sin sistema operativo, programado en C/C++ simplificado via Arduino IDE. C es el lenguaje dominante en firmware por su control de bajo nivel y compilacion a codigo compacto.",
+      "importance": "media"
+    },
+    {
+      "concept": "Motores graficos y videojuegos",
+      "definition_md": "Unity (C#): multiplataforma, gran ecosistema de assets, usado en AAA e indie. Unreal Engine (C++/Blueprint): graficos de altisima fidelidad. Godot (GDScript): open source, ligero. Scratch: bloques visuales para ensenar programacion a ninos, sin sintaxis textual.",
+      "importance": "media"
+    },
+    {
+      "concept": "REST vs SOAP",
+      "definition_md": "REST: arquitectura ligera sobre HTTP, usa JSON, sin contrato formal obligatorio. SOAP: protocolo con contrato formal WSDL, mensajes XML estrictos y estandares maduros para transacciones distribuidas (WS-AtomicTransaction), preferido en integraciones legacy o reguladas.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Metodos HTTP",
+      "definition_md": "GET: leer sin efectos secundarios. POST: crear un recurso nuevo. PUT: reemplazar completamente un recurso existente. PATCH: modificar parcialmente un recurso. DELETE: eliminar un recurso.",
+      "importance": "alta"
+    },
+    {
+      "concept": "OAuth 2.0",
+      "definition_md": "Protocolo de autorizacion delegada: una app tercera obtiene un token con permisos limitados (scopes) y expiracion, tras consentimiento explicito del usuario, sin conocer nunca su contrasena.",
+      "importance": "media"
+    }
   ],
   "sections": [
     {
@@ -36,7 +133,12 @@
       "title": null,
       "body_md": "Esta subarea aporta **10 reactivos** en Area 3. Cubre las plataformas modernas donde corren los sistemas: los **modelos de servicio cloud** (IaaS, PaaS, SaaS, FaaS), **Docker** y **Kubernetes** como ejes de la operacion en contenedores, y conceptos asociados como **CDN**, **API Gateway**, **edge**, **PWA** y **BaaS**.\n\nLos reactivos clasicos preguntan: (1) cual modelo corresponde a un escenario dado (ej. 'API impredecible que debe escalar a cero' -> FaaS); (2) la diferencia entre **imagen** y **contenedor**; (3) que recurso de K8s expone Pods estables (Service) y cual los administra (Deployment); (4) cuando usar **CDN** vs **edge computing**.\n\nTip de oro: la cadena de responsabilidad **disminuye** de IaaS a SaaS — en IaaS administras casi todo, en SaaS nada. FaaS es PaaS llevado al extremo: ni siquiera administras procesos largos, solo funciones. Una imagen Docker es como una clase, un contenedor es como un objeto instanciado. En K8s: Pod = unidad efimera, Deployment = quien la mantiene viva, Service = quien la expone."
     },
-    { "type": "concept", "order": 2, "title": "Conceptos clave", "metadata": null },
+    {
+      "type": "concept",
+      "order": 2,
+      "title": "Conceptos clave",
+      "metadata": null
+    },
     {
       "type": "example",
       "order": 3,
@@ -54,14 +156,56 @@
       "order": 5,
       "title": "IaaS vs PaaS vs SaaS vs FaaS",
       "metadata": {
-        "headers": ["Aspecto", "IaaS", "PaaS", "SaaS", "FaaS"],
+        "headers": [
+          "Aspecto",
+          "IaaS",
+          "PaaS",
+          "SaaS",
+          "FaaS"
+        ],
         "rows": [
-          ["Lo administra el cliente", "SO, runtime, app, datos", "App y datos", "Nada", "Solo codigo de la funcion"],
-          ["Lo administra el proveedor", "Hardware, red, virtualizacion", "SO, runtime, escala", "Todo", "SO, runtime, escala, ejecucion"],
-          ["Flexibilidad", "Maxima", "Media", "Minima", "Baja (limites de tiempo y recursos)"],
-          ["Modelo de costo", "Por hora de VM", "Por instancia / dyno", "Por usuario / suscripcion", "Por invocacion + GB-segundo"],
-          ["Escala a cero", "No", "No (suele tener minimo)", "N/A", "Si"],
-          ["Ejemplo", "AWS EC2", "Vercel, Heroku", "Gmail, Notion", "AWS Lambda, Cloud Functions"]
+          [
+            "Lo administra el cliente",
+            "SO, runtime, app, datos",
+            "App y datos",
+            "Nada",
+            "Solo codigo de la funcion"
+          ],
+          [
+            "Lo administra el proveedor",
+            "Hardware, red, virtualizacion",
+            "SO, runtime, escala",
+            "Todo",
+            "SO, runtime, escala, ejecucion"
+          ],
+          [
+            "Flexibilidad",
+            "Maxima",
+            "Media",
+            "Minima",
+            "Baja (limites de tiempo y recursos)"
+          ],
+          [
+            "Modelo de costo",
+            "Por hora de VM",
+            "Por instancia / dyno",
+            "Por usuario / suscripcion",
+            "Por invocacion + GB-segundo"
+          ],
+          [
+            "Escala a cero",
+            "No",
+            "No (suele tener minimo)",
+            "N/A",
+            "Si"
+          ],
+          [
+            "Ejemplo",
+            "AWS EC2",
+            "Vercel, Heroku",
+            "Gmail, Notion",
+            "AWS Lambda, Cloud Functions"
+          ]
         ]
       }
     },
@@ -71,46 +215,200 @@
       "title": "Herramientas de cloud y orquestacion",
       "metadata": {
         "tools": [
-          { "name": "AWS (EC2, Lambda, S3, RDS)", "url": "https://aws.amazon.com/", "description": "Proveedor cloud lider. EC2 (IaaS), Lambda (FaaS), S3 (storage), RDS (DB administrada)." },
-          { "name": "Docker", "url": "https://www.docker.com/", "description": "Motor de contenedores estandar. Empaqueta apps con todas sus dependencias en imagenes portables." },
-          { "name": "Kubernetes", "url": "https://kubernetes.io/", "description": "Orquestador de contenedores: programa Pods, escala, hace rolling updates y self-healing." },
-          { "name": "Terraform", "url": "https://www.terraform.io/", "description": "Infraestructura como codigo declarativa multi-cloud (AWS, GCP, Azure, etc.)." },
-          { "name": "Vercel", "url": "https://vercel.com/", "description": "PaaS optimizado para Next.js con edge functions, CDN global y previews por PR." },
-          { "name": "Cloudflare", "url": "https://www.cloudflare.com/", "description": "CDN + edge computing (Workers) + DNS + proteccion DDoS en red global." }
+          {
+            "name": "AWS (EC2, Lambda, S3, RDS)",
+            "url": "https://aws.amazon.com/",
+            "description": "Proveedor cloud lider. EC2 (IaaS), Lambda (FaaS), S3 (storage), RDS (DB administrada)."
+          },
+          {
+            "name": "Microsoft Azure",
+            "url": "https://azure.microsoft.com/",
+            "description": "Proveedor cloud de Microsoft: VMs, App Service (PaaS), Functions (FaaS), fuerte integracion con .NET."
+          },
+          {
+            "name": "Flutter",
+            "url": "https://flutter.dev/",
+            "description": "Framework movil multiplataforma de Google en Dart, compila a codigo nativo con motor de renderizado propio."
+          },
+          {
+            "name": "React Native",
+            "url": "https://reactnative.dev/",
+            "description": "Framework movil multiplataforma en JavaScript/TypeScript que renderiza componentes nativos reales."
+          },
+          {
+            "name": "Unity",
+            "url": "https://unity.com/",
+            "description": "Motor de videojuegos multiplataforma en C#, el mas usado en estudios indie y AAA."
+          },
+          {
+            "name": "Docker",
+            "url": "https://www.docker.com/",
+            "description": "Motor de contenedores estandar. Empaqueta apps con todas sus dependencias en imagenes portables."
+          },
+          {
+            "name": "Kubernetes",
+            "url": "https://kubernetes.io/",
+            "description": "Orquestador de contenedores: programa Pods, escala, hace rolling updates y self-healing."
+          },
+          {
+            "name": "Terraform",
+            "url": "https://www.terraform.io/",
+            "description": "Infraestructura como codigo declarativa multi-cloud (AWS, GCP, Azure, etc.)."
+          },
+          {
+            "name": "Vercel",
+            "url": "https://vercel.com/",
+            "description": "PaaS optimizado para Next.js con edge functions, CDN global y previews por PR."
+          },
+          {
+            "name": "Cloudflare",
+            "url": "https://www.cloudflare.com/",
+            "description": "CDN + edge computing (Workers) + DNS + proteccion DDoS en red global."
+          }
         ]
       }
+    },
+    {
+      "type": "comparison_table",
+      "title": "Seleccion de tecnologia movil, embebida y de motor grafico",
+      "metadata": {
+        "headers": [
+          "Necesito...",
+          "Tecnologia",
+          "Por que"
+        ],
+        "rows": [
+          [
+            "App para iOS y Android, un solo codigo base, animaciones nativas",
+            "Flutter",
+            "Compila a codigo nativo real, motor de renderizado propio (Skia)"
+          ],
+          [
+            "App movil reutilizando equipo y librerias .NET/C# existentes",
+            "Xamarin / .NET MAUI",
+            "Comparte codigo C# con el ecosistema .NET ya conocido por el equipo"
+          ],
+          [
+            "App nativa con maximo rendimiento y acceso total a APIs de la plataforma",
+            "Kotlin (Android) / Swift (iOS)",
+            "Nativo puro, sin capa intermedia, mayor control y rendimiento"
+          ],
+          [
+            "Firmware de sensores/microcontrolador de bajo costo",
+            "C + Arduino IDE / microcontrolador dedicado",
+            "Compila a binario compacto, sin runtime, control total de hardware"
+          ],
+          [
+            "Computadora pequena con Linux completo para IoT",
+            "Raspberry Pi",
+            "Corre Linux y Python nativamente, con GPIO integrado"
+          ],
+          [
+            "Videojuego 3D multiplataforma con gran ecosistema de assets",
+            "Unity (C#)",
+            "El mas usado en indie y AAA, soporta PC/consolas/moviles"
+          ],
+          [
+            "Ensenar programacion a ninos sin sintaxis de codigo",
+            "Scratch",
+            "Bloques visuales de arrastrar y soltar, sin texto"
+          ],
+          [
+            "Nube dedicada por regulacion + nube publica para lo no sensible",
+            "Nube hibrida",
+            "Combina control exclusivo (privada) con elasticidad (publica)"
+          ],
+          [
+            "Escalar automaticamente en picos de trafico impredecibles",
+            "Escalabilidad horizontal + autoescalado",
+            "Agrega/quita instancias segun demanda, se paga solo por lo usado"
+          ]
+        ]
+      },
+      "body_md": "Estos reactivos casi siempre siguen el mismo patron: describen una restriccion concreta del caso (presupuesto, equipo existente, regulacion, tipo de dispositivo) y piden elegir la tecnologia que la resuelve, no la 'mejor' tecnologia en abstracto. Ejemplo: si el equipo ya domina C#/.NET, la respuesta correcta suele ser Xamarin, aunque Flutter tambien sea valido en otro contexto. Si el caso menciona 'control total del hardware, sin sistema operativo', es C/microcontrolador dedicado, no Raspberry Pi (que si corre un SO completo).",
+      "order": 7
     },
     {
       "type": "glossary",
-      "order": 7,
+      "order": 8,
       "title": "Glosario",
       "metadata": {
         "terms": [
-          { "term": "IaaS", "def": "Infrastructure-as-a-Service. Recursos de computo virtualizado donde el cliente administra desde el SO hacia arriba." },
-          { "term": "PaaS", "def": "Platform-as-a-Service. Plataforma administrada donde el cliente solo despliega codigo." },
-          { "term": "SaaS", "def": "Software-as-a-Service. Aplicacion final lista para usar via navegador." },
-          { "term": "FaaS", "def": "Functions-as-a-Service. Ejecucion de funciones bajo demanda con escala a cero." },
-          { "term": "Pod", "def": "Unidad minima de despliegue en Kubernetes; agrupa uno o mas contenedores que comparten red y volumenes." },
-          { "term": "Image (Docker)", "def": "Plantilla inmutable de solo lectura que describe un contenedor." },
-          { "term": "Container", "def": "Instancia en ejecucion de una imagen Docker con su capa escribible." },
-          { "term": "Edge", "def": "Ejecucion de codigo en POPs cercanos al usuario para reducir latencia." },
-          { "term": "Serverless", "def": "Modelo de ejecucion sin administrar servidores; abarca FaaS, BaaS y servicios administrados." },
-          { "term": "CDN", "def": "Content Delivery Network. Red distribuida que cachea contenido estatico cerca del usuario." }
+          {
+            "term": "IaaS",
+            "def": "Infrastructure-as-a-Service. Recursos de computo virtualizado donde el cliente administra desde el SO hacia arriba."
+          },
+          {
+            "term": "PaaS",
+            "def": "Platform-as-a-Service. Plataforma administrada donde el cliente solo despliega codigo."
+          },
+          {
+            "term": "SaaS",
+            "def": "Software-as-a-Service. Aplicacion final lista para usar via navegador."
+          },
+          {
+            "term": "FaaS",
+            "def": "Functions-as-a-Service. Ejecucion de funciones bajo demanda con escala a cero."
+          },
+          {
+            "term": "Pod",
+            "def": "Unidad minima de despliegue en Kubernetes; agrupa uno o mas contenedores que comparten red y volumenes."
+          },
+          {
+            "term": "Image (Docker)",
+            "def": "Plantilla inmutable de solo lectura que describe un contenedor."
+          },
+          {
+            "term": "Container",
+            "def": "Instancia en ejecucion de una imagen Docker con su capa escribible."
+          },
+          {
+            "term": "Edge",
+            "def": "Ejecucion de codigo en POPs cercanos al usuario para reducir latencia."
+          },
+          {
+            "term": "Serverless",
+            "def": "Modelo de ejecucion sin administrar servidores; abarca FaaS, BaaS y servicios administrados."
+          },
+          {
+            "term": "CDN",
+            "def": "Content Delivery Network. Red distribuida que cachea contenido estatico cerca del usuario."
+          }
         ]
       }
     },
-    { "type": "quick_quiz", "order": 8, "title": "Quick Quiz", "metadata": null },
+    {
+      "type": "quick_quiz",
+      "order": 9,
+      "title": "Quick Quiz",
+      "metadata": null
+    },
     {
       "type": "references",
-      "order": 9,
+      "order": 10,
       "title": "Referencias",
       "metadata": {
         "refs": [
-          { "title": "AWS Well-Architected Framework", "url": "https://aws.amazon.com/architecture/well-architected/" },
-          { "title": "Kubernetes Documentation", "url": "https://kubernetes.io/docs/home/" },
-          { "title": "Docker Documentation", "url": "https://docs.docker.com/" },
-          { "title": "Google Cloud — Serverless overview", "url": "https://cloud.google.com/serverless" },
-          { "title": "NIST — Definition of Cloud Computing (SP 800-145)", "url": "https://csrc.nist.gov/publications/detail/sp/800-145/final" }
+          {
+            "title": "AWS Well-Architected Framework",
+            "url": "https://aws.amazon.com/architecture/well-architected/"
+          },
+          {
+            "title": "Kubernetes Documentation",
+            "url": "https://kubernetes.io/docs/home/"
+          },
+          {
+            "title": "Docker Documentation",
+            "url": "https://docs.docker.com/"
+          },
+          {
+            "title": "Google Cloud — Serverless overview",
+            "url": "https://cloud.google.com/serverless"
+          },
+          {
+            "title": "NIST — Definition of Cloud Computing (SP 800-145)",
+            "url": "https://csrc.nist.gov/publications/detail/sp/800-145/final"
+          }
         ]
       }
     }

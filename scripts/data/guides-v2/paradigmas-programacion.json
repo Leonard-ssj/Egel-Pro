@@ -15,17 +15,91 @@
     "published": true
   },
   "concepts": [
-    { "concept": "Paradigma imperativo", "definition_md": "El programa describe paso a paso COMO debe ejecutarse: asignaciones, bucles, condicionales. Ejemplos: C, Pascal. Es el estilo mas cercano a la maquina.", "importance": "alta" },
-    { "concept": "Paradigma declarativo", "definition_md": "El programa describe QUE resultado se quiere, no como obtenerlo. SQL, HTML, Prolog y los lenguajes funcionales son declarativos.", "importance": "alta" },
-    { "concept": "Programacion Orientada a Objetos (POO)", "definition_md": "Modela el mundo como objetos que combinan datos (atributos) y comportamiento (metodos). Cuatro pilares: encapsulamiento, herencia, polimorfismo y abstraccion.", "importance": "alta" },
-    { "concept": "Encapsulamiento", "definition_md": "Ocultar el estado interno de un objeto y exponer solo una interfaz publica controlada. En Java se logra con `private` y getters/setters.", "importance": "alta" },
-    { "concept": "Herencia", "definition_md": "Mecanismo por el que una clase hija reutiliza atributos y metodos de una clase padre. Se relaciona con la relacion 'es-un'.", "importance": "alta" },
-    { "concept": "Polimorfismo", "definition_md": "Capacidad de tratar objetos de diferentes clases por una interfaz comun. Permite que una sola llamada (`pagar()`) se comporte distinto segun el tipo concreto.", "importance": "alta" },
-    { "concept": "Abstraccion", "definition_md": "Exponer lo esencial y ocultar la complejidad. Se concreta en clases abstractas e interfaces que definen contratos sin implementacion.", "importance": "alta" },
-    { "concept": "Programacion funcional", "definition_md": "Paradigma basado en funciones puras, inmutabilidad, funciones de orden superior (HOF) y composicion. Evita estado mutable y efectos secundarios.", "importance": "alta" },
-    { "concept": "Programacion logica", "definition_md": "El programador declara hechos y reglas; el motor del lenguaje deduce respuestas via resolucion. Lenguaje canonico: Prolog.", "importance": "media" },
-    { "concept": "Programacion reactiva", "definition_md": "Modelo basado en flujos de datos observables y propagacion automatica de cambios. RxJS (JavaScript) y Reactor (Java) son implementaciones populares.", "importance": "media" },
-    { "concept": "Programacion dirigida por eventos", "definition_md": "Flujo de control conducido por eventos (clics, mensajes, timers). Node.js usa un event loop monohilo con callbacks asincronos.", "importance": "media" }
+    {
+      "concept": "Paradigma imperativo",
+      "definition_md": "El programa describe paso a paso COMO debe ejecutarse: asignaciones, bucles, condicionales. Ejemplos: C, Pascal. Es el estilo mas cercano a la maquina.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Paradigma declarativo",
+      "definition_md": "El programa describe QUE resultado se quiere, no como obtenerlo. SQL, HTML, Prolog y los lenguajes funcionales son declarativos.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Programacion Orientada a Objetos (POO)",
+      "definition_md": "Modela el mundo como objetos que combinan datos (atributos) y comportamiento (metodos). Cuatro pilares: encapsulamiento, herencia, polimorfismo y abstraccion.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Encapsulamiento",
+      "definition_md": "Ocultar el estado interno de un objeto y exponer solo una interfaz publica controlada. En Java se logra con `private` y getters/setters.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Herencia",
+      "definition_md": "Mecanismo por el que una clase hija reutiliza atributos y metodos de una clase padre. Se relaciona con la relacion 'es-un'.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Polimorfismo",
+      "definition_md": "Capacidad de tratar objetos de diferentes clases por una interfaz comun. Permite que una sola llamada (`pagar()`) se comporte distinto segun el tipo concreto.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Abstraccion",
+      "definition_md": "Exponer lo esencial y ocultar la complejidad. Se concreta en clases abstractas e interfaces que definen contratos sin implementacion.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Programacion funcional",
+      "definition_md": "Paradigma basado en funciones puras, inmutabilidad, funciones de orden superior (HOF) y composicion. Evita estado mutable y efectos secundarios.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Programacion logica",
+      "definition_md": "El programador declara hechos y reglas; el motor del lenguaje deduce respuestas via resolucion. Lenguaje canonico: Prolog.",
+      "importance": "media"
+    },
+    {
+      "concept": "Programacion reactiva",
+      "definition_md": "Modelo basado en flujos de datos observables y propagacion automatica de cambios. RxJS (JavaScript) y Reactor (Java) son implementaciones populares.",
+      "importance": "media"
+    },
+    {
+      "concept": "Programacion dirigida por eventos",
+      "definition_md": "Flujo de control conducido por eventos (clics, mensajes, timers). Node.js usa un event loop monohilo con callbacks asincronos.",
+      "importance": "media"
+    },
+    {
+      "concept": "Recursividad",
+      "definition_md": "Una funcion que se llama a si misma. Requiere un caso base (condicion de paro) y un caso recursivo que acerque el problema al caso base. Sin caso base, se agota la pila de llamadas (stack overflow).",
+      "importance": "alta"
+    },
+    {
+      "concept": "Pilas (stack, LIFO)",
+      "definition_md": "Estructura lineal donde el ultimo elemento insertado es el primero en salir (Last In, First Out). Usada para deshacer/rehacer, evaluacion de expresiones y llamadas de funcion.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Colas (queue, FIFO)",
+      "definition_md": "Estructura lineal donde el primer elemento insertado es el primero en salir (First In, First Out). Usada en sistemas de espera, buffers y colas de mensajes.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Arboles y grafos",
+      "definition_md": "Arbol: estructura jerarquica con un nodo padre y multiples hijos, sin ciclos (ej. sistema de archivos). Grafo: nodos conectados sin jerarquia fija, con o sin ciclos (ej. red social). BFS recorre por niveles y encuentra caminos mas cortos; DFS recorre en profundidad.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Notacion polaca inversa (RPN)",
+      "definition_md": "Notacion postfija donde el operador se escribe despues de sus operandos (ej. '3 4 +'). Se evalua con una pila: los numeros se apilan y cada operador desapila los dos ultimos valores, opera y apila el resultado.",
+      "importance": "media"
+    },
+    {
+      "concept": "Busqueda lineal vs binaria",
+      "definition_md": "Lineal: revisa elemento por elemento, O(n), sirve en cualquier arreglo. Binaria: requiere el arreglo ordenado y descarta la mitad del espacio de busqueda en cada paso, O(log n).",
+      "importance": "media"
+    }
   ],
   "sections": [
     {
@@ -34,7 +108,12 @@
       "title": null,
       "body_md": "Esta subarea aporta **10 reactivos** en Area 3. Su objetivo es que distingas los **paradigmas** y reconozcas en codigo cual se esta usando. El examen suele mostrar un fragmento y preguntar '¿que paradigma representa?', o pedir el **pilar de POO** ejemplificado.\n\nLos errores tipicos son: (1) confundir **encapsulamiento** con **abstraccion**; (2) creer que un lenguaje pertenece a un solo paradigma — la mayoria son multiparadigma (Python, JS, Scala); (3) llamar 'funcional' a cualquier codigo con funciones — funcional implica **pureza, inmutabilidad y HOF**, no solo usar funciones.\n\nEl truco mas util: si el codigo usa `map`, `filter`, `reduce` sin mutar variables, es **funcional**; si modela con `class`, `extends` y `interface`, es **POO**; si declara `father(X, Y) :- parent(X, Y), male(X).`, es **logico**; si usa `subscribe()` o `Observable`, es **reactivo**."
     },
-    { "type": "concept", "order": 2, "title": "Conceptos clave", "metadata": null },
+    {
+      "type": "concept",
+      "order": 2,
+      "title": "Conceptos clave",
+      "metadata": null
+    },
     {
       "type": "example",
       "order": 3,
@@ -52,14 +131,49 @@
       "order": 5,
       "title": "POO vs Funcional vs Logico",
       "metadata": {
-        "headers": ["Aspecto", "POO", "Funcional", "Logico"],
+        "headers": [
+          "Aspecto",
+          "POO",
+          "Funcional",
+          "Logico"
+        ],
         "rows": [
-          ["Unidad principal", "Objeto (datos + metodos)", "Funcion pura", "Hecho y regla"],
-          ["Estado", "Mutable encapsulado", "Inmutable", "Sin estado, base de hechos"],
-          ["Estilo", "Imperativo principalmente", "Declarativo", "Declarativo"],
-          ["Mecanismo de reuso", "Herencia, composicion", "Composicion, HOF", "Reglas reutilizables"],
-          ["Concurrencia", "Compleja por estado compartido", "Natural por inmutabilidad", "No es su fuerte"],
-          ["Lenguajes ejemplo", "Java, C#, Smalltalk", "Haskell, Clojure, Elixir", "Prolog, Datalog"]
+          [
+            "Unidad principal",
+            "Objeto (datos + metodos)",
+            "Funcion pura",
+            "Hecho y regla"
+          ],
+          [
+            "Estado",
+            "Mutable encapsulado",
+            "Inmutable",
+            "Sin estado, base de hechos"
+          ],
+          [
+            "Estilo",
+            "Imperativo principalmente",
+            "Declarativo",
+            "Declarativo"
+          ],
+          [
+            "Mecanismo de reuso",
+            "Herencia, composicion",
+            "Composicion, HOF",
+            "Reglas reutilizables"
+          ],
+          [
+            "Concurrencia",
+            "Compleja por estado compartido",
+            "Natural por inmutabilidad",
+            "No es su fuerte"
+          ],
+          [
+            "Lenguajes ejemplo",
+            "Java, C#, Smalltalk",
+            "Haskell, Clojure, Elixir",
+            "Prolog, Datalog"
+          ]
         ]
       }
     },
@@ -69,46 +183,126 @@
       "title": "Herramientas y lenguajes representativos",
       "metadata": {
         "tools": [
-          { "name": "Java", "url": "https://www.oracle.com/java/", "description": "Lenguaje POO clasico de la JVM. Tipado estatico, ampliamente usado en backend empresarial." },
-          { "name": "Python", "url": "https://www.python.org/", "description": "Multiparadigma: soporta POO, funcional e imperativo. Sintaxis legible para scripting, data y web." },
-          { "name": "Haskell", "url": "https://www.haskell.org/", "description": "Funcional puro con evaluacion perezosa y tipado fuerte. Referencia academica de funcional." },
-          { "name": "Prolog (SWI)", "url": "https://www.swi-prolog.org/", "description": "Lenguaje logico estandar. Util en sistemas expertos, NLP y resolucion de restricciones." },
-          { "name": "RxJS", "url": "https://rxjs.dev/", "description": "Libreria reactiva para JavaScript basada en Observables. Nucleo de Angular." },
-          { "name": "Lodash / Ramda", "url": "https://ramdajs.com/", "description": "Librerias JS con utilidades funcionales: map, filter, reduce, currying, composicion." }
+          {
+            "name": "Java",
+            "url": "https://www.oracle.com/java/",
+            "description": "Lenguaje POO clasico de la JVM. Tipado estatico, ampliamente usado en backend empresarial."
+          },
+          {
+            "name": "Python",
+            "url": "https://www.python.org/",
+            "description": "Multiparadigma: soporta POO, funcional e imperativo. Sintaxis legible para scripting, data y web."
+          },
+          {
+            "name": "Haskell",
+            "url": "https://www.haskell.org/",
+            "description": "Funcional puro con evaluacion perezosa y tipado fuerte. Referencia academica de funcional."
+          },
+          {
+            "name": "Prolog (SWI)",
+            "url": "https://www.swi-prolog.org/",
+            "description": "Lenguaje logico estandar. Util en sistemas expertos, NLP y resolucion de restricciones."
+          },
+          {
+            "name": "RxJS",
+            "url": "https://rxjs.dev/",
+            "description": "Libreria reactiva para JavaScript basada en Observables. Nucleo de Angular."
+          },
+          {
+            "name": "Lodash / Ramda",
+            "url": "https://ramdajs.com/",
+            "description": "Librerias JS con utilidades funcionales: map, filter, reduce, currying, composicion."
+          }
         ]
       }
+    },
+    {
+      "type": "example",
+      "title": "Evaluar una expresion en notacion polaca inversa (RPN) con una pila",
+      "body_md": "Convertir '(3 + 4) * (5 - 2)' a postfija: `3 4 + 5 2 - *`. Cada operador se coloca DESPUES de sus dos operandos, respetando la jerarquia de los parentesis.\n\n**Evaluacion con pila (izquierda a derecha):**\n```\nToken   Accion                          Pila\n3       apilar                          [3]\n4       apilar                          [3, 4]\n+       desapilar 4 y 3, calcular 3+4=7, apilar   [7]\n5       apilar                          [7, 5]\n2       apilar                          [7, 5, 2]\n-       desapilar 2 y 5, calcular 5-2=3, apilar    [7, 3]\n*       desapilar 3 y 7, calcular 7*3=21, apilar   [21]\n```\nResultado final: **21**.\n\n**Error tipico en el EGEL:** invertir el orden de los operandos al desapilar (restar 2-5 en vez de 5-2). La regla es: el PRIMER valor desapilado es el operando DERECHO de la operacion, el SEGUNDO desapilado es el operando IZQUIERDO.\n\n**Estructuras de datos relacionadas que el examen mezcla en el mismo reactivo:** pila (LIFO, usada aqui para RPN y tambien para deshacer/rehacer), cola (FIFO, para colas de espera), arbol (jerarquia sin ciclos, recorrido recursivo DFS), grafo (relaciones sin jerarquia fija, BFS para camino mas corto). Si el caso menciona 'ultimo en entrar, primero en salir' es pila; si dice 'primero en llegar, primero en atenderse' es cola.",
+      "order": 7
     },
     {
       "type": "glossary",
-      "order": 7,
+      "order": 8,
       "title": "Glosario",
       "metadata": {
         "terms": [
-          { "term": "Funcion pura", "def": "Funcion sin efectos secundarios que devuelve siempre el mismo resultado para los mismos argumentos." },
-          { "term": "HOF (Higher-Order Function)", "def": "Funcion que recibe otra funcion como argumento o devuelve una funcion. Ej. map, filter." },
-          { "term": "Currying", "def": "Transformar una funcion de n argumentos en una secuencia de n funciones de un argumento cada una." },
-          { "term": "Inmutabilidad", "def": "Propiedad de no modificar estructuras una vez creadas; las operaciones devuelven copias nuevas." },
-          { "term": "Observable", "def": "Flujo de datos asincrono al que multiples consumidores se suscriben para recibir emisiones." },
-          { "term": "Dispatcher", "def": "Componente que enruta un evento o accion hacia los handlers que correspondan. Comun en Flux/Redux." },
-          { "term": "Encapsulamiento", "def": "Ocultar estado interno de un objeto exponiendo una interfaz publica controlada." },
-          { "term": "Polimorfismo", "def": "Permite que una misma operacion se comporte de forma distinta segun el tipo concreto del objeto." },
-          { "term": "Event loop", "def": "Ciclo monohilo (Node.js, navegador) que procesa eventos y callbacks de forma cooperativa." },
-          { "term": "Composicion de funciones", "def": "Combinar varias funciones para formar una nueva: `(f . g)(x) = f(g(x))`. Base de la programacion funcional." }
+          {
+            "term": "Funcion pura",
+            "def": "Funcion sin efectos secundarios que devuelve siempre el mismo resultado para los mismos argumentos."
+          },
+          {
+            "term": "HOF (Higher-Order Function)",
+            "def": "Funcion que recibe otra funcion como argumento o devuelve una funcion. Ej. map, filter."
+          },
+          {
+            "term": "Currying",
+            "def": "Transformar una funcion de n argumentos en una secuencia de n funciones de un argumento cada una."
+          },
+          {
+            "term": "Inmutabilidad",
+            "def": "Propiedad de no modificar estructuras una vez creadas; las operaciones devuelven copias nuevas."
+          },
+          {
+            "term": "Observable",
+            "def": "Flujo de datos asincrono al que multiples consumidores se suscriben para recibir emisiones."
+          },
+          {
+            "term": "Dispatcher",
+            "def": "Componente que enruta un evento o accion hacia los handlers que correspondan. Comun en Flux/Redux."
+          },
+          {
+            "term": "Encapsulamiento",
+            "def": "Ocultar estado interno de un objeto exponiendo una interfaz publica controlada."
+          },
+          {
+            "term": "Polimorfismo",
+            "def": "Permite que una misma operacion se comporte de forma distinta segun el tipo concreto del objeto."
+          },
+          {
+            "term": "Event loop",
+            "def": "Ciclo monohilo (Node.js, navegador) que procesa eventos y callbacks de forma cooperativa."
+          },
+          {
+            "term": "Composicion de funciones",
+            "def": "Combinar varias funciones para formar una nueva: `(f . g)(x) = f(g(x))`. Base de la programacion funcional."
+          }
         ]
       }
     },
-    { "type": "quick_quiz", "order": 8, "title": "Quick Quiz", "metadata": null },
+    {
+      "type": "quick_quiz",
+      "order": 9,
+      "title": "Quick Quiz",
+      "metadata": null
+    },
     {
       "type": "references",
-      "order": 9,
+      "order": 10,
       "title": "Referencias",
       "metadata": {
         "refs": [
-          { "title": "Abelson & Sussman — Structure and Interpretation of Computer Programs (SICP)", "url": "https://mitpress.mit.edu/9780262510875/structure-and-interpretation-of-computer-programs/" },
-          { "title": "Michael Fogus — Functional JavaScript", "url": "https://www.oreilly.com/library/view/functional-javascript/9781449360757/" },
-          { "title": "Robert C. Martin — Clean Code", "url": "https://www.pearson.com/store/p/clean-code-a-handbook-of-agile-software-craftsmanship/P100000835696" },
-          { "title": "Bjarne Stroustrup — Programming: Principles and Practice", "url": "https://www.stroustrup.com/programming.html" },
-          { "title": "ReactiveX — Introduction to Rx", "url": "https://reactivex.io/intro.html" }
+          {
+            "title": "Abelson & Sussman — Structure and Interpretation of Computer Programs (SICP)",
+            "url": "https://mitpress.mit.edu/9780262510875/structure-and-interpretation-of-computer-programs/"
+          },
+          {
+            "title": "Michael Fogus — Functional JavaScript",
+            "url": "https://www.oreilly.com/library/view/functional-javascript/9781449360757/"
+          },
+          {
+            "title": "Robert C. Martin — Clean Code",
+            "url": "https://www.pearson.com/store/p/clean-code-a-handbook-of-agile-software-craftsmanship/P100000835696"
+          },
+          {
+            "title": "Bjarne Stroustrup — Programming: Principles and Practice",
+            "url": "https://www.stroustrup.com/programming.html"
+          },
+          {
+            "title": "ReactiveX — Introduction to Rx",
+            "url": "https://reactivex.io/intro.html"
+          }
         ]
       }
     }

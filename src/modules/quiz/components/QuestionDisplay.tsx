@@ -28,9 +28,20 @@ const AREA_BADGE: Record<number, string> = {
   4: 'bg-area4/15 text-area4 border-area4/40',
 }
 
+// Convencion de contenido: si question_text arranca con "CASO:", el bloque
+// de contexto (4-8 renglones estilo CENEVAL) se separa visualmente de la
+// pregunta concreta que viene despues de la primera linea en blanco.
+// Preguntas sin este marcador (banco legacy) se renderizan igual que antes.
+function splitCaso(text: string): { caso: string | null; pregunta: string } {
+  const match = text.match(/^\s*CASO:\s*\n([\s\S]+?)\n\s*\n([\s\S]+)$/i)
+  if (!match) return { caso: null, pregunta: text }
+  return { caso: match[1].trim(), pregunta: match[2].trim() }
+}
+
 export function QuestionDisplay({ question }: QuestionDisplayProps) {
   const difficulty = question.difficulty ?? 'medium'
   const areaClass = AREA_BADGE[question.area] ?? 'bg-bg-raised text-muted-foreground border-bg-border'
+  const { caso, pregunta } = splitCaso(question.question_text)
 
   return (
     <div className="space-y-5">
@@ -53,8 +64,18 @@ export function QuestionDisplay({ question }: QuestionDisplayProps) {
           {DIFFICULTY_LABEL[difficulty] ?? difficulty}
         </Badge>
       </div>
+      {caso ? (
+        <div className="rounded-lg border border-bg-border/60 bg-bg-raised/40 p-4">
+          <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Caso
+          </span>
+          <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/90 sm:text-base">
+            {caso}
+          </p>
+        </div>
+      ) : null}
       <h2 className="text-base font-medium leading-relaxed sm:text-lg md:text-xl lg:text-2xl">
-        {question.question_text}
+        {pregunta}
       </h2>
       {question.diagram ? <MermaidDiagram chart={question.diagram} /> : null}
       {question.image_url ? (

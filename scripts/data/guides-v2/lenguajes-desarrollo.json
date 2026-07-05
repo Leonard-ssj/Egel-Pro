@@ -71,6 +71,11 @@
       "importance": "media"
     },
     {
+      "concept": "Lenguajes especializados (Fortran, Prolog, R, ensamblador)",
+      "definition_md": "Fortran: calculo cientifico/numerico intensivo, decadas de bibliotecas HPC. Prolog: programacion logica, motor de inferencia por hechos y reglas (sistemas expertos). R: estadistica y ciencia de datos, data frames nativos. Ensamblador: instrucciones especificas del procesador, un nivel mas bajo que C; C se compila primero a ensamblador antes de codigo maquina.",
+      "importance": "media"
+    },
+    {
       "concept": "Arboles",
       "definition_md": "Estructura jerarquica. En un **arbol binario de busqueda balanceado** la busqueda/insercion/borrado son **O(log n)**; si se degenera, **O(n)**. Recorridos: inorden, preorden, postorden.",
       "importance": "media"
@@ -199,8 +204,58 @@
       }
     },
     {
+      "type": "comparison_table",
+      "title": "Que lenguaje conviene segun el caso",
+      "metadata": {
+        "headers": [
+          "Necesito...",
+          "Lenguaje",
+          "Por que"
+        ],
+        "rows": [
+          [
+            "Calculo cientifico/numerico intensivo en un cluster HPC",
+            "Fortran",
+            "Decadas de bibliotecas numericas optimizadas (LAPACK, BLAS)"
+          ],
+          [
+            "Motor de inferencia que deduzca conclusiones de reglas declaradas",
+            "Prolog",
+            "Programacion logica: hechos + reglas, resolucion por unificacion"
+          ],
+          [
+            "Analisis estadistico y ciencia de datos con equipo no ingenieril",
+            "R",
+            "Data frames y paquetes estadisticos (ggplot2, dplyr) nativos"
+          ],
+          [
+            "Firmware de microcontrolador de pocos KB de RAM",
+            "C",
+            "Compila a binario compacto, sin runtime, control total de memoria"
+          ],
+          [
+            "Control de instrucciones y registros que C no expone",
+            "Ensamblador",
+            "Un nivel mas bajo que C; C se compila primero a ensamblador"
+          ],
+          [
+            "Backend con maximo tipado y soporte empresarial de 10+ anios",
+            "Java",
+            "Tipado estatico fuerte, JVM madura, trayectoria en banca/seguros"
+          ],
+          [
+            "MVP de e-commerce con CMS en 6 semanas y equipo chico",
+            "PHP (Laravel/WordPress)",
+            "Ecosistema de frameworks/CMS maduro para velocidad de entrega"
+          ]
+        ]
+      },
+      "body_md": "El EGEL rara vez pregunta 'que es Fortran': pregunta un CASO (cluster HPC de 20 anios, sistema experto medico, firmware de 2KB) y pide inferir que lenguaje encaja. La senal mas fuerte suele ser la RESTRICCION explicita del caso (recursos limitados, plazo corto, equipo con cierto conocimiento previo, necesidad de determinismo en tiempo real) mas que el nombre del lenguaje en si.",
+      "order": 7
+    },
+    {
       "type": "glossary",
-      "order": 7,
+      "order": 8,
       "title": "Glosario",
       "metadata": {
         "terms": [
@@ -249,13 +304,13 @@
     },
     {
       "type": "quick_quiz",
-      "order": 8,
+      "order": 9,
       "title": "Quick Quiz",
       "metadata": null
     },
     {
       "type": "references",
-      "order": 9,
+      "order": 10,
       "title": "Referencias",
       "metadata": {
         "refs": [

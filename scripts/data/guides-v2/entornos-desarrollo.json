@@ -15,17 +15,71 @@
     "published": true
   },
   "concepts": [
-    { "concept": "IDE (Integrated Development Environment)", "definition_md": "Entorno que integra editor, compilador/intérprete, depurador, control de versiones y refactorizadores. Ejemplos: IntelliJ, VS Code, Eclipse.", "importance": "alta" },
-    { "concept": "SCM (Source Control Management)", "definition_md": "Sistema que rastrea cambios en archivos de codigo a lo largo del tiempo. Git es el SCM distribuido dominante; CVS y SVN son centralizados.", "importance": "alta" },
-    { "concept": "Branch (rama)", "definition_md": "Linea independiente de desarrollo dentro de un repositorio Git. Permite trabajar en features aislados sin romper la rama principal.", "importance": "alta" },
-    { "concept": "Merge vs Rebase", "definition_md": "Merge crea un commit de fusion que une dos historias preservando ambas. Rebase reescribe la historia de una rama 'replantandola' sobre otra, produciendo una linea lineal.", "importance": "alta" },
-    { "concept": "Cherry-pick", "definition_md": "Aplica un commit especifico de una rama sobre otra. Util para portar un fix puntual sin traer el resto de la rama.", "importance": "media" },
-    { "concept": "GitFlow vs Trunk-based", "definition_md": "GitFlow: ramas de larga vida (develop, release, hotfix) — bueno para releases versionados. Trunk-based: una sola rama principal con feature flags — bueno para entrega continua.", "importance": "alta" },
-    { "concept": "Pull Request (PR)", "definition_md": "Solicitud formal para fusionar una rama en otra. Es el punto de revision de codigo, ejecucion de CI y discusion del cambio.", "importance": "alta" },
-    { "concept": "CI/CD pipeline", "definition_md": "Cadena automatizada que va de un push a produccion. CI: build + test al integrar. CD: deploy automatizado a staging o produccion tras pasar las pruebas.", "importance": "alta" },
-    { "concept": "SemVer (Versionado Semantico)", "definition_md": "Convencion MAJOR.MINOR.PATCH: MAJOR cambia API publica (breaking), MINOR agrega features compatibles, PATCH arregla bugs sin romper.", "importance": "media" },
-    { "concept": "TDD (Test-Driven Development)", "definition_md": "Ciclo Red-Green-Refactor: escribir un test que falla, codigo minimo para pasarlo, refactorizar manteniendo el verde.", "importance": "alta" },
-    { "concept": "Mock vs Stub", "definition_md": "Stub: provee respuestas fijas sin verificar interaccion. Mock: ademas verifica como fue llamado (cuantas veces, con que args). Ambos son 'dobles de prueba'.", "importance": "media" }
+    {
+      "concept": "IDE (Integrated Development Environment)",
+      "definition_md": "Entorno que integra editor, compilador/intérprete, depurador, control de versiones y refactorizadores. Ejemplos: IntelliJ, VS Code, Eclipse.",
+      "importance": "alta"
+    },
+    {
+      "concept": "SCM (Source Control Management)",
+      "definition_md": "Sistema que rastrea cambios en archivos de codigo a lo largo del tiempo. Git es el SCM distribuido dominante; CVS y SVN son centralizados.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Branch (rama)",
+      "definition_md": "Linea independiente de desarrollo dentro de un repositorio Git. Permite trabajar en features aislados sin romper la rama principal.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Merge vs Rebase",
+      "definition_md": "Merge crea un commit de fusion que une dos historias preservando ambas. Rebase reescribe la historia de una rama 'replantandola' sobre otra, produciendo una linea lineal.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Cherry-pick",
+      "definition_md": "Aplica un commit especifico de una rama sobre otra. Util para portar un fix puntual sin traer el resto de la rama.",
+      "importance": "media"
+    },
+    {
+      "concept": "GitFlow vs Trunk-based",
+      "definition_md": "GitFlow: ramas de larga vida (develop, release, hotfix) — bueno para releases versionados. Trunk-based: una sola rama principal con feature flags — bueno para entrega continua.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Pull Request (PR)",
+      "definition_md": "Solicitud formal para fusionar una rama en otra. Es el punto de revision de codigo, ejecucion de CI y discusion del cambio.",
+      "importance": "alta"
+    },
+    {
+      "concept": "CI/CD pipeline",
+      "definition_md": "Cadena automatizada que va de un push a produccion. CI: build + test al integrar. CD: deploy automatizado a staging o produccion tras pasar las pruebas.",
+      "importance": "alta"
+    },
+    {
+      "concept": "SemVer (Versionado Semantico)",
+      "definition_md": "Convencion MAJOR.MINOR.PATCH: MAJOR cambia API publica (breaking), MINOR agrega features compatibles, PATCH arregla bugs sin romper.",
+      "importance": "media"
+    },
+    {
+      "concept": "TDD (Test-Driven Development)",
+      "definition_md": "Ciclo Red-Green-Refactor: escribir un test que falla, codigo minimo para pasarlo, refactorizar manteniendo el verde.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Mock vs Stub",
+      "definition_md": "Stub: provee respuestas fijas sin verificar interaccion. Mock: ademas verifica como fue llamado (cuantas veces, con que args). Ambos son 'dobles de prueba'.",
+      "importance": "media"
+    },
+    {
+      "concept": "IDEs especializados por lenguaje/plataforma",
+      "definition_md": "Cada ecosistema tiene su IDE de referencia: RStudio (R y estadistica), Arduino IDE (microcontroladores AVR), MATLAB (calculo matricial/senales), Thonny e IDLE (Python para principiantes), PyCharm (Python profesional), Xcode (iOS/Swift), Android Studio (Android/Kotlin), Eclipse y NetBeans (Java), Code::Blocks (C/C++). Elegir el IDE correcto depende del lenguaje/plataforma objetivo, no de preferencia personal.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Herramientas de pruebas automatizadas",
+      "definition_md": "JUnit: pruebas unitarias de codigo Java. JMeter: pruebas de carga/estres simulando miles de usuarios concurrentes. Appium: automatiza UI de apps moviles nativas (Android/iOS). SoapUI: prueba servicios SOAP a partir de su WSDL, generando y validando XML.",
+      "importance": "alta"
+    }
   ],
   "sections": [
     {
@@ -34,7 +88,12 @@
       "title": null,
       "body_md": "Esta subarea aporta **10 reactivos** en Area 3. Combina herramientas del dia a dia del desarrollador: **IDEs**, **Git** y **CI/CD**, mas las practicas asociadas: **estrategias de ramificacion**, **SemVer**, **TDD** y **dobles de prueba**.\n\nLos reactivos clasicos del EGEL se enfocan en: (1) diferencia entre **merge** y **rebase**; (2) cuando usar **GitFlow** vs **Trunk-based**; (3) que parte del numero SemVer se incrementa ante un cambio; (4) la diferencia entre **mock** y **stub**; (5) el orden del ciclo **Red-Green-Refactor**.\n\nUn truco que paga: memoriza que **rebase reescribe historia** (peligroso en ramas compartidas) y **merge la preserva** (mas seguro). Tambien recuerda que **CI** verifica calidad (build + test) y **CD** entrega o despliega — son etapas, no sinonimos. SemVer: si rompes la API publica, sube MAJOR aunque sea un cambio de una linea."
     },
-    { "type": "concept", "order": 2, "title": "Conceptos clave", "metadata": null },
+    {
+      "type": "concept",
+      "order": 2,
+      "title": "Conceptos clave",
+      "metadata": null
+    },
     {
       "type": "example",
       "order": 3,
@@ -52,14 +111,42 @@
       "order": 5,
       "title": "GitFlow vs Trunk-based",
       "metadata": {
-        "headers": ["Aspecto", "GitFlow", "Trunk-based"],
+        "headers": [
+          "Aspecto",
+          "GitFlow",
+          "Trunk-based"
+        ],
         "rows": [
-          ["Ramas de larga vida", "main, develop, release, hotfix", "Solo main (trunk)"],
-          ["Duracion de feature branch", "Dias a semanas", "Horas a 1-2 dias"],
-          ["Releases", "Manuales y versionados", "Continuos, varios al dia"],
-          ["Feature flags", "Opcionales", "Esenciales para ocultar trabajo en curso"],
-          ["Equipo ideal", "Apps versionadas, releases coordinados", "SaaS web, CI/CD maduro"],
-          ["Riesgo de merge-hell", "Alto si ramas tardan", "Bajo por integraciones frecuentes"]
+          [
+            "Ramas de larga vida",
+            "main, develop, release, hotfix",
+            "Solo main (trunk)"
+          ],
+          [
+            "Duracion de feature branch",
+            "Dias a semanas",
+            "Horas a 1-2 dias"
+          ],
+          [
+            "Releases",
+            "Manuales y versionados",
+            "Continuos, varios al dia"
+          ],
+          [
+            "Feature flags",
+            "Opcionales",
+            "Esenciales para ocultar trabajo en curso"
+          ],
+          [
+            "Equipo ideal",
+            "Apps versionadas, releases coordinados",
+            "SaaS web, CI/CD maduro"
+          ],
+          [
+            "Riesgo de merge-hell",
+            "Alto si ramas tardan",
+            "Bajo por integraciones frecuentes"
+          ]
         ]
       }
     },
@@ -69,47 +156,205 @@
       "title": "Herramientas del flujo dev / DevOps",
       "metadata": {
         "tools": [
-          { "name": "VS Code", "url": "https://code.visualstudio.com/", "description": "Editor liviano con ecosistema masivo de extensiones. Estandar de facto en web." },
-          { "name": "IntelliJ IDEA", "url": "https://www.jetbrains.com/idea/", "description": "IDE Java/Kotlin con refactorizadores avanzados. Hermanos: PyCharm, WebStorm, Rider." },
-          { "name": "Git", "url": "https://git-scm.com/", "description": "SCM distribuido dominante. Repos remotos en GitHub, GitLab y Bitbucket." },
-          { "name": "GitHub Actions", "url": "https://github.com/features/actions", "description": "CI/CD nativo de GitHub configurado por YAML. Ofrece runners hospedados y self-hosted." },
-          { "name": "Jenkins", "url": "https://www.jenkins.io/", "description": "Servidor CI/CD extensible via plugins. Veterano del ecosistema, autohospedado." },
-          { "name": "SonarQube", "url": "https://www.sonarsource.com/products/sonarqube/", "description": "Plataforma de calidad de codigo (SAST + smell detection) para mas de 30 lenguajes." },
-          { "name": "Jest / JUnit", "url": "https://jestjs.io/", "description": "Frameworks de pruebas unitarias para JavaScript/TS y Java respectivamente." }
+          {
+            "name": "VS Code",
+            "url": "https://code.visualstudio.com/",
+            "description": "Editor liviano con ecosistema masivo de extensiones. Estandar de facto en web."
+          },
+          {
+            "name": "IntelliJ IDEA",
+            "url": "https://www.jetbrains.com/idea/",
+            "description": "IDE Java/Kotlin con refactorizadores avanzados. Hermanos: PyCharm, WebStorm, Rider."
+          },
+          {
+            "name": "Git",
+            "url": "https://git-scm.com/",
+            "description": "SCM distribuido dominante. Repos remotos en GitHub, GitLab y Bitbucket."
+          },
+          {
+            "name": "GitHub Actions",
+            "url": "https://github.com/features/actions",
+            "description": "CI/CD nativo de GitHub configurado por YAML. Ofrece runners hospedados y self-hosted."
+          },
+          {
+            "name": "Jenkins",
+            "url": "https://www.jenkins.io/",
+            "description": "Servidor CI/CD extensible via plugins. Veterano del ecosistema, autohospedado."
+          },
+          {
+            "name": "SonarQube",
+            "url": "https://www.sonarsource.com/products/sonarqube/",
+            "description": "Plataforma de calidad de codigo (SAST + smell detection) para mas de 30 lenguajes."
+          },
+          {
+            "name": "Jest / JUnit",
+            "url": "https://jestjs.io/",
+            "description": "Frameworks de pruebas unitarias para JavaScript/TS y Java respectivamente."
+          },
+          {
+            "name": "JMeter",
+            "url": "https://jmeter.apache.org/",
+            "description": "Pruebas de carga y estres simulando miles de usuarios concurrentes contra un servidor o API."
+          },
+          {
+            "name": "Appium",
+            "url": "https://appium.io/",
+            "description": "Automatiza pruebas de interfaz en apps moviles nativas Android/iOS sobre emuladores o dispositivos reales."
+          },
+          {
+            "name": "SoapUI",
+            "url": "https://www.soapui.org/",
+            "description": "Prueba servicios web SOAP a partir de su WSDL, generando y validando mensajes XML."
+          },
+          {
+            "name": "RStudio",
+            "url": "https://posit.co/products/open-source/rstudio/",
+            "description": "IDE especializado para R: consola, panel de variables y graficas integradas."
+          },
+          {
+            "name": "Arduino IDE",
+            "url": "https://www.arduino.cc/en/software",
+            "description": "Compila y carga sketches a microcontroladores AVR con monitor serial integrado."
+          }
         ]
       }
+    },
+    {
+      "type": "comparison_table",
+      "title": "Que herramienta de pruebas usar segun el caso",
+      "metadata": {
+        "headers": [
+          "Necesito probar...",
+          "Herramienta",
+          "Por que"
+        ],
+        "rows": [
+          [
+            "Un metodo o clase aislada de Java",
+            "JUnit",
+            "Framework de pruebas unitarias: verifica logica interna sin dependencias externas"
+          ],
+          [
+            "Que el servidor aguante 5,000 usuarios concurrentes",
+            "JMeter",
+            "Simula carga y estres, mide tiempos de respuesta bajo trafico masivo"
+          ],
+          [
+            "Que los botones y gestos de una app movil funcionen",
+            "Appium",
+            "Automatiza UI de apps nativas Android/iOS en emuladores o dispositivos reales"
+          ],
+          [
+            "Un servicio SOAP legacy contra su contrato WSDL",
+            "SoapUI",
+            "Genera y valida mensajes XML automaticamente a partir del WSDL"
+          ],
+          [
+            "Analisis estadistico interactivo en R",
+            "RStudio",
+            "IDE especializado: consola, variables y graficas integradas para R"
+          ],
+          [
+            "Firmware de un microcontrolador AVR",
+            "Arduino IDE",
+            "Compila y carga sketches C/C++ simplificado, con monitor serial"
+          ],
+          [
+            "Python para un curso introductorio",
+            "Thonny / IDLE",
+            "Interfaz minimalista, ideal para principiantes sin abrumar con paneles"
+          ],
+          [
+            "Calculo matricial y procesamiento de senales",
+            "MATLAB",
+            "Entorno cientifico con su propio lenguaje de scripts .m"
+          ]
+        ]
+      },
+      "body_md": "El EGEL suele plantear un caso ('el equipo necesita probar X') y pedir la herramienta correcta entre varias opciones parecidas. La clave es identificar el NIVEL de la prueba (unidad vs carga vs UI vs contrato) o la PLATAFORMA/lenguaje (R, microcontrolador, Python principiante, calculo cientifico) antes de elegir. Un error comun es confundir pruebas unitarias (JUnit, codigo aislado) con pruebas de carga (JMeter, miles de usuarios) — ambas son 'pruebas automatizadas' pero resuelven problemas distintos.",
+      "order": 7
     },
     {
       "type": "glossary",
-      "order": 7,
+      "order": 8,
       "title": "Glosario",
       "metadata": {
         "terms": [
-          { "term": "SCM", "def": "Source Control Management. Sistema que versiona y rastrea cambios en codigo fuente." },
-          { "term": "PR (Pull Request)", "def": "Solicitud de fusion de una rama a otra; punto de revision de codigo y CI." },
-          { "term": "CI", "def": "Continuous Integration: integrar y validar codigo automaticamente en cada cambio." },
-          { "term": "CD", "def": "Continuous Delivery o Deployment: entregar a staging o desplegar a produccion automaticamente." },
-          { "term": "SAST", "def": "Static Application Security Testing. Analiza el codigo sin ejecutarlo para detectar vulnerabilidades." },
-          { "term": "SemVer", "def": "MAJOR.MINOR.PATCH. MAJOR rompe API, MINOR agrega features, PATCH arregla bugs." },
-          { "term": "Branch", "def": "Linea de desarrollo independiente dentro del repositorio." },
-          { "term": "Rebase", "def": "Reescribir la historia de una rama replantandola sobre otra base." },
-          { "term": "Mock", "def": "Doble de prueba que ademas de responder verifica como fue invocado." },
-          { "term": "Stub", "def": "Doble de prueba que devuelve respuestas predefinidas sin verificar invocaciones." }
+          {
+            "term": "SCM",
+            "def": "Source Control Management. Sistema que versiona y rastrea cambios en codigo fuente."
+          },
+          {
+            "term": "PR (Pull Request)",
+            "def": "Solicitud de fusion de una rama a otra; punto de revision de codigo y CI."
+          },
+          {
+            "term": "CI",
+            "def": "Continuous Integration: integrar y validar codigo automaticamente en cada cambio."
+          },
+          {
+            "term": "CD",
+            "def": "Continuous Delivery o Deployment: entregar a staging o desplegar a produccion automaticamente."
+          },
+          {
+            "term": "SAST",
+            "def": "Static Application Security Testing. Analiza el codigo sin ejecutarlo para detectar vulnerabilidades."
+          },
+          {
+            "term": "SemVer",
+            "def": "MAJOR.MINOR.PATCH. MAJOR rompe API, MINOR agrega features, PATCH arregla bugs."
+          },
+          {
+            "term": "Branch",
+            "def": "Linea de desarrollo independiente dentro del repositorio."
+          },
+          {
+            "term": "Rebase",
+            "def": "Reescribir la historia de una rama replantandola sobre otra base."
+          },
+          {
+            "term": "Mock",
+            "def": "Doble de prueba que ademas de responder verifica como fue invocado."
+          },
+          {
+            "term": "Stub",
+            "def": "Doble de prueba que devuelve respuestas predefinidas sin verificar invocaciones."
+          }
         ]
       }
     },
-    { "type": "quick_quiz", "order": 8, "title": "Quick Quiz", "metadata": null },
+    {
+      "type": "quick_quiz",
+      "order": 9,
+      "title": "Quick Quiz",
+      "metadata": null
+    },
     {
       "type": "references",
-      "order": 9,
+      "order": 10,
       "title": "Referencias",
       "metadata": {
         "refs": [
-          { "title": "Scott Chacon — Pro Git (libro oficial)", "url": "https://git-scm.com/book/en/v2" },
-          { "title": "Humble & Farley — Continuous Delivery", "url": "https://martinfowler.com/books/continuousDelivery.html" },
-          { "title": "Atlassian — Git Tutorials", "url": "https://www.atlassian.com/git/tutorials" },
-          { "title": "Semantic Versioning 2.0.0", "url": "https://semver.org/" },
-          { "title": "Kent Beck — Test-Driven Development by Example", "url": "https://www.pearson.com/store/p/test-driven-development-by-example/P100000838907" }
+          {
+            "title": "Scott Chacon — Pro Git (libro oficial)",
+            "url": "https://git-scm.com/book/en/v2"
+          },
+          {
+            "title": "Humble & Farley — Continuous Delivery",
+            "url": "https://martinfowler.com/books/continuousDelivery.html"
+          },
+          {
+            "title": "Atlassian — Git Tutorials",
+            "url": "https://www.atlassian.com/git/tutorials"
+          },
+          {
+            "title": "Semantic Versioning 2.0.0",
+            "url": "https://semver.org/"
+          },
+          {
+            "title": "Kent Beck — Test-Driven Development by Example",
+            "url": "https://www.pearson.com/store/p/test-driven-development-by-example/P100000838907"
+          }
         ]
       }
     }
