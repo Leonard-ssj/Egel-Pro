@@ -62,9 +62,20 @@ export function clearQueue(): void {
   writeQueue([])
 }
 
+// Tope de reintentos por error de red antes de descartar un item (evita que la
+// cola quede atorada para siempre mostrando "Sincronizando...").
+const MAX_ATTEMPTS = 6
+
 /**
- * Intenta enviar todos los items pendientes. Cada item recibe un callback
- * `submit` que devuelve {success}. Si falla, queda en cola para reintento.
+ * Intenta enviar todos los items pendientes.
+ *
+ * Reglas para NO quedar atorado:
+ *  - success        -> enviado, se quita de la cola.
+ *  - success:false  -> el servidor respondio y RECHAZO (sesion finalizada, sin
+ *                      permiso, datos invalidos...). Es permanente: se DESCARTA
+ *                      (reintentar nunca funcionaria).
+ *  - excepcion      -> error de red: se reintenta hasta MAX_ATTEMPTS y luego se
+ *                      descarta.
  */
 export async function flushQueue(
   submit: (payload: SubmitAnswerInput) => Promise<{ success: boolean; error?: string }>,
@@ -81,13 +92,18 @@ export async function flushQueue(
       const r = await submit(item.payload)
       if (r.success) {
         flushed++
-        continue
+      } else {
+        // Rechazo permanente del servidor: descartar para no atorar la cola.
+        failed++
       }
-      failed++
-      remaining.push({ ...item, attempts: item.attempts + 1 })
     } catch {
-      failed++
-      remaining.push({ ...item, attempts: item.attempts + 1 })
+      // Error de red: reintentar hasta el tope; despues, descartar.
+      const attempts = item.attempts + 1
+      if (attempts < MAX_ATTEMPTS) {
+        remaining.push({ ...item, attempts })
+      } else {
+        failed++
+      }
     }
   }
 
