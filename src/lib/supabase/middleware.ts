@@ -9,9 +9,23 @@ const PUBLIC_PATHS = ['/login', '/register', '/forgot-password', '/auth', '/offl
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
 
+  // Si faltan las env vars de Supabase (p.ej. un entorno Preview mal
+  // configurado), NO reventamos toda la app con un 500 en el edge. Dejamos
+  // pasar la request para que al menos las paginas publicas rendericen. El fix
+  // real es definir NEXT_PUBLIC_SUPABASE_URL / _ANON_KEY en ese entorno.
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.error(
+      '[middleware] Faltan NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY. ' +
+        'Se omite la verificacion de sesion. Configura las env vars en este entorno de Vercel.',
+    )
+    return supabaseResponse
+  }
+
   const supabase = createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseAnonKey,
     {
       cookies: {
         getAll() {

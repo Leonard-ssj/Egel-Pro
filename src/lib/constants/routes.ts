@@ -24,6 +24,7 @@ export const ROUTES = {
   },
   study: {
     root:         '/study',
+    mapa:         '/study/mapa',
     guide:        (area: number, subarea: number) => `/study/${area}/${subarea}`,
   },
   progress:       '/progress',

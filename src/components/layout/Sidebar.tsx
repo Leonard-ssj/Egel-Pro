@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   Brain,
   BookOpen,
+  Map as MapIcon,
   TrendingUp,
   Trophy,
   User,
@@ -31,6 +32,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: '/quiz',         label: 'Practicar',    icon: Brain },
   { href: '/simulacro',    label: 'Simulacro',    icon: Sparkles },
   { href: '/study',        label: 'Estudiar',     icon: BookOpen },
+  { href: '/study/mapa',   label: 'Mapa temario', icon: MapIcon },
   { href: '/progress',     label: 'Progreso',     icon: TrendingUp },
   { href: '/achievements',  label: 'Logros',         icon: Trophy },
   { href: '/leaderboard',   label: 'Ranking',        icon: Trophy },
@@ -42,6 +44,10 @@ const NAV_ITEMS: NavItem[] = [
 export function Sidebar({ role }: { role: Role }) {
   const pathname = usePathname()
   const items = NAV_ITEMS.filter((item) => !item.adminOnly || role === 'admin')
+  // Solo el match mas especifico queda activo (asi /study/mapa no activa tambien Estudiar).
+  const activeHref = items
+    .filter((i) => pathname === i.href || pathname.startsWith(`${i.href}/`))
+    .sort((a, b) => b.href.length - a.href.length)[0]?.href
 
   return (
     <aside className="sticky top-0 hidden h-screen w-60 shrink-0 self-start overflow-hidden border-r border-bg-border/50 md:flex md:flex-col">
@@ -59,8 +65,7 @@ export function Sidebar({ role }: { role: Role }) {
 
         <nav className="flex-1 space-y-0.5 overflow-y-auto p-3">
           {items.map((item) => {
-            const active =
-              pathname === item.href || pathname.startsWith(`${item.href}/`)
+            const active = item.href === activeHref
             const Icon = item.icon
             return (
               <Link

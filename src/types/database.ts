@@ -807,6 +807,74 @@ export type Database = {
           },
         ]
       }
+      syllabus_concepts: {
+        Row: {
+          area: number
+          created_at: string
+          exam_id: string
+          guide_slug: string | null
+          id: string
+          is_active: boolean
+          label: string
+          section: string
+          sort_order: number
+          subarea: number
+        }
+        Insert: {
+          area: number
+          created_at?: string
+          exam_id?: string
+          guide_slug?: string | null
+          id?: string
+          is_active?: boolean
+          label: string
+          section: string
+          sort_order?: number
+          subarea: number
+        }
+        Update: {
+          area?: number
+          created_at?: string
+          exam_id?: string
+          guide_slug?: string | null
+          id?: string
+          is_active?: boolean
+          label?: string
+          section?: string
+          sort_order?: number
+          subarea?: number
+        }
+        Relationships: []
+      }
+      user_concept_mastery: {
+        Row: {
+          concept_id: string
+          exam_id: string
+          mastered_at: string
+          user_id: string
+        }
+        Insert: {
+          concept_id: string
+          exam_id?: string
+          mastered_at?: string
+          user_id: string
+        }
+        Update: {
+          concept_id?: string
+          exam_id?: string
+          mastered_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_concept_mastery_concept_id_fkey"
+            columns: ["concept_id"]
+            isOneToOne: false
+            referencedRelation: "syllabus_concepts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       stimuli: {
         Row: {
           body: string

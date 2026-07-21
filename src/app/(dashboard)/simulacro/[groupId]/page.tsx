@@ -6,6 +6,7 @@ import { SimulacroBreak } from '@/modules/quiz/components/SimulacroBreak'
 import { SimulacroSession } from '@/modules/quiz/components/SimulacroSession'
 import { ROUTES } from '@/lib/constants/routes'
 import { EXAM_CONFIG } from '@/lib/constants/egel'
+import { QUESTION_CLIENT_COLS, attachStimuli } from '@/modules/quiz/lib/load-questions'
 import type { QuizQuestionForClient } from '@/modules/quiz/types'
 
 export const metadata: Metadata = { title: 'Simulacro EGEL' }
@@ -32,15 +33,14 @@ async function loadSessionQuestions(
   const ids = answers.map((a) => a.question_id)
   const { data: questions } = await supabase
     .from('questions')
-    .select(
-      'id, section, area, area_name, subarea, subarea_name, type, stimulus_id, question_text, option_a, option_b, option_c, image_url, difficulty, tags, times_seen, times_correct, is_active, is_pilot, is_deleted, created_by, created_at, updated_at',
-    )
+    .select(QUESTION_CLIENT_COLS)
     .in('id', ids)
 
   const byId = new Map((questions ?? []).map((q) => [q.id, q]))
-  return ids
+  const ordered = ids
     .map((qid) => byId.get(qid))
     .filter((q): q is NonNullable<typeof q> => Boolean(q)) as QuizQuestionForClient[]
+  return attachStimuli(supabase, ordered)
 }
 
 export default async function SimulacroGroupPage({
@@ -79,6 +79,11 @@ export default async function SimulacroGroupPage({
           timeLimitSeconds={
             state.session1.time_limit_seconds ?? EXAM_CONFIG.sessionDurationSeconds
           }
+          startedAtMs={
+            state.session1.started_at
+              ? new Date(state.session1.started_at).getTime()
+              : undefined
+          }
         />
       </div>
     )
@@ -103,6 +108,11 @@ export default async function SimulacroGroupPage({
           questions={questions}
           timeLimitSeconds={
             state.session2.time_limit_seconds ?? EXAM_CONFIG.sessionDurationSeconds
+          }
+          startedAtMs={
+            state.session2.started_at
+              ? new Date(state.session2.started_at).getTime()
+              : undefined
           }
         />
       </div>

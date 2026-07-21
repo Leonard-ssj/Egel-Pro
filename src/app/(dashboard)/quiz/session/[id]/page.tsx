@@ -6,6 +6,7 @@ import { AuroraBackground } from '@/components/ui/aurora-background'
 import { GlassCard } from '@/components/ui/glass-card'
 import { MagicButton } from '@/components/ui/magic-button'
 import { QuizCard } from '@/modules/quiz/components/QuizCard'
+import { QUESTION_CLIENT_COLS, attachStimuli } from '@/modules/quiz/lib/load-questions'
 import type { QuizQuestionForClient } from '@/modules/quiz/types'
 
 export const metadata: Metadata = { title: 'Quiz en progreso' }
@@ -42,8 +43,7 @@ export default async function QuizSessionPage({ params }: { params: Promise<Para
   //   3. Fallback: traer preguntas que matchean los filtros, shuffled.
   let questions: QuizQuestionForClient[] = []
 
-  const QUESTION_COLS =
-    'id, section, area, area_name, subarea, subarea_name, type, stimulus_id, question_text, option_a, option_b, option_c, image_url, difficulty, tags, times_seen, times_correct, is_active, is_pilot, is_deleted, created_by, created_at, updated_at'
+  const QUESTION_COLS = QUESTION_CLIENT_COLS
 
   const savedIds = (session.question_ids ?? null) as string[] | null
 
@@ -101,6 +101,17 @@ export default async function QuizSessionPage({ params }: { params: Promise<Para
     }
   }
 
+  // Adjuntar el texto base a las preguntas de multirreactivo (comprension lectora).
+  questions = await attachStimuli(supabase, questions)
+
+  // Politica de salida por modo: en practica se puede pausar y salir; en los
+  // examenes cronometrados se puede terminar antes; el simulacro no usa esta ruta.
+  const exitPolicy: 'pause' | 'end-early' | 'none' =
+    session.mode === 'practice' ? 'pause' : 'end-early'
+  const startedAtMs = session.started_at
+    ? new Date(session.started_at).getTime()
+    : undefined
+
   if (questions.length === 0) {
     return (
       <GlassCard variant="elevated" padding="lg" className="mx-auto max-w-xl space-y-4 text-center">
@@ -128,6 +139,8 @@ export default async function QuizSessionPage({ params }: { params: Promise<Para
           sessionId={id}
           questions={questions}
           timeLimitSeconds={session.time_limit_seconds}
+          startedAtMs={startedAtMs}
+          exitPolicy={exitPolicy}
         />
       </div>
     </div>

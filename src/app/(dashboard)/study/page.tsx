@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import { BookOpen, ArrowRight } from 'lucide-react'
+import { BookOpen, ArrowRight, Map as MapIcon } from 'lucide-react'
 import { AuroraBackground } from '@/components/ui/aurora-background'
 import { GlassCard } from '@/components/ui/glass-card'
 import { SparklesText } from '@/components/ui/sparkles-text'
@@ -83,8 +83,15 @@ export default async function StudyV2Hub() {
           19 guias completas del temario oficial EGEL Plus ISOFT — conceptos, ejemplos, diagramas, quick quiz y referencias por subarea.
         </p>
         <Link
+          href="/study/mapa"
+          className="inline-flex items-center gap-1.5 rounded-full border border-brand-400/50 bg-brand-400/15 px-3 py-1 text-xs font-semibold text-brand-400 backdrop-blur-md transition-colors hover:bg-brand-400/25"
+        >
+          <MapIcon className="h-3.5 w-3.5" /> Mapa del temario (282 conceptos)
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+        <Link
           href="/study/uml"
-          className="inline-flex items-center gap-1.5 rounded-full border border-aurora-2/40 bg-aurora-2/10 px-3 py-1 text-xs font-medium text-aurora-2 backdrop-blur-md transition-colors hover:bg-aurora-2/20"
+          className="ml-2 inline-flex items-center gap-1.5 rounded-full border border-aurora-2/40 bg-aurora-2/10 px-3 py-1 text-xs font-medium text-aurora-2 backdrop-blur-md transition-colors hover:bg-aurora-2/20"
         >
           <BookOpen className="h-3.5 w-3.5" /> Visualizador de diagramas UML
           <ArrowRight className="h-3.5 w-3.5" />

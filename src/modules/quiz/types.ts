@@ -10,11 +10,23 @@ import type {
 export type QuizSession = Tables<'quiz_sessions'>
 export type QuizAnswer = Tables<'quiz_answers'>
 export type Question = Tables<'questions'>
+export type Stimulus = Tables<'stimuli'>
+
+/**
+ * Estimulo (texto base de un multirreactivo) tal como se envia al cliente.
+ * Se usa en comprension lectora: un texto con varias preguntas asociadas.
+ */
+export type StimulusForClient = Pick<
+  Stimulus,
+  'id' | 'title' | 'body' | 'text_type'
+>
 
 /** Pregunta que se envia al cliente (sin la respuesta correcta) */
 export type QuizQuestionForClient = Omit<Question, 'correct_answer' | 'explanation'> & {
   /** Sentinel para que TS impida que la respuesta llegue al cliente */
   __server_only?: never
+  /** Texto base del multirreactivo (solo si la pregunta tiene stimulus_id) */
+  stimulus?: StimulusForClient | null
 }
 
 /** Pregunta que el cliente puede ver al revisar (con respuesta) */

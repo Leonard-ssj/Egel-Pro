@@ -46,7 +46,8 @@ export function SimulacroIntro() {
         </SparklesText>
         <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
           Replica fiel del examen oficial EGEL Plus ISOFT. {EXAM_CONFIG.sessions} sesiones de{' '}
-          {fmtHours(EXAM_CONFIG.sessionDurationSeconds)} cada una, distribucion oficial CENEVAL.
+          {fmtHours(EXAM_CONFIG.sessionDurationSeconds)} cada una, con la distribucion oficial
+          CENEVAL por subarea y los textos de comprension lectora completos.
         </p>
 
         {/* Numero gigante 203 */}
@@ -84,7 +85,7 @@ export function SimulacroIntro() {
           icon={<ListChecks className="h-5 w-5 text-area3" />}
           label="Sesion 1"
           value="102 reactivos"
-          hint="Areas disciplinares y transversales mezcladas"
+          hint="Distribucion oficial por subarea + textos de lectura"
         />
         <InfoTile
           icon={<ListChecks className="h-5 w-5 text-warning" />}

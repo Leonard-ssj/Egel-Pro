@@ -19,6 +19,14 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils/cn'
+import { getPerformanceLevel } from '@/lib/constants/egel'
+
+// Etiqueta y color del nivel de desempeno oficial CENEVAL por area.
+const LEVEL_META = {
+  sobresaliente: { label: 'Sobresaliente', className: 'bg-success/15 text-success border-success/40' },
+  satisfactorio: { label: 'Satisfactorio', className: 'bg-warning/15 text-warning border-warning/40' },
+  ans: { label: 'Aun no satisfactorio', className: 'bg-danger/15 text-danger border-danger/40' },
+} as const
 
 export type AreaBreakdownRow = {
   area: number
@@ -148,14 +156,24 @@ export function AreaBreakdown({ rows }: AreaBreakdownProps) {
                             </p>
                           </div>
                         </div>
-                        <span
-                          className={cn(
-                            'font-mono text-base font-bold tabular-nums',
-                            textClass,
-                          )}
-                        >
-                          <AnimatedCounter value={r.accuracy} suffix="%" />
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={cn(
+                              'hidden shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold sm:inline-block',
+                              LEVEL_META[getPerformanceLevel(r.accuracy)].className,
+                            )}
+                          >
+                            {LEVEL_META[getPerformanceLevel(r.accuracy)].label}
+                          </span>
+                          <span
+                            className={cn(
+                              'font-mono text-base font-bold tabular-nums',
+                              textClass,
+                            )}
+                          >
+                            <AnimatedCounter value={r.accuracy} suffix="%" />
+                          </span>
+                        </div>
                       </div>
                     </TooltipTrigger>
                     <TooltipContent side="left">
@@ -163,7 +181,7 @@ export function AreaBreakdown({ rows }: AreaBreakdownProps) {
                         Area {r.area} · {r.areaShortName}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        Precision: {r.accuracy}%
+                        Precision: {r.accuracy}% · {LEVEL_META[getPerformanceLevel(r.accuracy)].label}
                       </p>
                     </TooltipContent>
                   </Tooltip>

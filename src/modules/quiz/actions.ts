@@ -647,46 +647,157 @@ export async function cleanupEmptyInProgressSessions(): Promise<{ success: boole
 // SIMULACRO COMPLETO EGEL (2 sesiones de 4.5h)
 // =====================================================
 
-// Distribucion oficial CENEVAL EGEL Plus ISOFT:
-//   Disciplinar: 31 (Area 1) + 33 (Area 2) + 49 (Area 3) + 30 (Area 4) = 143
-//   Transversal: 30 (Area 1) + 30 (Area 2) = 60
-//   Total: 203 reactivos
-// Para el MVP repartimos cada area entre las dos sesiones (mitad y mitad,
-// redondeando para llegar a 102 + 101). El orden interno de las preguntas
-// es aleatorio dentro de cada sesion.
+// Distribucion oficial CENEVAL EGEL Plus ISOFT (203 reactivos):
+//   Disciplinar: 31 (A1) + 33 (A2) + 49 (A3) + 30 (A4) = 143
+//   Transversal: 30 (A1 Comprension lectora) + 30 (A2 Redaccion) = 60
 //
-// Sesion 1 (102): area1=16, area2=17, area3=25, area4=15, trans1=15, trans2=14
-// Sesion 2 (101): area1=15, area2=16, area3=24, area4=15, trans1=15, trans2=16
+// Repartimos el examen en 2 sesiones (102 + 101) respetando la distribucion
+// oficial a nivel SUBAREA para las areas que no usan multirreactivos.
+//
+// Comprension lectora (transversal, area 1) se maneja aparte con `grouped`:
+// se eligen TEXTOS completos (todas las preguntas de un mismo estimulo juntas)
+// hasta acercarse al objetivo, porque un texto no se puede partir entre
+// sesiones sin romper el multirreactivo. Por eso su conteo es aproximado.
 type SimulacroSlot = {
   section: 'disciplinar' | 'transversal'
   area: number
+  /** Subarea especifica (omitir en slots `grouped`, que cubren toda el area). */
+  subarea?: number
   count: number
+  /**
+   * Si true, se eligen grupos de estimulo completos (multirreactivos) en vez de
+   * preguntas sueltas. El conteo es un objetivo aproximado (no se parten textos).
+   */
+  grouped?: boolean
 }
 
+// Sesion 1: disciplinar 73 + transversal-2 15 + comprension lectora ~14 ≈ 102
 const SIMULACRO_SESSION_1_SLOTS: readonly SimulacroSlot[] = [
-  { section: 'disciplinar', area: 1, count: 16 },
-  { section: 'disciplinar', area: 2, count: 17 },
-  { section: 'disciplinar', area: 3, count: 25 },
-  { section: 'disciplinar', area: 4, count: 15 },
-  { section: 'transversal', area: 1, count: 15 },
-  { section: 'transversal', area: 2, count: 14 },
+  { section: 'disciplinar', area: 1, subarea: 1, count: 6 },
+  { section: 'disciplinar', area: 1, subarea: 2, count: 5 },
+  { section: 'disciplinar', area: 1, subarea: 3, count: 5 },
+  { section: 'disciplinar', area: 2, subarea: 1, count: 5 },
+  { section: 'disciplinar', area: 2, subarea: 2, count: 8 },
+  { section: 'disciplinar', area: 2, subarea: 3, count: 4 },
+  { section: 'disciplinar', area: 3, subarea: 1, count: 5 },
+  { section: 'disciplinar', area: 3, subarea: 2, count: 5 },
+  { section: 'disciplinar', area: 3, subarea: 3, count: 5 },
+  { section: 'disciplinar', area: 3, subarea: 4, count: 5 },
+  { section: 'disciplinar', area: 3, subarea: 5, count: 5 },
+  { section: 'disciplinar', area: 4, subarea: 1, count: 4 },
+  { section: 'disciplinar', area: 4, subarea: 2, count: 5 },
+  { section: 'disciplinar', area: 4, subarea: 3, count: 6 },
+  { section: 'transversal', area: 2, subarea: 1, count: 7 },
+  { section: 'transversal', area: 2, subarea: 2, count: 8 },
+  { section: 'transversal', area: 1, count: 14, grouped: true },
 ] as const
 
+// Sesion 2: disciplinar 70 + transversal-2 15 + comprension lectora ~16 ≈ 101
 const SIMULACRO_SESSION_2_SLOTS: readonly SimulacroSlot[] = [
-  { section: 'disciplinar', area: 1, count: 15 },
-  { section: 'disciplinar', area: 2, count: 16 },
-  { section: 'disciplinar', area: 3, count: 24 },
-  { section: 'disciplinar', area: 4, count: 15 },
-  { section: 'transversal', area: 1, count: 15 },
-  { section: 'transversal', area: 2, count: 16 },
+  { section: 'disciplinar', area: 1, subarea: 1, count: 6 },
+  { section: 'disciplinar', area: 1, subarea: 2, count: 4 },
+  { section: 'disciplinar', area: 1, subarea: 3, count: 5 },
+  { section: 'disciplinar', area: 2, subarea: 1, count: 5 },
+  { section: 'disciplinar', area: 2, subarea: 2, count: 8 },
+  { section: 'disciplinar', area: 2, subarea: 3, count: 3 },
+  { section: 'disciplinar', area: 3, subarea: 1, count: 5 },
+  { section: 'disciplinar', area: 3, subarea: 2, count: 5 },
+  { section: 'disciplinar', area: 3, subarea: 3, count: 5 },
+  { section: 'disciplinar', area: 3, subarea: 4, count: 4 },
+  { section: 'disciplinar', area: 3, subarea: 5, count: 5 },
+  { section: 'disciplinar', area: 4, subarea: 1, count: 4 },
+  { section: 'disciplinar', area: 4, subarea: 2, count: 5 },
+  { section: 'disciplinar', area: 4, subarea: 3, count: 6 },
+  { section: 'transversal', area: 2, subarea: 1, count: 8 },
+  { section: 'transversal', area: 2, subarea: 2, count: 7 },
+  { section: 'transversal', area: 1, count: 16, grouped: true },
 ] as const
 
 /**
- * Selecciona N preguntas al azar de las areas/secciones indicadas por los slots
- * y las inserta como filas de quiz_answers (con placeholders) para fijar el
- * conjunto seleccionado a la sesion.
+ * Elige preguntas para un slot. Devuelve BLOQUES: cada bloque es un conjunto de
+ * ids que deben permanecer consecutivos. Para slots normales cada pregunta es
+ * su propio bloque; para slots `grouped` cada bloque es un texto completo
+ * (multirreactivo) con todas sus preguntas.
+ */
+async function pickSlotBlocks(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  slot: SimulacroSlot,
+  excluded: Set<string>,
+): Promise<{ ok: true; blocks: string[][] } | { ok: false; error: string }> {
+  if (slot.grouped) {
+    // Traer candidatos con su stimulus_id para agrupar por texto.
+    const { data, error } = await supabase
+      .from('questions')
+      .select('id, stimulus_id')
+      .eq('section', slot.section)
+      .eq('area', slot.area)
+      .eq('is_active', true)
+      .eq('is_deleted', false)
+      .limit(1000)
+    if (error) {
+      return { ok: false, error: `Error al consultar preguntas: ${error.message}` }
+    }
+    const available = (data ?? []).filter((q) => !excluded.has(q.id))
+    // Agrupar por stimulus_id (las sueltas —sin estimulo— van como grupo propio)
+    const groups = new Map<string, string[]>()
+    for (const q of available) {
+      const key = q.stimulus_id ?? `solo:${q.id}`
+      const arr = groups.get(key) ?? []
+      arr.push(q.id)
+      groups.set(key, arr)
+    }
+    const shuffledGroups = shuffle(Array.from(groups.values()))
+    const blocks: string[][] = []
+    let taken = 0
+    for (const group of shuffledGroups) {
+      if (taken >= slot.count) break
+      blocks.push(group)
+      group.forEach((id) => excluded.add(id))
+      taken += group.length
+    }
+    if (blocks.length === 0) {
+      return {
+        ok: false,
+        error: `No hay textos disponibles para comprension lectora (seccion ${slot.section} area ${slot.area})`,
+      }
+    }
+    return { ok: true, blocks }
+  }
+
+  // Slot normal: preguntas sueltas de una subarea concreta.
+  let query = supabase
+    .from('questions')
+    .select('id')
+    .eq('section', slot.section)
+    .eq('area', slot.area)
+    .eq('is_active', true)
+    .eq('is_deleted', false)
+  if (slot.subarea !== undefined) query = query.eq('subarea', slot.subarea)
+
+  const { data, error } = await query.limit(1000)
+  if (error) {
+    return { ok: false, error: `Error al consultar preguntas: ${error.message}` }
+  }
+  const available = (data ?? []).filter((q) => !excluded.has(q.id))
+  if (available.length === 0) {
+    return {
+      ok: false,
+      error: `No hay preguntas disponibles para seccion ${slot.section} area ${slot.area}${slot.subarea ? ` subarea ${slot.subarea}` : ''}`,
+    }
+  }
+  const picked = shuffle(available).slice(0, slot.count)
+  for (const q of picked) excluded.add(q.id)
+  return { ok: true, blocks: picked.map((q) => [q.id]) }
+}
+
+/**
+ * Selecciona preguntas segun los slots y las persiste como filas de
+ * quiz_answers (placeholders) para fijar el conjunto a la sesion.
  *
- * Devuelve los IDs de las preguntas elegidas, en el orden en que se guardaron.
+ * Devuelve los IDs en el orden guardado. Los multirreactivos quedan juntos:
+ * barajamos los BLOQUES (no las preguntas), asi el examen no muestra las
+ * preguntas agrupadas por area pero si mantiene cada texto con sus preguntas.
+ *
  * Si excludeIds esta provisto, evita re-seleccionar preguntas ya usadas (caso
  * tipico: las de la sesion 1 cuando armamos la sesion 2).
  */
@@ -697,46 +808,21 @@ async function pickAndPersistSimulacroQuestions(
   excludeIds: readonly string[] = [],
 ): Promise<{ ok: true; questionIds: string[] } | { ok: false; error: string }> {
   const excluded = new Set(excludeIds)
-  const orderedIds: string[] = []
+  const allBlocks: string[][] = []
 
   for (const slot of slots) {
     if (slot.count === 0) continue
-
-    // Postgrest "not in" tiene limite practico de items en la URL; preferimos
-    // traer todos los candidatos del area y filtrar el excludeIds en JS.
-    const { data, error } = await supabase
-      .from('questions')
-      .select('id')
-      .eq('section', slot.section)
-      .eq('area', slot.area)
-      .eq('is_active', true)
-      .eq('is_deleted', false)
-      .limit(1000)
-    if (error) {
-      return { ok: false, error: `Error al consultar preguntas: ${error.message}` }
-    }
-    const available = (data ?? []).filter((q) => !excluded.has(q.id))
-    if (available.length === 0) {
-      return {
-        ok: false,
-        error: `No hay preguntas disponibles para seccion ${slot.section} area ${slot.area}`,
-      }
-    }
-    const picked = shuffle(available).slice(0, slot.count)
-    // Si no hay suficientes, igual usamos las que hay (mejor que nada en MVP).
-    for (const q of picked) {
-      orderedIds.push(q.id)
-      excluded.add(q.id)
-    }
+    const result = await pickSlotBlocks(supabase, slot, excluded)
+    if (!result.ok) return result
+    allBlocks.push(...result.blocks)
   }
 
-  if (orderedIds.length === 0) {
+  if (allBlocks.length === 0) {
     return { ok: false, error: 'No hay preguntas disponibles para el simulacro' }
   }
 
-  // Mezclamos el orden global para que el usuario no vea las preguntas
-  // agrupadas por area; el campo order_in_quiz se asigna por el indice final.
-  const finalOrder = shuffle(orderedIds)
+  // Barajar los BLOQUES (preserva los multirreactivos consecutivos) y aplanar.
+  const finalOrder = shuffle(allBlocks).flat()
 
   const rows = finalOrder.map((qid, idx) => ({
     session_id: sessionId,

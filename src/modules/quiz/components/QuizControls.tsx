@@ -8,6 +8,7 @@ import {
   Send,
   Loader2,
   XCircle,
+  PauseCircle,
 } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MagicButton } from '@/components/ui/magic-button'
@@ -24,6 +25,8 @@ type QuizControlsProps = {
   onToggleMark: () => void
   onFinish: () => void
   onEndEarly?: () => void
+  /** Pausar y salir (modo practica). Deja la sesion in_progress para retomar. */
+  onPause?: () => void
   answeredCount?: number
   total?: number
 }
@@ -39,6 +42,7 @@ export function QuizControls({
   onToggleMark,
   onFinish,
   onEndEarly,
+  onPause,
   answeredCount,
   total,
 }: QuizControlsProps) {
@@ -92,6 +96,18 @@ export function QuizControls({
       </div>
 
       <div className="flex items-center gap-2">
+        {onPause ? (
+          <MagicButton
+            variant="ghost"
+            size="md"
+            onClick={onPause}
+            disabled={isFinishing}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <PauseCircle className="h-4 w-4" />
+            <span className="hidden sm:inline">Pausar</span>
+          </MagicButton>
+        ) : null}
         {onEndEarly ? (
           <MagicButton
             variant="ghost"
