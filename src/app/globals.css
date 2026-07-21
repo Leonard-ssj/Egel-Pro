@@ -251,3 +251,45 @@
       0 0 24px -4px hsl(var(--brand-400) / 0.6);
   }
 }
+
+/* -------------------------------------------------------------------------
+   Rendimiento en moviles / iOS. backdrop-filter (blur) y las animaciones
+   continuas son la principal fuente de consumo de GPU -> bateria y calor.
+   En dispositivos tactiles bajamos MUCHO el radio del blur y apagamos las
+   animaciones decorativas en bucle. El aspecto se conserva casi identico.
+   ------------------------------------------------------------------------- */
+@media (pointer: coarse) {
+  .glass {
+    backdrop-filter: blur(10px) saturate(130%);
+    -webkit-backdrop-filter: blur(10px) saturate(130%);
+  }
+  .glass-strong {
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+  }
+  [class*="backdrop-blur"] {
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+  .animate-aurora-shift,
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-shimmer,
+  .shimmer,
+  .animate-marquee,
+  .animate-marquee-vertical {
+    animation: none !important;
+  }
+}
+
+/* Respeta la preferencia de accesibilidad "reducir movimiento". */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -28,6 +28,17 @@ export function SparklesText({
   const [sparkles, setSparkles] = useState<Sparkle[]>([])
 
   useEffect(() => {
+    // Las chispas animan en bucle con framer (JS en el main-thread). En moviles
+    // (tactil) o con "reducir movimiento" no las montamos: consumen bateria y
+    // calientan el equipo. El texto con gradient se conserva igual.
+    const noMotion =
+      typeof window !== 'undefined' &&
+      (window.matchMedia('(pointer: coarse)').matches ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+    if (noMotion) {
+      setSparkles([])
+      return
+    }
     const initial = Array.from({ length: count }, (_, i) => ({
       id: i,
       x: rand(0, 100),

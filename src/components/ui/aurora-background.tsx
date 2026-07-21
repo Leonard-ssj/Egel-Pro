@@ -41,7 +41,7 @@ export function AuroraBackground({
         aria-hidden
         className={cn(
           'pointer-events-none absolute -top-1/4 -left-1/4 h-[150%] w-[150%]',
-          'rounded-full blur-3xl will-change-transform',
+          'rounded-full blur-3xl',
           isVisible && 'animate-aurora-shift',
         )}
         style={{
@@ -54,7 +54,7 @@ export function AuroraBackground({
         aria-hidden
         className={cn(
           'pointer-events-none absolute -top-1/3 -right-1/4 h-[140%] w-[140%]',
-          'rounded-full blur-3xl will-change-transform',
+          'rounded-full blur-3xl',
           isVisible && 'animate-aurora-shift',
         )}
         style={{
@@ -67,7 +67,7 @@ export function AuroraBackground({
         aria-hidden
         className={cn(
           'pointer-events-none absolute -bottom-1/4 left-1/3 h-[130%] w-[130%]',
-          'rounded-full blur-3xl will-change-transform',
+          'rounded-full blur-3xl',
           isVisible && 'animate-aurora-shift',
         )}
         style={{
