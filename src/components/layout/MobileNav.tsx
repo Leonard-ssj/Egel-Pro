@@ -3,37 +3,53 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { LayoutDashboard, Brain, BookOpen, TrendingUp, User, LogOut } from 'lucide-react'
+import {
+  LayoutDashboard,
+  Brain,
+  Sparkles,
+  BookOpen,
+  Map as MapIcon,
+  TrendingUp,
+  User,
+  LogOut,
+} from 'lucide-react'
 import { cn } from '@/lib/utils/cn'
 import { signOut } from '@/modules/auth/actions'
 
 const ITEMS = [
   { href: '/dashboard',    label: 'Inicio',    icon: LayoutDashboard },
   { href: '/quiz',         label: 'Practicar', icon: Brain },
+  { href: '/simulacro',    label: 'Simulacro', icon: Sparkles },
   { href: '/study',        label: 'Estudiar',  icon: BookOpen },
+  { href: '/study/mapa',   label: 'Mapa',      icon: MapIcon },
   { href: '/progress',     label: 'Progreso',  icon: TrendingUp },
   { href: '/profile',      label: 'Perfil',    icon: User },
 ] as const
 
 export function MobileNav() {
   const pathname = usePathname()
+  // Solo el match mas especifico queda activo (asi /study/mapa no activa Estudiar).
+  const activeHref = ITEMS.filter(
+    (i) => pathname === i.href || pathname.startsWith(`${i.href}/`),
+  ).sort((a, b) => b.href.length - a.href.length)[0]?.href
+
   return (
     <nav
       className="fixed inset-x-2 bottom-2 z-50 md:hidden"
       aria-label="Navegacion principal mobile"
     >
       <div className="glass-strong relative rounded-2xl shadow-elev-4">
-        <ul className="grid grid-cols-6 gap-0.5 px-1 py-1.5">
+        {/* Fila deslizable horizontalmente: caben todos los accesos sin amontonar */}
+        <ul className="flex snap-x gap-0.5 overflow-x-auto px-1 py-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {ITEMS.map((item) => {
-            const active =
-              pathname === item.href || pathname.startsWith(`${item.href}/`)
+            const active = item.href === activeHref
             const Icon = item.icon
             return (
-              <li key={item.href}>
+              <li key={item.href} className="shrink-0 snap-start">
                 <Link
                   href={item.href}
                   className={cn(
-                    'relative flex flex-col items-center gap-0.5 rounded-lg px-0.5 py-1.5 text-[10px] font-medium leading-tight transition-colors',
+                    'relative flex w-14 flex-col items-center gap-0.5 rounded-lg px-0.5 py-1.5 text-[10px] font-medium leading-tight transition-colors',
                     active ? 'text-brand-400' : 'text-muted-foreground',
                   )}
                 >
@@ -55,12 +71,12 @@ export function MobileNav() {
               </li>
             )
           })}
-          <li>
+          <li className="shrink-0 snap-start">
             <form action={signOut}>
               <button
                 type="submit"
                 aria-label="Cerrar sesion"
-                className="relative flex w-full flex-col items-center gap-0.5 rounded-lg px-0.5 py-1.5 text-[10px] font-medium leading-tight text-muted-foreground transition-colors hover:text-danger"
+                className="relative flex w-14 flex-col items-center gap-0.5 rounded-lg px-0.5 py-1.5 text-[10px] font-medium leading-tight text-muted-foreground transition-colors hover:text-danger"
               >
                 <LogOut className="relative z-10 h-4 w-4" />
                 <span className="relative z-10 whitespace-nowrap">Salir</span>
