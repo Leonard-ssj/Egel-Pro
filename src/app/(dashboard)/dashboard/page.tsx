@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
+import { Map as MapIcon, ArrowRight } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = { title: 'Dashboard' }
@@ -92,6 +94,21 @@ export default async function DashboardPage() {
   const profile = profileRes.data
   const progress = progressRes.data ?? []
 
+  // Cobertura del temario (mapa): conceptos dominados vs total.
+  const [conceptTotalRes, conceptDoneRes] = await Promise.all([
+    supabase
+      .from('syllabus_concepts')
+      .select('id', { count: 'exact', head: true })
+      .eq('is_active', true),
+    supabase
+      .from('user_concept_mastery')
+      .select('concept_id', { count: 'exact', head: true })
+      .eq('user_id', user.id),
+  ])
+  const conceptTotal = conceptTotalRes.count ?? 0
+  const conceptDone = conceptDoneRes.count ?? 0
+  const coveragePct = conceptTotal > 0 ? Math.round((conceptDone / conceptTotal) * 100) : 0
+
   // Stats agregados
   const totalQuestions = progress.reduce((acc, p) => acc + (p.questions_attempted ?? 0), 0)
   const totalCorrect = progress.reduce((acc, p) => acc + (p.questions_correct ?? 0), 0)
@@ -170,6 +187,34 @@ export default async function DashboardPage() {
       {/* Weak areas — 3 cols */}
       <BentoCard colSpan={3} variant="elevated" padding="lg">
         <WeakAreasCard areas={weakAreas} />
+      </BentoCard>
+
+      {/* Cobertura del temario — 6 cols (full row) */}
+      <BentoCard colSpan={6} variant="elevated" padding="lg">
+        <Link href="/study/mapa" className="group flex flex-wrap items-center gap-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-400/15 text-brand-400">
+            <MapIcon className="h-6 w-6" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="flex items-center gap-2 text-sm font-semibold">
+              Cobertura del temario
+              <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Dominas <span className="font-semibold text-brand-400">{conceptDone}</span> de{' '}
+              {conceptTotal} conceptos del examen
+            </p>
+            <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-bg-raised/60">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-aurora-1 via-aurora-2 to-aurora-3 transition-all"
+                style={{ width: `${coveragePct}%` }}
+              />
+            </div>
+          </div>
+          <span className="font-mono text-2xl font-bold tabular-nums text-brand-400">
+            {coveragePct}%
+          </span>
+        </Link>
       </BentoCard>
 
       {/* Mini leaderboard — 6 cols (full row) */}
