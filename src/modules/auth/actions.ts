@@ -26,6 +26,26 @@ function getSiteUrl() {
   return process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
 }
 
+/**
+ * Origen REAL desde el que se hace la peticion (preview, prod o localhost).
+ * Se usa para los redirects de auth (confirmacion de email, magic link, OAuth,
+ * reset de password) para que el usuario vuelva al MISMO entorno donde inicio.
+ *
+ * Antes se usaba NEXT_PUBLIC_APP_URL (fija a prod), por lo que un login iniciado
+ * en un preview de Vercel terminaba autenticando contra produccion.
+ */
+async function getRequestOrigin(): Promise<string> {
+  const h = await headers()
+  const origin = h.get('origin')
+  if (origin) return origin
+  const host = h.get('x-forwarded-host') ?? h.get('host')
+  if (host) {
+    const proto = h.get('x-forwarded-proto') ?? 'https'
+    return `${proto}://${host}`
+  }
+  return getSiteUrl()
+}
+
 // =====================================================
 // SIGN UP — Email + Password
 // =====================================================
@@ -40,7 +60,7 @@ export async function signUp(input: SignUpInput): Promise<ActionResult> {
     email: parsed.data.email,
     password: parsed.data.password,
     options: {
-      emailRedirectTo: `${getSiteUrl()}/auth/callback`,
+      emailRedirectTo: `${await getRequestOrigin()}/auth/callback`,
       data: {
         full_name: parsed.data.full_name,
       },
@@ -136,8 +156,7 @@ export async function signOut(): Promise<void> {
 // =====================================================
 export async function signInWithGoogle(): Promise<ActionResult<{ url: string }>> {
   const supabase = await createClient()
-  const headersList = await headers()
-  const origin = headersList.get('origin') ?? getSiteUrl()
+  const origin = await getRequestOrigin()
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
@@ -164,7 +183,7 @@ export async function sendMagicLink(input: MagicLinkInput): Promise<ActionResult
   const { error } = await supabase.auth.signInWithOtp({
     email: parsed.data.email,
     options: {
-      emailRedirectTo: `${getSiteUrl()}/auth/callback`,
+      emailRedirectTo: `${await getRequestOrigin()}/auth/callback`,
       shouldCreateUser: true,
     },
   })
@@ -184,7 +203,7 @@ export async function forgotPassword(input: ForgotPasswordInput): Promise<Action
 
   const supabase = await createClient()
   const { error } = await supabase.auth.resetPasswordForEmail(parsed.data.email, {
-    redirectTo: `${getSiteUrl()}/auth/callback?next=/profile/reset-password`,
+    redirectTo: `${await getRequestOrigin()}/auth/callback?next=/profile/reset-password`,
   })
 
   if (error) return { success: false, error: error.message }
