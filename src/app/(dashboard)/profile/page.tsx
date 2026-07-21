@@ -95,16 +95,19 @@ export default async function ProfilePage() {
         </div>
       </GlassCard>
 
-      <GlassCard variant="elevated" padding="lg">
-        <h2 className="mb-1 flex items-center gap-2 text-lg font-semibold">
-          <Download className="h-4 w-4 text-aurora-2" />
-          Exportar banco de preguntas
-        </h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          Descarga todas las preguntas activas en formato Excel para estudiar offline.
-        </p>
-        <ExportQuestionsButton />
-      </GlassCard>
+      {/* Exportar el banco completo es sensible (todo el contenido): solo admin. */}
+      {profile.role === 'admin' ? (
+        <GlassCard variant="elevated" padding="lg">
+          <h2 className="mb-1 flex items-center gap-2 text-lg font-semibold">
+            <Download className="h-4 w-4 text-aurora-2" />
+            Exportar banco de preguntas
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            Descarga todas las preguntas activas en formato Excel para estudiar offline.
+          </p>
+          <ExportQuestionsButton />
+        </GlassCard>
+      ) : null}
 
       <GlassCard variant="elevated" padding="lg">
         <h2 className="mb-1 flex items-center gap-2 text-lg font-semibold">

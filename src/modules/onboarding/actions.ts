@@ -2,7 +2,9 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 import { createClient } from '@/lib/supabase/server'
+import { ONBOARDING_SKIP_COOKIE } from './constants'
 import {
   completeOnboardingSchema,
   type CompleteOnboardingInput,
@@ -87,22 +89,23 @@ export async function getDiagnosticQuestions(): Promise<{
 }
 
 /**
- * Permite saltar el onboarding (lo marca como completado sin datos).
- * Util para usuarios que quieren explorar sin compromiso.
+ * Salta el onboarding SOLO por esta sesion: deja entrar al dashboard ahora pero
+ * NO marca onboarding_completed. La cookie se borra al cerrar sesion, asi el
+ * guard del dashboard lo regresa al onboarding en el proximo login hasta que lo
+ * termine de verdad.
  */
 export async function skipOnboarding(): Promise<void> {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  await supabase
-    .from('profiles')
-    .update({
-      onboarding_completed: true,
-      goal_level: 'sobresaliente',
-    })
-    .eq('id', user.id)
+  const cookieStore = await cookies()
+  cookieStore.set(ONBOARDING_SKIP_COOKIE, '1', {
+    httpOnly: true,
+    sameSite: 'lax',
+    path: '/',
+    // Sin maxAge => cookie de sesion (se borra al cerrar el navegador/PWA).
+  })
 
-  revalidatePath('/', 'layout')
   redirect('/dashboard')
 }
