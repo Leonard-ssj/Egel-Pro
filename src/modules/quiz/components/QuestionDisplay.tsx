@@ -1,5 +1,6 @@
 'use client'
 
+import { BookOpen } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils/cn'
 import { MermaidDiagram } from '@/components/ui/MermaidDiagram'
@@ -42,9 +43,31 @@ export function QuestionDisplay({ question }: QuestionDisplayProps) {
   const difficulty = question.difficulty ?? 'medium'
   const areaClass = AREA_BADGE[question.area] ?? 'bg-bg-raised text-muted-foreground border-bg-border'
   const { caso, pregunta } = splitCaso(question.question_text)
+  const stimulus = question.stimulus
 
   return (
     <div className="space-y-5">
+      {/* Texto base del multirreactivo (comprension lectora). Se muestra arriba
+          de la pregunta para que el sustentante pueda leerlo, tal como en el
+          examen real donde varias preguntas comparten un mismo texto. */}
+      {stimulus ? (
+        <figure className="rounded-xl border border-cyan-ice/30 bg-cyan-ice/5 p-4 backdrop-blur-md sm:p-5">
+          <figcaption className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-cyan-ice">
+            <BookOpen className="h-3.5 w-3.5" />
+            Texto de lectura
+            {stimulus.title ? (
+              <span className="font-normal normal-case text-muted-foreground">
+                · {stimulus.title}
+              </span>
+            ) : null}
+          </figcaption>
+          <div className="max-h-[40vh] overflow-y-auto pr-1">
+            <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/90">
+              {stimulus.body}
+            </p>
+          </div>
+        </figure>
+      ) : null}
       <div className="flex flex-wrap items-center gap-2 text-xs">
         <span
           className={cn(

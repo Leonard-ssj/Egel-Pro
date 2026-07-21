@@ -30,12 +30,28 @@ type QuizCardProps = {
   sessionId: string
   questions: QuizQuestionForClient[]
   timeLimitSeconds: number | null
+  /**
+   * Inicio real de la sesion (ms epoch, tomado de la DB). El cronometro cuenta
+   * desde aqui para que al retomar la sesion el tiempo siga corriendo de verdad
+   * y no se reinicie. Si se omite, cae al store / Date.now() (modo offline).
+   */
+  startedAtMs?: number
+  /**
+   * Politica de salida:
+   *  - 'pause': se puede pausar y salir (modo practica). La sesion queda
+   *    in_progress y se retoma luego.
+   *  - 'end-early': se puede terminar antes y ver resultado parcial (examenes).
+   *  - 'none': no se puede salir (simulacro, replica del examen real).
+   */
+  exitPolicy?: 'pause' | 'end-early' | 'none'
 }
 
 export function QuizCard({
   sessionId,
   questions,
   timeLimitSeconds,
+  startedAtMs,
+  exitPolicy = 'end-early',
 }: QuizCardProps) {
   const router = useRouter()
   const [isFinishing, startFinishing] = useTransition()
@@ -87,12 +103,36 @@ export function QuizCard({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const startedAt = useQuizStore((s) => s.startedAt) ?? Date.now()
+  // Preferimos el inicio real de la DB (startedAtMs). Solo si no llega usamos
+  // el del store persistido, y como ultimo recurso Date.now() (offline).
+  const storeStartedAt = useQuizStore((s) => s.startedAt)
+  const startedAt = startedAtMs ?? storeStartedAt ?? Date.now()
   const { remainingSeconds } = useQuizTimer({
     startedAt,
     timeLimitSeconds,
     onExpire: handleTimeUp,
   })
+
+  // Avisos de tiempo: en examenes largos (simulacro) avisamos a 30/15/5/1 min.
+  // Guardamos los umbrales ya disparados para no repetir el toast.
+  const firedWarningsRef = useRef<Set<number>>(new Set())
+  useEffect(() => {
+    if (timeLimitSeconds === null) return
+    const thresholds = [1800, 900, 300, 60] // 30, 15, 5, 1 min
+    for (const t of thresholds) {
+      if (t >= timeLimitSeconds) continue
+      if (remainingSeconds <= t && !firedWarningsRef.current.has(t)) {
+        firedWarningsRef.current.add(t)
+        const mins = t / 60
+        toast.warning(
+          mins >= 1
+            ? `Te queda${mins === 1 ? '' : 'n'} ${mins} minuto${mins === 1 ? '' : 's'} de examen`
+            : 'Ultimos segundos',
+          { duration: 6000 },
+        )
+      }
+    }
+  }, [remainingSeconds, timeLimitSeconds])
 
   // Submit en background al cambiar la respuesta / marca. Si falla la red,
   // encola en localStorage para reintentar al recuperar conexion.
@@ -199,6 +239,15 @@ export function QuizCard({
     })
   }
 
+  async function handlePause() {
+    // Practica: guardar el avance (ya se sincroniza en background) y salir.
+    // La sesion sigue in_progress, asi que el banner "Continuar" la retoma.
+    await ensureSynced()
+    toast.success('Practica pausada. Puedes retomarla cuando quieras.')
+    router.push('/quiz')
+    router.refresh()
+  }
+
   async function handleEndEarly() {
     await ensureSynced()
     startFinishing(async () => {
@@ -277,7 +326,12 @@ export function QuizCard({
           onSkip={handleSkip}
           onToggleMark={handleToggleMark}
           onFinish={handleFinish}
-          onEndEarly={answeredCount > 0 ? handleEndEarly : undefined}
+          onEndEarly={
+            exitPolicy === 'end-early' && answeredCount > 0
+              ? handleEndEarly
+              : undefined
+          }
+          onPause={exitPolicy === 'pause' ? handlePause : undefined}
           answeredCount={answeredCount}
           total={questions.length}
         />

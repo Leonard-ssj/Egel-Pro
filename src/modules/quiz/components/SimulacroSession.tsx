@@ -13,6 +13,8 @@ type SimulacroSessionProps = {
   sessionNumber: 1 | 2
   questions: QuizQuestionForClient[]
   timeLimitSeconds: number
+  /** Inicio real de la sesion (ms epoch) para que el cronometro no se reinicie. */
+  startedAtMs?: number
 }
 
 /**
@@ -30,6 +32,7 @@ export function SimulacroSession({
   sessionNumber,
   questions,
   timeLimitSeconds,
+  startedAtMs,
 }: SimulacroSessionProps) {
   // Mantener metadata del simulacro en el hook (init del store + memo).
   useSimulacro({
@@ -59,6 +62,8 @@ export function SimulacroSession({
         sessionId={sessionId}
         questions={questions}
         timeLimitSeconds={timeLimitSeconds}
+        startedAtMs={startedAtMs}
+        exitPolicy="none"
       />
     </div>
   )
