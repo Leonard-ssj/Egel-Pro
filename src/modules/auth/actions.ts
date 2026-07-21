@@ -2,8 +2,9 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { headers } from 'next/headers'
+import { headers, cookies } from 'next/headers'
 import { createClient } from '@/lib/supabase/server'
+import { ONBOARDING_SKIP_COOKIE } from '@/modules/onboarding/constants'
 import { sendWelcomeEmail } from '@/modules/notifications/actions'
 import {
   signUpSchema,
@@ -147,6 +148,9 @@ export async function signIn(input: SignInInput): Promise<ActionResult> {
 export async function signOut(): Promise<void> {
   const supabase = await createClient()
   await supabase.auth.signOut()
+  // Borrar el bypass de onboarding: al re-loguear vuelve al onboarding si no lo termino.
+  const cookieStore = await cookies()
+  cookieStore.delete(ONBOARDING_SKIP_COOKIE)
   revalidatePath('/', 'layout')
   redirect('/login')
 }

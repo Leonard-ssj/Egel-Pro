@@ -1,5 +1,7 @@
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 import { createClient } from '@/lib/supabase/server'
+import { ONBOARDING_SKIP_COOKIE } from '@/modules/onboarding/constants'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { Header } from '@/components/layout/Header'
 import { MobileNav } from '@/components/layout/MobileNav'
@@ -29,7 +31,12 @@ export default async function DashboardLayout({
     .eq('id', user.id)
     .single()
 
-  if (profile && !profile.onboarding_completed) {
+  // Si no completo el onboarding y NO lo salto en esta sesion (cookie), lo
+  // regresamos al onboarding. La cookie se borra al cerrar sesion, asi vuelve
+  // al onboarding en cada nuevo login hasta terminarlo.
+  const skippedThisSession =
+    (await cookies()).get(ONBOARDING_SKIP_COOKIE)?.value === '1'
+  if (profile && !profile.onboarding_completed && !skippedThisSession) {
     redirect('/onboarding')
   }
 

@@ -23,6 +23,17 @@ export async function GET() {
     return NextResponse.json({ error: 'No autenticado' }, { status: 401 })
   }
 
+  // Exportar el banco COMPLETO es sensible: solo admin. Evita que un estudiante
+  // (o el usuario demo) se descargue todo el contenido por la URL directa.
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
+    .single()
+  if (profile?.role !== 'admin') {
+    return NextResponse.json({ error: 'No autorizado' }, { status: 403 })
+  }
+
   const admin = createAdminClient()
 
   // 1. Cargar preguntas en paginas (Supabase limita ~1000 por query)
