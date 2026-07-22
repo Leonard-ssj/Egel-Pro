@@ -20,7 +20,7 @@ import { QuizControls } from './QuizControls'
 import { QuestionFeedbackChips } from './QuestionFeedbackChips'
 import { useQuizStore, type QuizAnswerState } from '@/modules/quiz/store/quiz-store'
 import { useQuizTimer } from '@/modules/quiz/hooks/useQuizTimer'
-import { useQuizAnswersRealtime } from '@/modules/quiz/hooks/useQuizAnswersRealtime'
+import { useQuizSync } from '@/modules/quiz/hooks/useQuizSync'
 import { submitAnswer, completeSession } from '@/modules/quiz/actions'
 import { enqueueAnswer, flushQueue, queueSize } from '@/modules/quiz/lib/offline-queue'
 import type { QuizQuestionForClient } from '@/modules/quiz/types'
@@ -88,8 +88,12 @@ export function QuizCard({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionId, questions.length, init])
 
-  // Sincronizacion en vivo entre dispositivos del mismo usuario.
-  useQuizAnswersRealtime(sessionId)
+  // Sincronizacion en vivo entre dispositivos del mismo usuario (respuestas + posicion).
+  const { sendPosition } = useQuizSync(sessionId)
+  // Emite la posicion actual del store tras navegar (goToIndex/next/prev ya se aplicaron).
+  const broadcastPosition = useCallback(() => {
+    sendPosition(useQuizStore.getState().currentIndex)
+  }, [sendPosition])
 
   // Track tiempo por pregunta — guardar segundos cuando cambia el currentIndex
   const enterTimeRef = useRef<number>(Date.now())
@@ -206,6 +210,7 @@ export function QuizCard({
     void submitInBackground(currentQuestion.id)
     setDirection(1)
     next()
+    broadcastPosition()
   }
 
   function handleToggleMark() {
@@ -218,17 +223,20 @@ export function QuizCard({
     if (currentQuestion) void submitInBackground(currentQuestion.id)
     setDirection(1)
     next()
+    broadcastPosition()
   }
 
   function handlePrev() {
     if (currentQuestion) void submitInBackground(currentQuestion.id)
     setDirection(-1)
     prev()
+    broadcastPosition()
   }
 
   function handleJumpTo(i: number) {
     setDirection(i > currentIndex ? 1 : -1)
     goToIndex(i)
+    broadcastPosition()
   }
 
   async function ensureSynced() {
