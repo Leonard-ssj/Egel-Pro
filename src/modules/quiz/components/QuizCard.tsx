@@ -18,8 +18,9 @@ import { QuestionDisplay } from './QuestionDisplay'
 import { OptionsList } from './OptionsList'
 import { QuizControls } from './QuizControls'
 import { QuestionFeedbackChips } from './QuestionFeedbackChips'
-import { useQuizStore } from '@/modules/quiz/store/quiz-store'
+import { useQuizStore, type QuizAnswerState } from '@/modules/quiz/store/quiz-store'
 import { useQuizTimer } from '@/modules/quiz/hooks/useQuizTimer'
+import { useQuizAnswersRealtime } from '@/modules/quiz/hooks/useQuizAnswersRealtime'
 import { submitAnswer, completeSession } from '@/modules/quiz/actions'
 import { enqueueAnswer, flushQueue, queueSize } from '@/modules/quiz/lib/offline-queue'
 import type { QuizQuestionForClient } from '@/modules/quiz/types'
@@ -44,6 +45,10 @@ type QuizCardProps = {
    *  - 'none': no se puede salir (simulacro, replica del examen real).
    */
   exitPolicy?: 'pause' | 'end-early' | 'none'
+  /** Avance ya guardado en la DB (para hidratar al abrir en otro dispositivo). */
+  initialAnswers?: Record<string, QuizAnswerState>
+  /** Indice de la ultima pregunta vista (para retomar donde iba). */
+  startIndex?: number
 }
 
 export function QuizCard({
@@ -52,6 +57,8 @@ export function QuizCard({
   timeLimitSeconds,
   startedAtMs,
   exitPolicy = 'end-early',
+  initialAnswers,
+  startIndex,
 }: QuizCardProps) {
   const router = useRouter()
   const [isFinishing, startFinishing] = useTransition()
@@ -73,10 +80,16 @@ export function QuizCard({
     (s) => Object.values(s.answers).filter((a) => a.isMarked).length,
   )
 
-  // Inicializar el store SOLO al montar / cambiar sessionId
+  // Inicializar el store al montar / cambiar sessionId, hidratando el avance
+  // guardado en la DB (para retomar en cualquier dispositivo).
   useEffect(() => {
-    init(sessionId, questions.length)
+    init(sessionId, questions.length, initialAnswers, startIndex)
+    // initialAnswers/startIndex son snapshots del server render; no re-inicializar por su identidad.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionId, questions.length, init])
+
+  // Sincronizacion en vivo entre dispositivos del mismo usuario.
+  useQuizAnswersRealtime(sessionId)
 
   // Track tiempo por pregunta — guardar segundos cuando cambia el currentIndex
   const enterTimeRef = useRef<number>(Date.now())

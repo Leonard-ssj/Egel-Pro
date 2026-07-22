@@ -4,6 +4,7 @@ import { QuizCard } from './QuizCard'
 import { useBeforeUnload } from '@/modules/quiz/hooks/useBeforeUnload'
 import { useSimulacro } from '@/modules/quiz/hooks/useSimulacro'
 import type { QuizQuestionForClient } from '@/modules/quiz/types'
+import type { QuizAnswerState } from '@/modules/quiz/store/quiz-store'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { AlertTriangle } from 'lucide-react'
 
@@ -15,6 +16,9 @@ type SimulacroSessionProps = {
   timeLimitSeconds: number
   /** Inicio real de la sesion (ms epoch) para que el cronometro no se reinicie. */
   startedAtMs?: number
+  /** Avance ya guardado (hidratacion cross-device). */
+  initialAnswers?: Record<string, QuizAnswerState>
+  startIndex?: number
 }
 
 /**
@@ -33,6 +37,8 @@ export function SimulacroSession({
   questions,
   timeLimitSeconds,
   startedAtMs,
+  initialAnswers,
+  startIndex,
 }: SimulacroSessionProps) {
   // Mantener metadata del simulacro en el hook (init del store + memo).
   useSimulacro({
@@ -64,6 +70,8 @@ export function SimulacroSession({
         timeLimitSeconds={timeLimitSeconds}
         startedAtMs={startedAtMs}
         exitPolicy="none"
+        initialAnswers={initialAnswers}
+        startIndex={startIndex}
       />
     </div>
   )
