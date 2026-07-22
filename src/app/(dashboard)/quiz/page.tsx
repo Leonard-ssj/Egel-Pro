@@ -4,7 +4,7 @@ import { AuroraBackground } from '@/components/ui/aurora-background'
 import { SparklesText } from '@/components/ui/sparkles-text'
 import { StartQuizForm } from '@/modules/quiz/components/StartQuizForm'
 import { ResumeQuizBanner } from '@/modules/quiz/components/ResumeQuizBanner'
-import { QuizPageLiveRefresh } from '@/modules/quiz/components/QuizPageLiveRefresh'
+import { RealtimeRefresh } from '@/components/shared/RealtimeRefresh'
 import { AreaCoverage } from '@/modules/quiz/components/AreaCoverage'
 import { OfflineDownloadCard } from '@/modules/quiz/components/OfflineDownloadCard'
 import { WeakAreasButton } from '@/modules/quiz/components/WeakAreasButton'
@@ -120,7 +120,7 @@ export default async function QuizPage() {
   return (
     <div className="relative">
       {/* Refresca /quiz en vivo cuando cambia el avance en otro dispositivo. */}
-      <QuizPageLiveRefresh />
+      <RealtimeRefresh channel="quiz" />
       <AuroraBackground variant="subtle" className="absolute inset-0 -z-10">
         <div className="h-full w-full" />
       </AuroraBackground>

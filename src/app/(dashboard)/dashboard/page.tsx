@@ -13,6 +13,7 @@ import { RecentActivityCard, type RecentSession } from '@/modules/dashboard/comp
 import { TimelineCard, type TimelineDay } from '@/modules/dashboard/components/TimelineCard'
 import { DailyChallengeCard } from '@/modules/dashboard/components/DailyChallengeCard'
 import { BentoGrid, BentoCard } from '@/components/ui/bento-grid'
+import { RealtimeRefresh } from '@/components/shared/RealtimeRefresh'
 import { DISCIPLINAR_AREAS } from '@/lib/constants/egel'
 
 function buildLast7Days(streaks: Array<{ date: string; xp_earned: number | null; questions_answered: number | null }>): TimelineDay[] {
@@ -145,6 +146,8 @@ export default async function DashboardPage() {
 
   return (
     <BentoGrid className="gap-4">
+      {/* Actualiza el dashboard en vivo cuando cambia el avance del usuario. */}
+      <RealtimeRefresh channel="dashboard" />
       {/* Hero — full row */}
       <BentoCard colSpan={6} padding="none" variant="flat" className="overflow-hidden border-glass-border/40 bg-transparent">
         <HeroSection

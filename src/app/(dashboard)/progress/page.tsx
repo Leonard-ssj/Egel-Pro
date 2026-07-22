@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = { title: 'Progreso' }
 import { PageHeader } from '@/components/layout/PageHeader'
+import { RealtimeRefresh } from '@/components/shared/RealtimeRefresh'
 import { AuroraBackground } from '@/components/ui/aurora-background'
 import { GlassCard } from '@/components/ui/glass-card'
 import { MagicButton } from '@/components/ui/magic-button'
@@ -195,6 +196,8 @@ export default async function ProgressPage() {
       variant="subtle"
       className="-mx-4 -mt-4 px-4 pt-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
     >
+      {/* Actualiza el progreso en vivo al terminar quizzes / cambiar el avance. */}
+      <RealtimeRefresh channel="progress" />
       <PageHeader
         title="Tu progreso"
         description="Analiticas detalladas de tu preparacion para el EGEL Plus"
