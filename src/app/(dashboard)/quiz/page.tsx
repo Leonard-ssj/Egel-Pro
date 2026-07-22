@@ -4,6 +4,7 @@ import { AuroraBackground } from '@/components/ui/aurora-background'
 import { SparklesText } from '@/components/ui/sparkles-text'
 import { StartQuizForm } from '@/modules/quiz/components/StartQuizForm'
 import { ResumeQuizBanner } from '@/modules/quiz/components/ResumeQuizBanner'
+import { QuizPageLiveRefresh } from '@/modules/quiz/components/QuizPageLiveRefresh'
 import { OfflineDownloadCard } from '@/modules/quiz/components/OfflineDownloadCard'
 import { WeakAreasButton } from '@/modules/quiz/components/WeakAreasButton'
 import {
@@ -100,6 +101,8 @@ export default async function QuizPage() {
   const seenPct = totalBank > 0 ? Math.round((seenCount / totalBank) * 100) : 0
   return (
     <div className="relative">
+      {/* Refresca /quiz en vivo cuando cambia el avance en otro dispositivo. */}
+      <QuizPageLiveRefresh />
       <AuroraBackground variant="subtle" className="absolute inset-0 -z-10">
         <div className="h-full w-full" />
       </AuroraBackground>
