@@ -7,6 +7,7 @@ import { SimulacroSession } from '@/modules/quiz/components/SimulacroSession'
 import { ROUTES } from '@/lib/constants/routes'
 import { EXAM_CONFIG } from '@/lib/constants/egel'
 import { QUESTION_CLIENT_COLS, attachStimuli } from '@/modules/quiz/lib/load-questions'
+import { getMyQuestionFeedback } from '@/modules/quiz/feedback-actions'
 import type { QuizQuestionForClient } from '@/modules/quiz/types'
 
 export const metadata: Metadata = { title: 'Simulacro EGEL' }
@@ -99,6 +100,7 @@ export default async function SimulacroGroupPage({
       loadSessionQuestions(supabase, state.session1.id),
       loadSessionAnswers(supabase, state.session1.id),
     ])
+    const initialFeedback = await getMyQuestionFeedback(questions.map((q) => q.id))
     return (
       <div className="mx-auto max-w-3xl">
         <SimulacroSession
@@ -116,6 +118,7 @@ export default async function SimulacroGroupPage({
           }
           initialAnswers={initialAnswers}
           startIndex={state.session1.last_question_index ?? 0}
+          initialFeedback={initialFeedback}
         />
       </div>
     )
@@ -134,6 +137,7 @@ export default async function SimulacroGroupPage({
       loadSessionQuestions(supabase, state.session2.id),
       loadSessionAnswers(supabase, state.session2.id),
     ])
+    const initialFeedback = await getMyQuestionFeedback(questions.map((q) => q.id))
     return (
       <div className="mx-auto max-w-3xl">
         <SimulacroSession
@@ -151,6 +155,7 @@ export default async function SimulacroGroupPage({
           }
           initialAnswers={initialAnswers}
           startIndex={state.session2.last_question_index ?? 0}
+          initialFeedback={initialFeedback}
         />
       </div>
     )

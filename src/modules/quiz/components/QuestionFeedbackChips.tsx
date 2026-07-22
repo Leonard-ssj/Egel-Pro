@@ -15,6 +15,12 @@ type Props = {
   questionId: string
   /** Razones que el usuario ya marco (para precargar el estado). */
   initialReasons?: string[]
+  /**
+   * Se llama con las razones actualizadas tras cada toggle. Permite que el padre
+   * (p. ej. QuizCard) conserve el estado aunque el componente se remonte al
+   * navegar entre preguntas, para que la marca no "desaparezca".
+   */
+  onChange?: (reasons: string[]) => void
 }
 
 /**
@@ -22,29 +28,28 @@ type Props = {
  * calidad). Toggle optimista: actualiza la UI al instante y revierte si la
  * Server Action falla. Cada marca alimenta el contador en BD (question_feedback).
  */
-export function QuestionFeedbackChips({ questionId, initialReasons = [] }: Props) {
+export function QuestionFeedbackChips({ questionId, initialReasons = [], onChange }: Props) {
   const [marked, setMarked] = useState<Set<string>>(() => new Set(initialReasons))
   const [pending, startTransition] = useTransition()
 
   function toggle(reason: QuestionFeedbackReason) {
     const wasMarked = marked.has(reason)
     // Optimista
-    setMarked((prev) => {
-      const next = new Set(prev)
-      if (wasMarked) next.delete(reason)
-      else next.add(reason)
-      return next
-    })
+    const optimistic = new Set(marked)
+    if (wasMarked) optimistic.delete(reason)
+    else optimistic.add(reason)
+    setMarked(optimistic)
+    onChange?.(Array.from(optimistic))
+
     startTransition(async () => {
       const res = await toggleQuestionFeedback({ questionId, reason })
       if (!res.success) {
         // Revertir
-        setMarked((prev) => {
-          const next = new Set(prev)
-          if (wasMarked) next.add(reason)
-          else next.delete(reason)
-          return next
-        })
+        const reverted = new Set(optimistic)
+        if (wasMarked) reverted.add(reason)
+        else reverted.delete(reason)
+        setMarked(reverted)
+        onChange?.(Array.from(reverted))
         toast.error(res.error)
       }
     })

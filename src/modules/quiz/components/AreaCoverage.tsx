@@ -1,5 +1,6 @@
 import { DISCIPLINAR_AREAS, TRANSVERSAL_AREAS } from '@/lib/constants/egel'
 import { cn } from '@/lib/utils/cn'
+import { PracticeAreaButton } from './PracticeAreaButton'
 
 type Counts = { disciplinar: Record<number, number>; transversal: Record<number, number> }
 
@@ -12,6 +13,8 @@ type AreaCoverageProps = {
 
 type Row = {
   key: string
+  section: 'disciplinar' | 'transversal'
+  area: number
   label: string
   short: string
   seen: number
@@ -38,6 +41,8 @@ export function AreaCoverage({ available, seen }: AreaCoverageProps) {
   const rows: Row[] = [
     ...DISCIPLINAR_AREAS.map((a) => ({
       key: `d${a.area}`,
+      section: 'disciplinar' as const,
+      area: a.area,
       label: a.name,
       short: `Área ${a.area}`,
       seen: seen.disciplinar[a.area] ?? 0,
@@ -46,6 +51,8 @@ export function AreaCoverage({ available, seen }: AreaCoverageProps) {
     })),
     ...TRANSVERSAL_AREAS.map((a) => ({
       key: `t${a.area}`,
+      section: 'transversal' as const,
+      area: a.area,
       label: a.name,
       short: 'Transversal',
       seen: seen.transversal[a.area] ?? 0,
@@ -97,14 +104,21 @@ export function AreaCoverage({ available, seen }: AreaCoverageProps) {
                   style={{ width: `${pct}%` }}
                 />
               </div>
-              <p className="text-xs text-muted-foreground">
-                <span className={cn('font-semibold', st.text)}>{r.seen.toLocaleString('es-MX')}</span>
-                {' '}de {r.total.toLocaleString('es-MX')} vistas
-                {' · '}
-                <span className="text-foreground/70">
-                  {(r.total - r.seen).toLocaleString('es-MX')} por recorrer
-                </span>
-              </p>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-xs text-muted-foreground">
+                  <span className={cn('font-semibold', st.text)}>{r.seen.toLocaleString('es-MX')}</span>
+                  {' '}de {r.total.toLocaleString('es-MX')} vistas
+                  {' · '}
+                  <span className="text-foreground/70">
+                    {(r.total - r.seen).toLocaleString('es-MX')} por recorrer
+                  </span>
+                </p>
+                <PracticeAreaButton
+                  section={r.section}
+                  area={r.area}
+                  remaining={r.total - r.seen}
+                />
+              </div>
             </div>
           )
         })}

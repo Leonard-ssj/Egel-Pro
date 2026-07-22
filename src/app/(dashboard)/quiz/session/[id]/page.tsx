@@ -6,6 +6,7 @@ import { AuroraBackground } from '@/components/ui/aurora-background'
 import { GlassCard } from '@/components/ui/glass-card'
 import { MagicButton } from '@/components/ui/magic-button'
 import { QuizCard } from '@/modules/quiz/components/QuizCard'
+import { getMyQuestionFeedback } from '@/modules/quiz/feedback-actions'
 import { QUESTION_CLIENT_COLS, attachStimuli } from '@/modules/quiz/lib/load-questions'
 import type { QuizQuestionForClient } from '@/modules/quiz/types'
 
@@ -125,6 +126,10 @@ export default async function QuizSessionPage({ params }: { params: Promise<Para
   }
   const startIndex = session.last_question_index ?? 0
 
+  // Feedback de calidad ya marcado por el user (para precargar los chips y que
+  // no "desaparezca" al navegar/recargar).
+  const initialFeedback = await getMyQuestionFeedback(questions.map((q) => q.id))
+
   // Politica de salida por modo: en practica se puede pausar y salir; en los
   // examenes cronometrados se puede terminar antes; el simulacro no usa esta ruta.
   const exitPolicy: 'pause' | 'end-early' | 'none' =
@@ -164,6 +169,7 @@ export default async function QuizSessionPage({ params }: { params: Promise<Para
           exitPolicy={exitPolicy}
           initialAnswers={initialAnswers}
           startIndex={startIndex}
+          initialFeedback={initialFeedback}
         />
       </div>
     </div>

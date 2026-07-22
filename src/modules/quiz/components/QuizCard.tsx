@@ -49,6 +49,8 @@ type QuizCardProps = {
   initialAnswers?: Record<string, QuizAnswerState>
   /** Indice de la ultima pregunta vista (para retomar donde iba). */
   startIndex?: number
+  /** Feedback de calidad ya marcado por el user, por questionId (precarga chips). */
+  initialFeedback?: Record<string, string[]>
 }
 
 export function QuizCard({
@@ -59,7 +61,14 @@ export function QuizCard({
   exitPolicy = 'end-early',
   initialAnswers,
   startIndex,
+  initialFeedback,
 }: QuizCardProps) {
+  // Feedback de calidad por pregunta. Se mantiene aqui (no en el chip) para que
+  // sobreviva a la navegacion entre preguntas: el chip se remonta con cada
+  // pregunta y perderia su estado local.
+  const [feedbackByQ, setFeedbackByQ] = useState<Record<string, string[]>>(
+    () => initialFeedback ?? {},
+  )
   const router = useRouter()
   const [isFinishing, startFinishing] = useTransition()
   const [direction, setDirection] = useState(1)
@@ -332,7 +341,13 @@ export function QuizCard({
               {/* Feedback de calidad de la pregunta (distinto de "Marcar"/bookmark).
                   El usuario reporta si la pregunta es floja: muy facil, respuestas
                   obvias, etc. Alimenta el contador en BD. */}
-              <QuestionFeedbackChips questionId={currentQuestion.id} />
+              <QuestionFeedbackChips
+                questionId={currentQuestion.id}
+                initialReasons={feedbackByQ[currentQuestion.id] ?? []}
+                onChange={(reasons) =>
+                  setFeedbackByQ((prev) => ({ ...prev, [currentQuestion.id]: reasons }))
+                }
+              />
             </motion.div>
           </AnimatePresence>
         </GlassCard>
