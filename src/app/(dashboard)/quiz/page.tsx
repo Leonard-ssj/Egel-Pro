@@ -5,6 +5,7 @@ import { SparklesText } from '@/components/ui/sparkles-text'
 import { StartQuizForm } from '@/modules/quiz/components/StartQuizForm'
 import { ResumeQuizBanner } from '@/modules/quiz/components/ResumeQuizBanner'
 import { QuizPageLiveRefresh } from '@/modules/quiz/components/QuizPageLiveRefresh'
+import { AreaCoverage } from '@/modules/quiz/components/AreaCoverage'
 import { OfflineDownloadCard } from '@/modules/quiz/components/OfflineDownloadCard'
 import { WeakAreasButton } from '@/modules/quiz/components/WeakAreasButton'
 import {
@@ -49,36 +50,51 @@ async function getAvailableCounts(): Promise<AvailableCounts> {
   return { disciplinar, transversal }
 }
 
+type SeenBreakdown = {
+  total: number
+  disciplinar: Record<number, number>
+  transversal: Record<number, number>
+}
+
 /**
- * Cuenta cuantas preguntas distintas ha visto el user (cualquier sesion).
- * Se usa para el banner "Has visto X de Y" en /quiz.
+ * Cuenta las preguntas DISTINTAS que el user ha visto, total y POR AREA (join a
+ * questions para saber section/area). Alimenta el banner global "Has visto X de Y"
+ * y los KPIs de cobertura por area en /quiz.
  */
-async function getUserSeenCount(userId: string): Promise<number> {
+async function getUserSeen(userId: string): Promise<SeenBreakdown> {
   const supabase = await createClient()
-  // count(DISTINCT question_id) via PostgREST: traer todos los question_id y dedup en cliente
-  // Optimizacion: solo necesitamos contar, pero PostgREST no soporta distinct count direct.
-  // Hacemos paginas y dedup local. Para usuarios con <10K respuestas alcanza una pagina.
+  const disciplinar: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0 }
+  const transversal: Record<number, number> = { 1: 0, 2: 0 }
+
+  const { data: sessions } = await supabase
+    .from('quiz_sessions')
+    .select('id')
+    .eq('user_id', userId)
+  const sessionIds = (sessions ?? []).map((s) => s.id)
+  if (sessionIds.length === 0) return { total: 0, disciplinar, transversal }
+
   const seen = new Set<string>()
   let offset = 0
   const PAGE = 1000
   while (true) {
-    const { data: sessions } = await supabase
-      .from('quiz_sessions')
-      .select('id')
-      .eq('user_id', userId)
-    const sessionIds = (sessions ?? []).map((s) => s.id)
-    if (sessionIds.length === 0) break
     const { data, error } = await supabase
       .from('quiz_answers')
-      .select('question_id')
+      .select('question_id, questions ( section, area )')
       .in('session_id', sessionIds)
       .range(offset, offset + PAGE - 1)
     if (error || !data || data.length === 0) break
-    for (const r of data) if (r.question_id) seen.add(r.question_id)
+    for (const r of data) {
+      if (!r.question_id || seen.has(r.question_id)) continue
+      seen.add(r.question_id)
+      const q = r.questions as unknown as { section: string; area: number } | null
+      if (!q) continue
+      if (q.section === 'disciplinar' && disciplinar[q.area] !== undefined) disciplinar[q.area]++
+      else if (q.section === 'transversal' && transversal[q.area] !== undefined) transversal[q.area]++
+    }
     if (data.length < PAGE) break
     offset += PAGE
   }
-  return seen.size
+  return { total: seen.size, disciplinar, transversal }
 }
 
 export default async function QuizPage() {
@@ -88,11 +104,13 @@ export default async function QuizPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  const [availableCounts, activeRes, seenCount] = await Promise.all([
+  const emptySeen: SeenBreakdown = { total: 0, disciplinar: { 1: 0, 2: 0, 3: 0, 4: 0 }, transversal: { 1: 0, 2: 0 } }
+  const [availableCounts, activeRes, seen] = await Promise.all([
     getAvailableCounts(),
     getActiveQuizSession(),
-    user ? getUserSeenCount(user.id) : Promise.resolve(0),
+    user ? getUserSeen(user.id) : Promise.resolve(emptySeen),
   ])
+  const seenCount = seen.total
   const activeSession = activeRes.success ? activeRes.data : null
   const totalDisciplinar = Object.values(availableCounts.disciplinar).reduce((s, n) => s + n, 0)
   const totalTransversal = Object.values(availableCounts.transversal).reduce((s, n) => s + n, 0)
@@ -143,6 +161,11 @@ export default async function QuizPage() {
             />
           </div>
         </div>
+      ) : null}
+
+      {/* KPIs de cobertura por area (contestadas / total del banco / %) */}
+      {user && totalBank > 0 ? (
+        <AreaCoverage available={availableCounts} seen={seen} />
       ) : null}
 
       {/* Atajo: practica enfocada en areas debiles */}
