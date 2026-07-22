@@ -126,7 +126,12 @@ function ReviewRow({ item, index }: { item: ReviewItem; index: number }) {
             </span>
           </div>
           <p className="text-sm font-medium leading-snug">
-            {item.questionText}
+            {/* Preview de una linea: sin bloques de codigo (se condensan) ni backticks. */}
+            {item.questionText
+              .replace(/```[\s\S]*?```/g, ' «código» ')
+              .replace(/`([^`]+)`/g, '$1')
+              .replace(/\s+/g, ' ')
+              .trim()}
           </p>
         </div>
         <motion.span
