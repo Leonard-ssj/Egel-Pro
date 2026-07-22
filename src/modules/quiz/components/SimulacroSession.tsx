@@ -19,6 +19,8 @@ type SimulacroSessionProps = {
   /** Avance ya guardado (hidratacion cross-device). */
   initialAnswers?: Record<string, QuizAnswerState>
   startIndex?: number
+  /** Feedback de calidad ya marcado por el user (precarga chips). */
+  initialFeedback?: Record<string, string[]>
 }
 
 /**
@@ -39,6 +41,7 @@ export function SimulacroSession({
   startedAtMs,
   initialAnswers,
   startIndex,
+  initialFeedback,
 }: SimulacroSessionProps) {
   // Mantener metadata del simulacro en el hook (init del store + memo).
   useSimulacro({
@@ -72,6 +75,7 @@ export function SimulacroSession({
         exitPolicy="none"
         initialAnswers={initialAnswers}
         startIndex={startIndex}
+        initialFeedback={initialFeedback}
       />
     </div>
   )

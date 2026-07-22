@@ -19,6 +19,7 @@ type AnswerRow = {
   question_id: string
   user_answer: string | null
   is_correct: boolean | null
+  is_marked: boolean | null
   order_in_quiz: number
   questions: {
     id: string
@@ -67,6 +68,7 @@ export default async function ResultsPage({ params }: { params: Promise<Params> 
       question_id,
       user_answer,
       is_correct,
+      is_marked,
       order_in_quiz,
       questions ( id, question_text, area, area_name, subarea, subarea_name, option_a, option_b, option_c, option_a_image, option_b_image, option_c_image, option_a_diagram, option_b_diagram, option_c_diagram, correct_answer, explanation )
     `)
@@ -103,6 +105,7 @@ export default async function ResultsPage({ params }: { params: Promise<Params> 
       correctAnswer: a.questions.correct_answer as CorrectAnswer,
       userAnswer: (a.user_answer as CorrectAnswer | null) ?? null,
       isCorrect: a.is_correct,
+      isMarked: Boolean(a.is_marked),
       explanation: a.questions.explanation,
       feedbackReasons: feedbackMap[a.question_id] ?? [],
     }))

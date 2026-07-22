@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Check, X, MinusCircle, ChevronDown } from 'lucide-react'
+import { Check, X, MinusCircle, ChevronDown, Flag } from 'lucide-react'
 import { GlassCard } from '@/components/ui/glass-card'
 import { cn } from '@/lib/utils/cn'
 import { QuestionFeedbackChips } from './QuestionFeedbackChips'
@@ -27,6 +27,8 @@ export type ReviewItem = {
   correctAnswer: 'a' | 'b' | 'c'
   userAnswer: 'a' | 'b' | 'c' | null
   isCorrect: boolean | null
+  /** Si el usuario marco (bandera) esta pregunta durante el quiz. */
+  isMarked?: boolean
   explanation: string | null
   /** Razones de feedback de calidad que el usuario ya marco para esta pregunta. */
   feedbackReasons?: string[]
@@ -36,16 +38,80 @@ type AnswerReviewProps = {
   items: ReviewItem[]
 }
 
+type Filter = 'all' | 'correct' | 'incorrect' | 'skipped' | 'marked'
+
+function matchesFilter(item: ReviewItem, f: Filter): boolean {
+  switch (f) {
+    case 'correct':
+      return item.userAnswer !== null && item.isCorrect === true
+    case 'incorrect':
+      return item.userAnswer !== null && item.isCorrect === false
+    case 'skipped':
+      return item.userAnswer === null
+    case 'marked':
+      return Boolean(item.isMarked)
+    default:
+      return true
+  }
+}
+
 export function AnswerReview({ items }: AnswerReviewProps) {
+  const [filter, setFilter] = useState<Filter>('all')
   if (items.length === 0) return null
+
+  const counts = {
+    all: items.length,
+    correct: items.filter((i) => matchesFilter(i, 'correct')).length,
+    incorrect: items.filter((i) => matchesFilter(i, 'incorrect')).length,
+    skipped: items.filter((i) => matchesFilter(i, 'skipped')).length,
+    marked: items.filter((i) => matchesFilter(i, 'marked')).length,
+  }
+
+  const TABS: Array<{ key: Filter; label: string; active: string }> = [
+    { key: 'all', label: 'Todas', active: 'bg-bg-raised text-foreground' },
+    { key: 'correct', label: 'Correctas', active: 'bg-success/20 text-success' },
+    { key: 'incorrect', label: 'Incorrectas', active: 'bg-danger/20 text-danger' },
+    { key: 'skipped', label: 'Saltadas', active: 'bg-bg-raised text-muted-foreground' },
+    { key: 'marked', label: 'Marcadas', active: 'bg-warning/20 text-warning' },
+  ]
+
+  const filtered = items
+    .map((item, i) => ({ item, index: i + 1 }))
+    .filter(({ item }) => matchesFilter(item, filter))
+
   return (
     <GlassCard variant="elevated" padding="lg">
-      <h3 className="mb-4 text-lg font-semibold">Revisar respuestas</h3>
-      <div className="space-y-3">
-        {items.map((item, i) => (
-          <ReviewRow key={item.questionId} item={item} index={i + 1} />
-        ))}
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <h3 className="text-lg font-semibold">Revisar respuestas</h3>
+        <div className="flex flex-wrap gap-1 rounded-xl border border-glass-border/40 bg-glass-bg/40 p-1 backdrop-blur-md">
+          {TABS.map((t) => (
+            <button
+              key={t.key}
+              type="button"
+              onClick={() => setFilter(t.key)}
+              className={cn(
+                'rounded-lg px-2.5 py-1 text-xs font-semibold transition-colors',
+                filter === t.key ? t.active : 'text-muted-foreground hover:text-foreground',
+              )}
+              data-testid={`review-filter-${t.key}`}
+            >
+              {t.label}
+              <span className="ml-1 tabular-nums opacity-70">{counts[t.key]}</span>
+            </button>
+          ))}
+        </div>
       </div>
+      {filtered.length === 0 ? (
+        <p className="py-6 text-center text-sm text-muted-foreground">
+          No hay preguntas en este filtro.
+        </p>
+      ) : (
+        <div className="space-y-3">
+          {filtered.map(({ item, index }) => (
+            <ReviewRow key={item.questionId} item={item} index={index} />
+          ))}
+        </div>
+      )}
     </GlassCard>
   )
 }
@@ -124,6 +190,12 @@ function ReviewRow({ item, index }: { item: ReviewItem; index: number }) {
             <span className={cn('font-semibold', meta.labelClass)}>
               {meta.label}
             </span>
+            {item.isMarked ? (
+              <span className="inline-flex items-center gap-1 rounded-full border border-warning/40 bg-warning/15 px-2 py-0.5 text-[10px] font-semibold text-warning">
+                <Flag className="h-3 w-3 fill-warning" />
+                Marcada
+              </span>
+            ) : null}
           </div>
           <p className="text-sm font-medium leading-snug">
             {/* Preview de una linea: sin bloques de codigo (se condensan) ni backticks. */}

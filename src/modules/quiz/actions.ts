@@ -1193,3 +1193,28 @@ export async function startWeakAreasQuiz(
     onlyUnseen: false,
   })
 }
+
+/**
+ * Inicia una practica SOLO con las preguntas que faltan (no vistas) de un area.
+ * La usa el boton "practicar faltantes" en las tarjetas de cobertura por area.
+ * Reutiliza startQuizSession con onlyUnseen=true.
+ */
+export async function startAreaUnseenQuiz(input: {
+  section: 'disciplinar' | 'transversal'
+  area: number
+  totalQuestions?: number
+}): Promise<ActionResult<StartQuizResult>> {
+  const section = input.section === 'transversal' ? 'transversal' : 'disciplinar'
+  const area = Math.min(Math.max(Math.trunc(input.area), 1), 4)
+  const total = Math.min(Math.max(input.totalQuestions ?? 25, 5), 50)
+
+  return startQuizSession({
+    mode: 'practice',
+    section,
+    areas: [area],
+    subareas: [],
+    totalQuestions: total,
+    timeLimitSeconds: null,
+    onlyUnseen: true,
+  })
+}
