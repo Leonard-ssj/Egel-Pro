@@ -20,7 +20,18 @@ type QuizStoreState = {
   startedAt: number | null
 
   // Acciones
-  init: (sessionId: string, totalQuestions: number) => void
+  init: (
+    sessionId: string,
+    totalQuestions: number,
+    initialAnswers?: Record<string, QuizAnswerState>,
+    startIndex?: number,
+  ) => void
+  /** Aplica un cambio de respuesta recibido por Realtime desde otro dispositivo. */
+  applyRemoteAnswer: (
+    questionId: string,
+    userAnswer: CorrectAnswer | null,
+    isMarked: boolean,
+  ) => void
   reset: () => void
   goToIndex: (index: number) => void
   next: () => void
@@ -48,17 +59,47 @@ export const useQuizStore = create<QuizStoreState>()(
     (set, get) => ({
       ...INITIAL,
 
-      init: (sessionId, totalQuestions) => {
-        // Si ya hay una sesion persistida con el mismo sessionId, NO sobreescribir
-        // (asi sobrevive refresh / offline / cierre de tab).
+      init: (sessionId, totalQuestions, initialAnswers = {}, startIndex = 0) => {
         const existing = get()
-        if (existing.sessionId === sessionId && existing.startedAt) return
+        const sameSession = existing.sessionId === sessionId && Boolean(existing.startedAt)
+        if (sameSession) {
+          // Misma sesion ya en curso en este dispositivo: conservamos el avance
+          // local (mas fresco) y solo RELLENAMOS lo que falte con el del servidor
+          // (respuestas hechas en otro dispositivo). Asi no se pierde progreso.
+          set({
+            totalQuestions,
+            answers: { ...initialAnswers, ...existing.answers },
+          })
+          return
+        }
+        // Sesion nueva en este dispositivo: hidratar desde el servidor.
         set({
           sessionId,
           totalQuestions,
-          currentIndex: 0,
-          answers: {},
+          currentIndex: Math.min(Math.max(startIndex, 0), Math.max(totalQuestions - 1, 0)),
+          answers: initialAnswers,
           startedAt: Date.now(),
+        })
+      },
+
+      applyRemoteAnswer: (questionId, userAnswer, isMarked) => {
+        set((state) => {
+          const prev = state.answers[questionId]
+          // Sin cambios reales -> no re-render.
+          if (prev && prev.userAnswer === userAnswer && prev.isMarked === isMarked) {
+            return state
+          }
+          return {
+            answers: {
+              ...state.answers,
+              [questionId]: {
+                questionId,
+                userAnswer,
+                isMarked,
+                timeSpentSeconds: prev?.timeSpentSeconds ?? 0,
+              },
+            },
+          }
         })
       },
 

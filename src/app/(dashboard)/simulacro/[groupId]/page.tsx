@@ -43,6 +43,33 @@ async function loadSessionQuestions(
   return attachStimuli(supabase, ordered)
 }
 
+type InitialAnswers = Record<
+  string,
+  { questionId: string; userAnswer: 'a' | 'b' | 'c' | null; isMarked: boolean; timeSpentSeconds: number }
+>
+
+/** Carga el avance guardado de una sesion (para hidratar cross-device). */
+async function loadSessionAnswers(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  sessionId: string,
+): Promise<InitialAnswers> {
+  const { data } = await supabase
+    .from('quiz_answers')
+    .select('question_id, user_answer, is_marked, time_spent_seconds')
+    .eq('session_id', sessionId)
+  const map: InitialAnswers = {}
+  for (const a of data ?? []) {
+    if (!a.question_id) continue
+    map[a.question_id] = {
+      questionId: a.question_id,
+      userAnswer: (a.user_answer ?? null) as 'a' | 'b' | 'c' | null,
+      isMarked: Boolean(a.is_marked),
+      timeSpentSeconds: a.time_spent_seconds ?? 0,
+    }
+  }
+  return map
+}
+
 export default async function SimulacroGroupPage({
   params,
 }: {
@@ -68,7 +95,10 @@ export default async function SimulacroGroupPage({
   // Estado: sesion 1 in_progress -> renderizar QuizCard de sesion 1
   if (state.nextAction === 'continue1') {
     if (!state.session1) notFound()
-    const questions = await loadSessionQuestions(supabase, state.session1.id)
+    const [questions, initialAnswers] = await Promise.all([
+      loadSessionQuestions(supabase, state.session1.id),
+      loadSessionAnswers(supabase, state.session1.id),
+    ])
     return (
       <div className="mx-auto max-w-3xl">
         <SimulacroSession
@@ -84,6 +114,8 @@ export default async function SimulacroGroupPage({
               ? new Date(state.session1.started_at).getTime()
               : undefined
           }
+          initialAnswers={initialAnswers}
+          startIndex={state.session1.last_question_index ?? 0}
         />
       </div>
     )
@@ -98,7 +130,10 @@ export default async function SimulacroGroupPage({
   // Estado: sesion 2 in_progress -> renderizar QuizCard de sesion 2
   if (state.nextAction === 'continue2') {
     if (!state.session2) notFound()
-    const questions = await loadSessionQuestions(supabase, state.session2.id)
+    const [questions, initialAnswers] = await Promise.all([
+      loadSessionQuestions(supabase, state.session2.id),
+      loadSessionAnswers(supabase, state.session2.id),
+    ])
     return (
       <div className="mx-auto max-w-3xl">
         <SimulacroSession
@@ -114,6 +149,8 @@ export default async function SimulacroGroupPage({
               ? new Date(state.session2.started_at).getTime()
               : undefined
           }
+          initialAnswers={initialAnswers}
+          startIndex={state.session2.last_question_index ?? 0}
         />
       </div>
     )

@@ -104,6 +104,27 @@ export default async function QuizSessionPage({ params }: { params: Promise<Para
   // Adjuntar el texto base a las preguntas de multirreactivo (comprension lectora).
   questions = await attachStimuli(supabase, questions)
 
+  // Hidratar el avance ya guardado en la DB, para retomar el quiz en CUALQUIER
+  // dispositivo (no solo en el que se empezo). Realtime lo mantiene en vivo.
+  const { data: savedAnswers } = await supabase
+    .from('quiz_answers')
+    .select('question_id, user_answer, is_marked, time_spent_seconds')
+    .eq('session_id', id)
+  const initialAnswers: Record<
+    string,
+    { questionId: string; userAnswer: 'a' | 'b' | 'c' | null; isMarked: boolean; timeSpentSeconds: number }
+  > = {}
+  for (const a of savedAnswers ?? []) {
+    if (!a.question_id) continue
+    initialAnswers[a.question_id] = {
+      questionId: a.question_id,
+      userAnswer: (a.user_answer ?? null) as 'a' | 'b' | 'c' | null,
+      isMarked: Boolean(a.is_marked),
+      timeSpentSeconds: a.time_spent_seconds ?? 0,
+    }
+  }
+  const startIndex = session.last_question_index ?? 0
+
   // Politica de salida por modo: en practica se puede pausar y salir; en los
   // examenes cronometrados se puede terminar antes; el simulacro no usa esta ruta.
   const exitPolicy: 'pause' | 'end-early' | 'none' =
@@ -141,6 +162,8 @@ export default async function QuizSessionPage({ params }: { params: Promise<Para
           timeLimitSeconds={session.time_limit_seconds}
           startedAtMs={startedAtMs}
           exitPolicy={exitPolicy}
+          initialAnswers={initialAnswers}
+          startIndex={startIndex}
         />
       </div>
     </div>
