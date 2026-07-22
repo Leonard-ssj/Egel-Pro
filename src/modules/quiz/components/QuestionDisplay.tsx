@@ -4,6 +4,7 @@ import { BookOpen } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils/cn'
 import { MermaidDiagram } from '@/components/ui/MermaidDiagram'
+import { QuestionRichText } from './QuestionRichText'
 import type { QuizQuestionForClient } from '@/modules/quiz/types'
 
 type QuestionDisplayProps = {
@@ -92,14 +93,14 @@ export function QuestionDisplay({ question }: QuestionDisplayProps) {
           <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             Caso
           </span>
-          <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/90 sm:text-base">
-            {caso}
-          </p>
+          <QuestionRichText text={caso} proseSize="sm" className="text-foreground/90" />
         </div>
       ) : null}
-      <h2 className="text-base font-medium leading-relaxed sm:text-lg md:text-xl lg:text-2xl">
-        {pregunta}
-      </h2>
+      {/* Enunciado: renderiza codigo como bloque tipo editor y diagramas mermaid. */}
+      <QuestionRichText
+        text={pregunta}
+        className="text-base font-medium leading-relaxed sm:text-lg [&_p]:text-base sm:[&_p]:text-lg md:[&_p]:text-xl"
+      />
       {question.diagram ? <MermaidDiagram chart={question.diagram} /> : null}
       {question.image_url ? (
         <div className="overflow-hidden rounded-lg border border-bg-border/40 bg-bg-raised/40">
