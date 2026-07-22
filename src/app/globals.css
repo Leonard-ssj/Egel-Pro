@@ -282,6 +282,50 @@
   }
 }
 
+/* -------------------------------------------------------------------------
+   Prose (markdown) tematizado con NUESTROS tokens en vez de prose-invert.
+   Como el color se maneja por variables que cambian con .light, esto hace que
+   el texto de guias/preguntas se lea bien tanto en modo oscuro como claro.
+   ------------------------------------------------------------------------- */
+.prose-egel {
+  --tw-prose-body: hsl(var(--foreground) / 0.92);
+  --tw-prose-headings: hsl(var(--foreground));
+  --tw-prose-lead: hsl(var(--muted-foreground));
+  --tw-prose-links: hsl(var(--brand-400));
+  --tw-prose-bold: hsl(var(--foreground));
+  --tw-prose-counters: hsl(var(--muted-foreground));
+  --tw-prose-bullets: hsl(var(--muted-foreground));
+  --tw-prose-hr: hsl(var(--bg-border));
+  --tw-prose-quotes: hsl(var(--foreground));
+  --tw-prose-quote-borders: hsl(var(--aurora-2));
+  --tw-prose-captions: hsl(var(--muted-foreground));
+  --tw-prose-code: hsl(var(--foreground));
+  --tw-prose-pre-code: #e6edf3;
+  --tw-prose-pre-bg: #0d1117;
+  --tw-prose-th-borders: hsl(var(--bg-border));
+  --tw-prose-td-borders: hsl(var(--bg-border));
+}
+
+/* -------------------------------------------------------------------------
+   Resaltado de sintaxis (highlight.js) — paleta estilo VS Code Dark+.
+   Los bloques de codigo tienen fondo oscuro fijo en ambos temas, asi que la
+   paleta oscura funciona siempre.
+   ------------------------------------------------------------------------- */
+.hljs { color: #d4d4d4; background: transparent; }
+.hljs-comment, .hljs-quote { color: #6a9955; font-style: italic; }
+.hljs-keyword, .hljs-selector-tag, .hljs-built_in, .hljs-literal { color: #569cd6; }
+.hljs-type, .hljs-class .hljs-title, .hljs-title.class_ { color: #4ec9b0; }
+.hljs-string, .hljs-attr, .hljs-regexp, .hljs-addition { color: #ce9178; }
+.hljs-number, .hljs-boolean { color: #b5cea8; }
+.hljs-title, .hljs-title.function_, .hljs-section { color: #dcdcaa; }
+.hljs-variable, .hljs-template-variable, .hljs-params, .hljs-attribute { color: #9cdcfe; }
+.hljs-meta, .hljs-meta .hljs-keyword { color: #dcdcaa; } /* anotaciones tipo @Test */
+.hljs-tag, .hljs-name { color: #569cd6; }
+.hljs-symbol, .hljs-bullet, .hljs-operator, .hljs-punctuation { color: #d4d4d4; }
+.hljs-deletion { color: #f48771; }
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: 700; }
+
 /* Respeta la preferencia de accesibilidad "reducir movimiento". */
 @media (prefers-reduced-motion: reduce) {
   *,

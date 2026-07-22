@@ -73,7 +73,7 @@ function renderBody(section: Section, concepts: Concept[], guideId: string, guid
     case 'example':
     case 'case_study':
       return section.body_md ? (
-        <article className="prose prose-invert max-w-none prose-sm break-words prose-headings:font-semibold prose-h3:text-base prose-h4:text-sm prose-p:leading-relaxed prose-strong:text-foreground prose-blockquote:border-l-aurora-2 prose-code:rounded prose-code:bg-bg-raised/60 prose-code:px-1 prose-pre:rounded-xl prose-pre:border prose-pre:border-glass-border/40 prose-pre:bg-bg-raised/40 sm:prose-base [&_pre]:overflow-x-auto [&_table]:block [&_table]:overflow-x-auto">
+        <article className="prose prose-egel max-w-none prose-sm break-words prose-headings:font-semibold prose-h3:text-base prose-h4:text-sm prose-p:leading-relaxed prose-strong:text-foreground prose-blockquote:border-l-aurora-2 prose-code:rounded prose-code:bg-bg-raised/60 prose-code:px-1 prose-pre:rounded-xl prose-pre:border prose-pre:border-glass-border/40 prose-pre:bg-bg-raised/40 sm:prose-base [&_pre]:overflow-x-auto [&_table]:block [&_table]:overflow-x-auto">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{section.body_md}</ReactMarkdown>
         </article>
       ) : null

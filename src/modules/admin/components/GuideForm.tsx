@@ -346,7 +346,7 @@ export function GuideForm({ initialData }: GuideFormProps) {
                   Vista previa
                 </p>
                 {contentValue ? (
-                  <div className="prose prose-invert max-w-none prose-headings:font-semibold">
+                  <div className="prose prose-egel max-w-none prose-headings:font-semibold">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{contentValue}</ReactMarkdown>
                   </div>
                 ) : (

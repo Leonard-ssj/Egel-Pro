@@ -3,6 +3,7 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { MermaidDiagram } from '@/components/ui/MermaidDiagram'
+import { highlightCode } from '@/lib/hljs'
 import { cn } from '@/lib/utils/cn'
 
 // Detecta bloques de codigo cercados ```lang ... ``` dentro del texto de la
@@ -67,8 +68,8 @@ export function QuestionRichText({
           <div
             key={i}
             className={cn(
-              'prose prose-invert max-w-none break-words',
-              'prose-p:leading-relaxed prose-strong:text-foreground',
+              'prose prose-egel max-w-none break-words',
+              'prose-p:leading-relaxed',
               'prose-code:rounded prose-code:bg-bg-raised/70 prose-code:px-1 prose-code:py-0.5 prose-code:font-mono prose-code:text-aurora-2 prose-code:before:content-none prose-code:after:content-none',
               proseSize === 'base' ? 'prose-sm sm:prose-base' : 'prose-sm',
             )}
@@ -96,7 +97,11 @@ function CodeBlock({ code, lang }: { code: string; lang?: string }) {
         ) : null}
       </div>
       <pre className="overflow-x-auto p-4 text-[13px] leading-relaxed sm:text-sm">
-        <code className="font-mono text-slate-100">{code}</code>
+        {/* Resaltado de sintaxis (hljs escapa el codigo -> seguro). */}
+        <code
+          className="hljs bg-transparent font-mono"
+          dangerouslySetInnerHTML={{ __html: highlightCode(code, lang) }}
+        />
       </pre>
     </div>
   )
