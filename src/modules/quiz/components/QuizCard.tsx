@@ -363,9 +363,9 @@ export function QuizCard({
           onToggleMark={handleToggleMark}
           onFinish={handleFinish}
           onEndEarly={
-            exitPolicy === 'end-early' && answeredCount > 0
-              ? handleEndEarly
-              : undefined
+            // Terminar ahora: en cualquier modo con salida (practica y examenes),
+            // no en el simulacro. Solo si ya hay al menos una respuesta.
+            exitPolicy !== 'none' && answeredCount > 0 ? handleEndEarly : undefined
           }
           onPause={exitPolicy === 'pause' ? handlePause : undefined}
           answeredCount={answeredCount}
