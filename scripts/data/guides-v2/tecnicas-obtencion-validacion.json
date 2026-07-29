@@ -84,6 +84,21 @@
       "concept": "Estudio de viabilidad (factibilidad)",
       "definition_md": "Analisis temprano que determina si vale la pena construir el sistema. Dimensiones: **tecnica** (existe la tecnologia y el know-how), **economica** (costo-beneficio, ROI), **operativa** (la organizacion y los usuarios lo adoptaran), **legal** (cumple normas y regulaciones) y **de calendario/temporal** (se puede entregar a tiempo). Su resultado alimenta la decision de continuar el proyecto.",
       "importance": "alta"
+    },
+    {
+      "concept": "Observacion, encuestas, cuestionarios y workshops",
+      "definition_md": "Observacion (shadowing): presenciar el proceso real sin interrumpir, ideal para capturar conocimiento tacito dificil de verbalizar. Encuestas/cuestionarios: escalables para volumenes grandes de usuarios dispersos, con analisis estadistico cuantitativo. Workshops: sesiones de trabajo colaborativas (relacionadas con JAD) para converger en decisiones de grupo.",
+      "importance": "media"
+    },
+    {
+      "concept": "Lluvia de ideas (brainstorming) y licitaciones",
+      "definition_md": "Lluvia de ideas: generacion libre y creativa de propuestas sin criticar durante la sesion, para maximizar cantidad antes de filtrar despues. Licitacion: proceso formal de adquisicion (comun en gobierno) donde se publican requerimientos para que multiples proveedores compitan con propuestas tecnicas y economicas.",
+      "importance": "media"
+    },
+    {
+      "concept": "T-Shirt Sizing, Buy a Feature, priorizacion por cuadrante y Story Mapping",
+      "definition_md": "T-Shirt Sizing: estima esfuerzo relativo con categorias simples (S/M/L/XL) sin calcular horas. Buy a Feature: presupuesto ficticio para que usuarios 'compren' lo que mas valoran, revelando preferencias reales. Priorizacion por cuadrante: grafica valor vs esfuerzo en una matriz de 4 cuadrantes. Story Mapping: organiza actividades del usuario en una linea de tiempo horizontal para ubicar historias por prioridad.",
+      "importance": "media"
     }
   ],
   "sections": [

@@ -134,6 +134,21 @@
       "concept": "Patrones estructurales (GoF)",
       "definition_md": "Patrones que componen clases y objetos en estructuras mayores: **Adapter, Bridge, Composite, Decorator, Facade, Flyweight y Proxy**. Decorator anade responsabilidades en tiempo de ejecucion sin herencia.",
       "importance": "alta"
+    },
+    {
+      "concept": "Prototype (GoF)",
+      "definition_md": "Patron creacional que crea nuevos objetos clonando una instancia existente (prototipo) en lugar de instanciar la clase desde cero, util cuando crear un objeto es costoso o se necesitan variantes de un objeto base.",
+      "importance": "media"
+    },
+    {
+      "concept": "DAO, DTO y VO",
+      "definition_md": "DAO (Data Access Object): encapsula el acceso a datos (SQL, ORM), aislando la logica de negocio del mecanismo de persistencia. DTO (Data Transfer Object): objeto simple sin logica, usado para transportar datos entre capas o servicios. VO (Value Object): objeto inmutable identificado por su valor, no por su identidad (ej. un rango de fechas o un monto con moneda).",
+      "importance": "media"
+    },
+    {
+      "concept": "Tipos de acoplamiento (normal, de control, externo, de contenido)",
+      "definition_md": "Normal (de datos): los modulos solo comparten parametros simples via su interfaz, el mas deseable. De control: un modulo pasa una bandera que controla el flujo interno de otro. Externo: dependencia de un formato/protocolo externo compartido. De contenido: un modulo accede o modifica directamente el estado interno de otro sin pasar por su interfaz, el mas fuerte e indeseable.",
+      "importance": "alta"
     }
   ],
   "sections": [

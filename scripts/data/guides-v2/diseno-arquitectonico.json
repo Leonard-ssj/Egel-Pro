@@ -104,6 +104,21 @@
       "concept": "C4 Model",
       "definition_md": "Notacion para documentar arquitectura en 4 niveles de zoom progresivo: Context (sistema y actores externos), Containers (aplicaciones/servicios), Components (modulos internos) y Code (clases). Complementa, no reemplaza, a UML.",
       "importance": "media"
+    },
+    {
+      "concept": "Estilos arquitectonicos clasicos (cliente-servidor, multicapa)",
+      "definition_md": "Cliente-servidor: separa quien solicita (cliente) de quien procesa/almacena (servidor) sobre una red. Multicapa (N-tier): divide el sistema en capas (presentacion, negocio, datos) con responsabilidades y dependencias unidireccionales, facilitando mantenimiento y escalado independiente.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Metodos de diseno arquitectonico (ADD, ACDM, Rozanski y Woods, ARID)",
+      "definition_md": "ADD (Attribute-Driven Design): disena la arquitectura iterativamente priorizando atributos de calidad. ACDM: metodo centrado en la comunidad de stakeholders para decisiones arquitectonicas. Rozanski y Woods: framework de vistas y perspectivas (viewpoints/perspectives) para documentar arquitectura desde multiples angulos. ARID (Active Reviews for Intermediate Designs): revision activa de disenos aun incompletos, con ejercicios practicos en vez de solo presentacion pasiva.",
+      "importance": "media"
+    },
+    {
+      "concept": "Vistas arquitectonicas (Views and Beyond, Views and Viewpoints, ISO/IEC/IEEE 42010)",
+      "definition_md": "Views and Beyond: metodo del SEI para documentar arquitectura con multiples vistas (modulo, componente-conector, despliegue). Views and Viewpoints: un viewpoint es la convencion para construir una vista especifica dirigida a un stakeholder particular. ISO/IEC/IEEE 42010: estandar internacional que formaliza como describir arquitecturas de sistemas mediante vistas y viewpoints.",
+      "importance": "media"
     }
   ],
   "sections": [

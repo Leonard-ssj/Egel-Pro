@@ -107,7 +107,27 @@
     },
     {
       "concept": "Motores graficos y videojuegos",
-      "definition_md": "Unity (C#): multiplataforma, gran ecosistema de assets, usado en AAA e indie. Unreal Engine (C++/Blueprint): graficos de altisima fidelidad. Godot (GDScript): open source, ligero. Scratch: bloques visuales para ensenar programacion a ninos, sin sintaxis textual.",
+      "definition_md": "Unity (C#): multiplataforma, gran ecosistema de assets, usado en AAA e indie. Unreal Engine (C++/Blueprint): graficos de altisima fidelidad. Godot (GDScript): open source, ligero. Source Engine (Valve, C++): motor propietario de titulos como Half-Life 2 y Counter-Strike, fisica e iluminacion avanzadas. Scratch: bloques visuales para ensenar programacion a ninos, sin sintaxis textual.",
+      "importance": "media"
+    },
+    {
+      "concept": "Frameworks web backend por lenguaje",
+      "definition_md": "Cada lenguaje backend tiene su framework de referencia: Node.js con Express.js (JavaScript, minimalista); Python con Django (bateria incluida, admin automatico); PHP con Laravel (convenciones modernas) o el propio WordPress; Ruby con Ruby on Rails (convention over configuration, generadores de scaffolding); C# con ASP.NET (ecosistema .NET). En frontend, ademas de React/Angular/Next.js, existen Vue (curva de aprendizaje suave) y Qwik (hidratacion resumible para carga instantanea).",
+      "importance": "media"
+    },
+    {
+      "concept": "API Key vs OAuth 2.0",
+      "definition_md": "API Key: identificador simple para reconocer que aplicacion consume un servicio (rate limiting), sin consentimiento de usuario ni permisos granulares; suficiente para APIs publicas sin datos sensibles. OAuth 2.0: autorizacion delegada con consentimiento explicito del usuario, scopes que limitan permisos y tokens con expiracion, necesario cuando una app tercera accede a datos sensibles de un usuario.",
+      "importance": "alta"
+    },
+    {
+      "concept": "DevOps y DevSecOps",
+      "definition_md": "DevOps: cultura y practicas que integran desarrollo y operaciones para entregar software mas rapido y confiable (CI/CD, automatizacion, colaboracion). DevSecOps: extiende DevOps integrando la seguridad desde las primeras etapas del pipeline (SAST, analisis de dependencias), en vez de dejarla solo para el final ('shift-left').",
+      "importance": "alta"
+    },
+    {
+      "concept": "Responsive design (HTML/CSS)",
+      "definition_md": "Tecnica de diseno web que usa media queries de CSS y sistemas de layout (Flexbox, Grid) para que una misma pagina HTML se adapte automaticamente a distintos tamanos de pantalla (celular, tablet, escritorio), sin duplicar el HTML por dispositivo.",
       "importance": "media"
     },
     {

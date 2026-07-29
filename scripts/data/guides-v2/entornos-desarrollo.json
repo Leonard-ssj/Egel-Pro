@@ -72,13 +72,23 @@
     },
     {
       "concept": "IDEs especializados por lenguaje/plataforma",
-      "definition_md": "Cada ecosistema tiene su IDE de referencia: RStudio (R y estadistica), Arduino IDE (microcontroladores AVR), MATLAB (calculo matricial/senales), Thonny e IDLE (Python para principiantes), PyCharm (Python profesional), Xcode (iOS/Swift), Android Studio (Android/Kotlin), Eclipse y NetBeans (Java), Code::Blocks (C/C++). Elegir el IDE correcto depende del lenguaje/plataforma objetivo, no de preferencia personal.",
+      "definition_md": "Cada ecosistema tiene su IDE de referencia: RStudio (R y estadistica), Arduino IDE (microcontroladores AVR), MATLAB (calculo matricial/senales), Thonny e IDLE (Python para principiantes), PyCharm (Python profesional), Xcode (iOS/Swift), Android Studio (Android/Kotlin), Eclipse y NetBeans (Java), Code::Blocks (C/C++), BlueJ y Greenfoot (ensenanza de POO en Java para principiantes), Aptana y Spket (editores orientados a desarrollo web/Ruby on Rails). Elegir el IDE correcto depende del lenguaje/plataforma objetivo, no de preferencia personal.",
       "importance": "alta"
     },
     {
       "concept": "Herramientas de pruebas automatizadas",
       "definition_md": "JUnit: pruebas unitarias de codigo Java. JMeter: pruebas de carga/estres simulando miles de usuarios concurrentes. Appium: automatiza UI de apps moviles nativas (Android/iOS). SoapUI: prueba servicios SOAP a partir de su WSDL, generando y validando XML.",
       "importance": "alta"
+    },
+    {
+      "concept": "Visual Studio (completo) y Jupyter Notebook",
+      "definition_md": "Visual Studio (distinto de VS Code): IDE completo de Microsoft para .NET/C++ empresarial, con depuracion avanzada, disenador de interfaces y generacion de instaladores. Jupyter Notebook: entorno de celdas ejecutables para ciencia de datos en Python/R, con salida inmediata de graficas y texto Markdown intercalado.",
+      "importance": "media"
+    },
+    {
+      "concept": "Sistemas operativos (Windows, Linux, macOS, Android, iOS)",
+      "definition_md": "Windows: dominante en escritorio empresarial y gaming. Linux: estandar en servidores por estabilidad y ausencia de costo de licencia. macOS: unico SO que corre Xcode para desarrollo iOS. Android e iOS: sistemas moviles con toolchains y tiendas de apps propias (Google Play, App Store).",
+      "importance": "media"
     }
   ],
   "sections": [

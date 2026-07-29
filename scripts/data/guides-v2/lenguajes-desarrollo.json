@@ -76,6 +76,21 @@
       "importance": "media"
     },
     {
+      "concept": "Ruby",
+      "definition_md": "Lenguaje interpretado, tipado dinamico y fuerte, disenado para la felicidad del programador (sintaxis expresiva y legible). Su framework insignia, Ruby on Rails, popularizo 'convention over configuration' y los generadores de scaffolding para acelerar el desarrollo web.",
+      "importance": "media"
+    },
+    {
+      "concept": "C++, PHP, jQuery, Kotlin, Swift",
+      "definition_md": "C++: extiende C con clases y plantillas genericas, usado en videojuegos y sistemas de alto rendimiento. PHP: interpretado, tipado dinamico, dominante en backend web (WordPress, Laravel). jQuery: biblioteca (no lenguaje) que simplifica manipulacion del DOM y AJAX en JavaScript. Kotlin: lenguaje oficial de Android, interoperable 100% con Java, con null safety. Swift: lenguaje de Apple para iOS/macOS, con Optionals para manejo seguro de nulos.",
+      "importance": "media"
+    },
+    {
+      "concept": "Lenguajes por dominio de aplicacion",
+      "definition_md": "Movil: Kotlin (Android nativo), Swift (iOS nativo), Dart (Flutter multiplataforma). Backend: Java, C#, Python, PHP, Node.js/JavaScript. Analisis de datos: Python y R. Videojuegos: C++ (motores AAA) y C# (Unity). Web frontend: JavaScript/TypeScript. La eleccion depende de la plataforma objetivo y el ecosistema existente del equipo, no de una preferencia unica 'mejor' en abstracto.",
+      "importance": "alta"
+    },
+    {
       "concept": "Arboles",
       "definition_md": "Estructura jerarquica. En un **arbol binario de busqueda balanceado** la busqueda/insercion/borrado son **O(log n)**; si se degenera, **O(n)**. Recorridos: inorden, preorden, postorden.",
       "importance": "media"

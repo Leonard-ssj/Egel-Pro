@@ -134,6 +134,16 @@
       "concept": "Diagrama de Ishikawa y de Pareto",
       "definition_md": "Ishikawa (causa-efecto/espina de pescado): organiza causas potenciales de un problema en categorias (mano de obra, metodo, maquina, medicion, materiales) para encontrar la causa raiz. Pareto: ordena categorias de defectos por frecuencia acumulada para identificar el 20% de causas responsable del 80% de los problemas.",
       "importance": "media"
+    },
+    {
+      "concept": "Histograma y diagramas de control/dispersion",
+      "definition_md": "Histograma: agrupa datos numericos en intervalos de frecuencia para visualizar la distribucion de una metrica (ej. tiempos de respuesta). Diagrama de control: grafica una metrica en el tiempo con limites superior/inferior para detectar variaciones anormales del proceso. Diagrama de dispersion: grafica dos variables para detectar correlacion entre ellas (ej. horas de prueba vs defectos encontrados).",
+      "importance": "media"
+    },
+    {
+      "concept": "GILB y checklist de calidad",
+      "definition_md": "Tom Gilb: pionero en definir requerimientos de calidad de forma cuantificable y medible (metodo de especificacion cuantitativa), precursor de enfoques como GQM. Checklist de calidad: lista de verificacion estandarizada usada en inspecciones o revisiones para asegurar que no se omita ningun criterio de calidad esperado.",
+      "importance": "baja"
     }
   ],
   "sections": [

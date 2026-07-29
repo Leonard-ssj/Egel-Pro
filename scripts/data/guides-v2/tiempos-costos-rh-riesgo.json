@@ -89,6 +89,21 @@
       "concept": "Estimacion por lineas de codigo",
       "definition_md": "A partir de la **productividad** (LDC por persona-mes) y el tamano estimado se obtiene el esfuerzo en personas-mes; dividido entre el plazo da el numero de personas necesarias.",
       "importance": "media"
+    },
+    {
+      "concept": "COCOMO basico, intermedio, completo y COCOMO II",
+      "definition_md": "Basico: estima esfuerzo solo a partir de lineas de codigo estimadas (KLDC). Intermedio: anade 15 multiplicadores de costo (experiencia del equipo, complejidad, herramientas). Completo (Detallado): aplica los multiplicadores por fase y por componente del sistema. COCOMO II: version moderna que usa puntos de funcion/casos de uso en vez de solo KLDC, adaptada a desarrollo iterativo y reutilizacion de componentes.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Tiempo-hombre, holguras y estimacion por tres valores",
+      "definition_md": "Tiempo-hombre (persona-mes/hora-hombre): unidad que combina cantidad de personas y duracion para medir esfuerzo. Holgura: tiempo que una actividad puede retrasarse sin afectar la fecha fin del proyecto (las actividades de la ruta critica tienen holgura cero). Estimacion por tres valores (PERT): combina optimista (O), mas probable (M) y pesimista (P) en la formula (O + 4M + P) / 6 para obtener una duracion esperada mas realista.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Analisis costo-beneficio",
+      "definition_md": "Compara el costo total de un proyecto contra los beneficios economicos esperados (ahorro, ingresos adicionales) para decidir si vale la pena ejecutarlo, frecuentemente expresado como ROI (retorno de inversion) o periodo de recuperacion.",
+      "importance": "media"
     }
   ],
   "sections": [

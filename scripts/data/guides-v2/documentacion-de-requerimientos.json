@@ -84,6 +84,16 @@
       "concept": "Criterios de aceptacion",
       "definition_md": "Condiciones medibles que el requerimiento debe cumplir para considerarse terminado. Formato Gherkin: Given/When/Then. Sirven de base para pruebas.",
       "importance": "alta"
+    },
+    {
+      "concept": "Diagrama de flujo de datos (DFD), diagrama de contexto y descomposicion funcional",
+      "definition_md": "Diagrama de contexto: representa el sistema completo como una sola caja frente a entidades externas, sin procesos internos (nivel 0). DFD: documenta el movimiento de datos entre procesos, almacenes y entidades externas, sin exigir orden temporal preciso. Descomposicion funcional: divide un sistema/proceso complejo en subprocesos mas pequenos y manejables (niveles 1, 2... del DFD).",
+      "importance": "alta"
+    },
+    {
+      "concept": "Prototipos, inspeccion y vision y alcance",
+      "definition_md": "Prototipo: representacion navegable (desechable o evolutiva) para validar diseno con el cliente antes de construir. Inspeccion de requerimientos: verificacion formal y sistematica de la calidad de un documento SRS ya elaborado, antes de su aprobacion. Documento de vision y alcance: establece a alto nivel el proposito del proyecto y delimita explicitamente que esta dentro y fuera de su alcance.",
+      "importance": "media"
     }
   ],
   "sections": [

@@ -28,7 +28,10 @@
     { "concept": "Prototipo", "definition_md": "Mockup interactivo con flujos navegables. Permite validar usabilidad con usuarios antes de codificar.", "importance": "alta" },
     { "concept": "Atomic Design", "definition_md": "Metodologia de Brad Frost (2013). Descompone la UI en 5 niveles: atomos, moleculas, organismos, templates y pages.", "importance": "alta" },
     { "concept": "Design tokens", "definition_md": "Variables de diseno (colores, espaciados, tipografias) en formato neutral (JSON) que se transforman en CSS, iOS, Android. Fuente unica de verdad entre diseno y codigo.", "importance": "alta" },
-    { "concept": "Affordance", "definition_md": "Pista visual que sugiere como interactuar con un elemento (un boton parece presionable, un link parece clickeable). Termino de Norman/Gibson.", "importance": "media" }
+    { "concept": "Affordance", "definition_md": "Pista visual que sugiere como interactuar con un elemento (un boton parece presionable, un link parece clickeable). Termino de Norman/Gibson.", "importance": "media" },
+    { "concept": "APIs, SOA y Web Services", "definition_md": "API: contrato que expone funcionalidad de un sistema a otro. SOA (Service-Oriented Architecture): estilo que organiza el software como servicios de negocio reutilizables y debilmente acoplados. Web Services: implementacion de SOA sobre protocolos web (SOAP con WSDL, o REST sobre HTTP), la interfaz que consumen otros sistemas o el frontend.", "importance": "alta" },
+    { "concept": "UX y evaluacion de interfaces segun requerimientos del cliente", "definition_md": "UX (User Experience): diseno centrado en la experiencia completa del usuario, no solo en la apariencia visual (UI). Evaluar una interfaz contra los requerimientos del cliente significa verificar que cumpla las heuristicas de usabilidad Y las necesidades de negocio especificas (marca, flujo de conversion, publico objetivo), no solo que 'se vea bien'.", "importance": "alta" },
+    { "concept": "Responsive design", "definition_md": "Tecnica que usa media queries de CSS y layouts flexibles (Flexbox, Grid) para que una misma interfaz se adapte automaticamente a distintos tamanos de pantalla, sin duplicar el diseno por dispositivo.", "importance": "media" }
   ],
   "sections": [
     {

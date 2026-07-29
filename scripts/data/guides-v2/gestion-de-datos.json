@@ -84,6 +84,36 @@
       "concept": "Fragmentacion horizontal y vertical",
       "definition_md": "Horizontal: divide una tabla en particiones por FILAS (ej. por rango de fecha), cada fragmento conserva todas las columnas. Vertical: divide por COLUMNAS relacionadas en fragmentos distintos, unidos por la misma llave. Ambas mejoran rendimiento en tablas grandes o bases de datos distribuidas.",
       "importance": "alta"
+    },
+    {
+      "concept": "DDL vs DML vs DCL",
+      "definition_md": "DDL (CREATE, ALTER, DROP): define la estructura de tablas e indices. DML (SELECT, INSERT, UPDATE, DELETE): manipula los datos de tablas ya existentes. DCL (GRANT, REVOKE): controla permisos de acceso. PL/SQL es la extension procedimental de Oracle sobre SQL (cursores, bucles) para logica compleja dentro del motor.",
+      "importance": "alta"
+    },
+    {
+      "concept": "HAVING, constraints y diccionario de datos",
+      "definition_md": "HAVING filtra resultados DESPUES de un GROUP BY (a diferencia de WHERE, que filtra filas antes de agrupar y no admite funciones de agregacion). Constraints (CHECK, UNIQUE, NOT NULL) blindan la integridad de los datos a nivel de motor, sin depender de la aplicacion cliente. El diccionario de datos documenta metadatos: nombre, tipo, longitud y reglas de cada columna de la base.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Motores relacionales empresariales (Oracle, SQL Server)",
+      "definition_md": "Oracle: motor empresarial con soporte 24/7, transacciones distribuidas complejas, comun en banca/seguros. SQL Server: motor de Microsoft, fuerte integracion con el ecosistema .NET y Azure. Ambos compiten con PostgreSQL/MySQL en el segmento de licenciamiento comercial con soporte oficial.",
+      "importance": "media"
+    },
+    {
+      "concept": "Transacciones: COMMIT, ROLLBACK, SAVEPOINT",
+      "definition_md": "COMMIT confirma permanentemente los cambios de una transaccion. ROLLBACK revierte todos los cambios no confirmados (garantia de atomicidad ACID). SAVEPOINT marca un punto intermedio dentro de una transaccion para poder revertir solo una parte (ROLLBACK TO SAVEPOINT) sin deshacer los pasos anteriores ya validados.",
+      "importance": "alta"
+    },
+    {
+      "concept": "Algebra relacional (sigma, pi, rho)",
+      "definition_md": "Sigma (σ, seleccion): filtra FILAS que cumplen una condicion, conservando todas las columnas. Pi (π, proyeccion): selecciona un subconjunto de COLUMNAS, conservando todas las filas. Rho (ρ, renombramiento): cambia el nombre de una relacion o sus atributos. Son la base teorica formal detras de las consultas SQL.",
+      "importance": "media"
+    },
+    {
+      "concept": "Data mesh",
+      "definition_md": "Enfoque arquitectonico que descentraliza la propiedad de los datos hacia cada dominio/unidad de negocio, que gestiona y publica sus propios 'productos de datos' de forma autonoma, resolviendo el cuello de botella de un equipo central unico de datos.",
+      "importance": "baja"
     }
   ],
   "sections": [

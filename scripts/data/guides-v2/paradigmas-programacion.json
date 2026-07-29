@@ -99,6 +99,21 @@
       "concept": "Busqueda lineal vs binaria",
       "definition_md": "Lineal: revisa elemento por elemento, O(n), sirve en cualquier arreglo. Binaria: requiere el arreglo ordenado y descarta la mitad del espacio de busqueda en cada paso, O(log n).",
       "importance": "media"
+    },
+    {
+      "concept": "Lisp",
+      "definition_md": "Lenguaje funcional historico (1958) donde el codigo mismo se representa como listas anidadas (S-expressions). Pionero en recursividad, funciones de orden superior y recoleccion de basura automatica.",
+      "importance": "media"
+    },
+    {
+      "concept": "Algoritmos de ordenamiento (burbuja, insercion, seleccion, merge sort)",
+      "definition_md": "Burbuja: compara adyacentes y los intercambia repetidamente, O(n^2), simple pero ineficiente a escala. Insercion: inserta cada elemento en su posicion correcta, eficiente si los datos ya estan casi ordenados. Seleccion: busca el minimo y lo coloca al frente en cada pasada, O(n^2). Merge sort: divide y venceras, estable y O(n log n) garantizado incluso en el peor caso.",
+      "importance": "media"
+    },
+    {
+      "concept": "Arboles de decision",
+      "definition_md": "Estructura que organiza una secuencia de preguntas si/no (nodos) que se ramifican hacia distintas conclusiones. Util para modelar logica de negocio condicional (aprobar/rechazar/escalar) de forma visual.",
+      "importance": "media"
     }
   ],
   "sections": [
